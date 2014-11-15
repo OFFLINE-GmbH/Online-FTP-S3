@@ -1,0 +1,192 @@
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="date"],
+input[type="datetime"],
+input[type="time"],
+input[type="range"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="file"],
+textarea,
+select {
+    display: block;
+    @include vendor-prefix('border-radius', '1px');
+    font: 13px Arial, sans-serif;
+    border: 1px solid #ccc;
+    padding: 7px 5px;
+    outline: none;
+    color: #777;
+    margin: 0;
+    width: 210px;
+    max-width: 100%;
+    display: block;
+    margin-bottom: $gutter-width;
+    background: #fff;
+    &:focus {
+        color: #333;
+        border-color: #aaa;
+        @include vendor-prefix('box-shadow', '0 0 5px rgba( 0, 0, 0, .15)');
+    }
+    &.xxx-small {
+        @include column-width(1);
+        text-align: center;
+    }
+    &.xx-small {
+        @include column-width(2);
+        text-align: center;
+    }
+    &.x-small {
+        @include column-width(3);
+    }
+    &.small {
+        @include column-width(4);
+    }
+    &.large {
+        @include column-width(5);
+    }
+    &.x-large {
+        @include column-width(6);
+    }
+    &.xx-large {
+        @include column-width(7);
+    }
+    &.xxx-large {
+        @include column-width(8);
+    }
+    &.xxxx-large {
+        @include column-width(9);
+    }
+
+    @include max-screen(720px) {
+        width: 100% !important;
+    }
+}
+
+input[type="date"],
+input[type="datetime"],
+input[type="time"],
+input[type="number"] {
+    height: 33px;
+}
+
+input[type="checkbox"] {
+    display: inline;
+    cursor: pointer;
+    position: relative;
+    &:not(.deletebox) {
+        top: 3px;
+    }
+}
+
+textarea {
+    min-height: 60px;
+}
+
+.table input, .table select {
+    margin-bottom: 0;
+}
+
+label,
+legend {
+    display: block;
+    color: #444;
+    font-weight: bold;
+    @include font-size(1.3);
+    margin-bottom: 6px;
+    cursor: pointer;
+
+    span {
+        font-weight: normal;
+        @include font-size(1.3);
+        padding-left: 10px;
+        color: #AAA;
+        white-space: nowrap;
+    }
+    &.not-bold {
+        font-weight: normal;
+    }
+    [class^="icon-"] {
+        margin-left: 6px;
+        opacity: .3;
+        color: #444;
+        @include font-size(1.2);
+        @include vendor-prefix('transition', '.1s ease opacity');
+    }
+    &:hover {
+        [class^="icon-"] {
+            opacity: 1;
+        }
+    }
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: $gutter-width;
+    position: relative;
+    margin-bottom: $gutter-width;
+    div:last-child {
+        input, select, button {
+            margin-bottom: 0;
+        }
+    }
+    &:before {
+        content: attr(name);
+        @include font-size(1.2);
+        position: absolute;
+        left: $gutter-width;
+        top: -10px;
+        background: #eee;
+        padding: 4px 6px;
+        display: block;
+        @include vendor-prefix('border-radius', '4px');
+    }
+    > fieldset {
+        margin-top: 20px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    label:first-child {
+        margin-top: 10px;
+    }
+}
+
+.error {
+    label, legend {
+        color: #e74c3c !important;
+        span {
+            background: #e74c3c;
+            color: #fafafa;
+            padding: 1px 3px 0px 3px;
+            margin-left: 15px;
+            font-size: 90%;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+    }
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="url"],
+    input[type="date"],
+    input[type="number"],
+    input[type="datetime"],
+    input[type="time"],
+    input[type="range"],
+    input[type="file"],
+    input[type="tel"],
+    input[type="search"],
+    textarea,
+    select {
+        color: #e74c3c !important;
+        border-color: #e74c3c !important;
+        &:focus {
+            color: #333;
+            border-color: #aaa;
+            @include vendor-prefix('box-shadow', '0 0 5px rgba( 255, 0, 0, .25)');
+        }
+    }
+}

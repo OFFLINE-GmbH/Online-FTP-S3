@@ -1,0 +1,156 @@
+html {
+    font-size: 62.5%;
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    @include font-size(1.4);
+    &.dragging,
+    &.dragging * {
+        cursor: move !important;
+    }
+}
+
+a:link,
+a:visited,
+a:active,
+a:hover {
+    text-decoration: none;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    font-weight: inherit;
+    color: inherit;
+}
+
+h1 {
+    @include font-size(3.9);
+    line-height: 50px;
+    margin-bottom: 14px;
+}
+
+h2 {
+    @include font-size(2.8);
+    line-height: 40px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    @include font-size(2.1);
+    line-height: 34px;
+    margin-bottom: 8px;
+}
+
+h4 {
+    @include font-size(1.6);
+    line-height: 30px;
+    margin-bottom: 4px;
+}
+
+h5 {
+    @include font-size(1.5);
+    line-height: 24px;
+}
+
+h6 {
+    @include font-size(1.4);
+    line-height: 21px;
+}
+
+p {
+    margin: 0 0 20px;
+    line-height: 1.6;
+    color: #333;
+    font-weight: 300;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: 700;
+}
+
+small {
+    font-size: 80%;
+}
+
+hr {
+    border: solid #ddd;
+    border-width: 1px 0 0;
+    clear: both;
+    height: 0;
+    margin: 10px 0 30px;
+}
+
+.main {
+    h1 {
+        @include font-size(2.6);
+        font-weight: 300;
+    }
+    h2 {
+        @include font-size(1.8);
+        font-weight: 300;
+        text-transform: uppercase;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    h3 {
+        @include font-size(1.6);
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+    a:link,
+    a:active,
+    a:visited {
+        color: #005580;
+        &.button {
+            color: #333;
+        }
+    }
+    a:hover {
+        color: lighten(#005580, 10);
+    }
+}
+
+h1.page-title {
+    color: #666;
+    @include font-size(3);
+    line-height: 1;
+    font-weight: 300;
+    margin: 20px $gutter-width;
+    letter-spacing: -1px;
+}
+
+h1.main-title {
+    @include font-size(2);
+    line-height: 1;
+    margin: 0;
+}
+
+.table {
+    .attributes {
+        display: block;
+        color: #888;
+    }
+}
+
+.user-edit {
+    .first-h {
+        margin-top: 0;
+    }
+    .col {
+        margin-top: -16px;
+        padding: 15px;
+        &--left {
+            margin-right: 0;
+            border-right: 1px solid #F7F7F7;
+        }
+        &--right {
+            width: 66%;
+        }
+    }
+}

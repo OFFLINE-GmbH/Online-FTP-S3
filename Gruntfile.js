@@ -3,66 +3,65 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         concat: {
-            js: {
-                src: [
-                    'webroot/src/js/html5shiv.min.js',
-                    'webroot/src/js/cookie.js',
-                    'webroot/src/js/jquery.tablesorter.min.js',
-                    'webroot/src/js/jquery.filtertable.min.js',
-                    'webroot/src/js/mediathek.js',
-                    'webroot/src/js/app.js'
-                ],
-                dest: 'webroot/src/js/concatinated.js'
-            },
+            //js: {
+            //    src: [
+            //        'template/src/js/html5shiv.min.js',
+            //        'template/src/js/cookie.js',
+            //        'template/src/js/jquery.tablesorter.min.js',
+            //        'template/src/js/jquery.filtertable.min.js',
+            //        'template/src/js/mediathek.js',
+            //        'template/src/js/app.js'
+            //    ],
+            //    dest: 'template/src/js/concatinated.js'
+            //},
             css: {
                 src: [
-                    'webroot/src/css/fontello.min.css',
-                    'webroot/src/css/main.min.css'
+                    'template/src/css/main.min.css'
                 ],
-                dest: 'webroot/build/styles.min.css'
+                dest: 'template/build/styles.min.css'
             }
         },
-        uglify: {
-            js: {
-                files: {
-                    'webroot/build/app.min.js': ['webroot/src/js/concatinated.js']
-                }
-            }
-        },
+        //uglify: {
+        //    js: {
+        //        files: {
+        //            'template/build/app.min.js': ['template/src/js/concatinated.js']
+        //        }
+        //    }
+        //},
         watch: {
             options: {
                 livereload: true
             },
             scripts: {
-                files: ['webroot/src/js/*.js'],
+                files: ['template/src/js/*.js'],
                 tasks: ['concat', 'uglify', 'clean'],
                 options: {
                     spawn: false
                 }
             },
             css: {
-                files: ['webroot/src/scss/*.scss', 'webroot/src/scss/**/*.scss'],
-                tasks: ['sass:backend', 'concat'],
+                files: ['template/src/scss/*.scss', 'template/src/scss/**/*.scss'],
+                tasks: ['sass:template', 'concat'],
                 options: {
                     spawn: false
                 }
             }
         },
         sass: {
-            backend: {
+            template: {
                 options: {
                     'sourcemap=none': true,
                     style: 'compressed'
                 },
                 files: {
-                    'webroot/src/css/main.min.css': 'webroot/src/scss/main.scss',
-                    'webroot/src/css/fontello.min.css': 'webroot/src/fontello/css/cdc-embedded.css'
+                    'template/src/css/main.min.css': 'template/src/scss/main.scss',
+                    // 'template/src/css/fontello.min.css': 'template/src/fontello/css/cdc-embedded.css'
                 }
             }
         },
         clean: {
-            js: ['webroot/src/js/concatinated.js'],
-            css: ['webroot/src/css/fontello.min.css', 'webroot/src/css/main.min.css']
+            js: ['template/src/js/concatinated.js'],
+            css: ['template/src/css/fontello.min.css', 'template/src/css/main.min.css']
         }
     });
 
@@ -70,7 +69,8 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('default', ['concat:js', 'uglify', 'sass:backend', 'concat:css', 'clean']);
+    // grunt.registerTask('default', ['concat:js', 'uglify', 'sass:template', 'concat:css', 'clean']);
+    grunt.registerTask('default', ['sass:template', 'concat:css', 'clean']);
     grunt.registerTask('dev', ['watch']);
 
 };
