@@ -17,17 +17,12 @@
         font-weight: bold;
         border-bottom: 1px solid #c8c8c8;
         @include font-size(1);
-        &.deletebox-col {
-            width: 25px;
+        &:nth-child(1),
+        &:nth-child(2) {
+            width: 40px;
         }
-        &.id-col {
-            width: 45px;
-        }
-        &.battery-col {
-            width: 100px;
-        }
-        &.short-col {
-            width: 20%;
+        &:last-child {
+            padding-right: $gutter-width;
         }
     }
     td {
@@ -35,87 +30,17 @@
         vertical-align: middle;
         height: 40px;
         @include font-size(1.3);
-        &.sorter-col {
-            width: 50px;
-            text-align: center;
+        &:nth-child(1) {
+            padding-left: $gutter-width;
         }
-        &.delete-col {
-            width: 50px;
-            text-align: center;
-            a {
-                color: rgba(0, 0, 0, .2);
-                display: inline-block;
-                padding: 5px;
-                @include vendor-prefix('transition', '.2s ease color');
-                &:hover {
-                    color: rgba(0, 0, 0, .8);
-                }
-            }
-        }
-        &.colIndex {
-            width: 110px;
-            text-align: center;
+        &:last-child {
+            padding-right: $gutter-width;
         }
     }
     tr {
         &.is-marked td {
             background: lighten($red, 45) !important;
             color: #f00;
-        }
-        &.is-red td {
-            background: lighten($red, 10) !important;
-            color: #fff !important;
-        }
-        &.row-grey th {
-            background: #eee;
-            border-bottom: 1px solid #c8c8c8;
-            padding-top: 20px;
-        }
-        &.placeholder {
-            display: block;
-            background: #F00;
-            position: relative;
-            margin: 0;
-            padding: 0;
-            border: none;
-            &:before {
-                content: "";
-                position: absolute;
-                width: 0;
-                height: 0;
-                border: 5px solid rgba(0, 0, 0, 0);
-                border-left-color: #F00;
-                margin-top: -5px;
-                left: -5px;
-                border-right: none;
-            }
-        }
-    }
-    tfoot {
-        .price_before_vat td {
-            border-top: 1px solid #000 !important;
-            font-style: normal !important;
-            font-weight: bold;
-            background: #fafafa !important;
-        }
-        .price_vat td,
-        .price_shipping td {
-            border-top: 1px solid #ddd;
-            background: #fafafa !important;
-            font-style: normal !important;
-            color: #888;
-        }
-        .price_total td {
-            background: #eee !important;
-            font-weight: bold;
-            font-style: normal !important;
-            border-top: 1px solid #aaa;
-            border-bottom: 1px solid #aaa !important;
-        }
-    }
-    &.table--vertical-align-top {
-        td {
-            vertical-align: top;
         }
     }
     &.table--condensed {
@@ -157,21 +82,5 @@
         th {
             vertical-align: middle;
         }
-    }
-}
-
-.content.no-padding .table {
-    td, th {
-        &:first-child {
-            padding-left: $gutter-width;
-        }
-    }
-    td, th {
-        &:last-child {
-            padding-right: $gutter-width;
-        }
-    }
-    &.is-sortable .header:last-child {
-        background-position: right ($gutter-width - 5) center;
     }
 }

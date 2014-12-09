@@ -1,10 +1,8 @@
-/* Grid Variablen
+/* Layout
 ---------------------------------------- */
-$gutter-width: 15px;
-$columns: 16;
-$total-width: 100%;
-
+$wrapper-width: 100%;
 $sidebar-width: 235px;
+$gutter-width: 20px;
 
 /* Farben
 ---------------------------------------- */
@@ -12,6 +10,8 @@ $black: #333;
 $grey: #666;
 $light-grey: #EFEFF1;
 $white: #fcfcfc;
+
+$border-color: #c8c8c8;
 
 $green: #27AE60;
 $orange: #F39C12;

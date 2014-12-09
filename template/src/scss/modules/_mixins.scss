@@ -23,19 +23,19 @@
 }
 
 @mixin keyframes($animationName) {
-    @-webkit-keyframes $animationName {
+    @-webkit-keyframes #{$animationName} {
         @content;
     }
-    @-moz-keyframes $animationName {
+    @-moz-keyframes #{$animationName} {
         @content;
     }
-    @-ms-keyframes $animationName {
+    @-ms-keyframes #{$animationName} {
         @content;
     }
-    @-o-keyframes $animationName {
+    @-o-keyframes #{$animationName} {
         @content;
     }
-    @keyframes $animationName {
+    @keyframes #{$animationName} {
         @content;
     }
 }

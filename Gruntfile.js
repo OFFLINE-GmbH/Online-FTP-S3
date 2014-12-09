@@ -16,6 +16,7 @@ module.exports = function (grunt) {
             //},
             css: {
                 src: [
+                    'template/src/css/fontello/css/onlineftp-embedded.css',
                     'template/src/css/main.min.css'
                 ],
                 dest: 'template/build/styles.min.css'

@@ -1,9 +1,11 @@
 {
-  "name": "Online FTP",
-  "dependencies": {
-    "dropzone": "~3.10.2",
-    "jquery": "~1.11.1",
-    "angular": "1.2.26",
-    "jQueryFileTree": "daverogers/jQueryFileTree"
-  }
+    "name": "Online FTP",
+    "dependencies": {
+        "requirejs": null,
+        "dropzone": "~3.10.2",
+        "jquery": "~1.11.1",
+        "angular": "1.2.26",
+        "jQueryFileTree": "daverogers/jQueryFileTree",
+        "ace": "ajaxorg/ace-builds"
+    }
 }

@@ -1,3 +1,52 @@
+.sidebar {
+    border-right: 1px solid $border-color;
+}
+
+.breadcrumbs {
+    width: 100%;
+    margin-bottom: $gutter-width;
+    padding: 0 $gutter-width;
+    @include font-size(1.2);
+    > li {
+        display: inline;
+        margin-right: 10px;
+    }
+    a {
+        padding: 2px 5px;
+        display: inline-block;
+        background: #f0f0f0;
+        border-radius: 2px;
+    }
+}
+
+.toolbar {
+    margin-bottom: $gutter-width;
+    padding: $gutter-width;
+}
+
+.toolbar-group {
+    display: inline-block;
+    margin-right: ($gutter-width / 2);
+}
+
+#editor {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5000;
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+
+    @include vendor-prefix('transition', '.4s ease opacity');
+    &.is-visible {
+        pointer-events: auto;
+        visibility: visible;
+        opacity: 1;
+    }
+}
 
 .modal {
     position: fixed;

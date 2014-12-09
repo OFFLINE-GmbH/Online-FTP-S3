@@ -1,0 +1,4 @@
+
+.icon-folder:before { content: '\e800'; } /* '' */
+.icon-folder-open:before { content: '\e801'; } /* '' */
+.icon-file:before { content: '\e802'; } /* '' */

@@ -30,36 +30,6 @@ select {
         border-color: #aaa;
         @include vendor-prefix('box-shadow', '0 0 5px rgba( 0, 0, 0, .15)');
     }
-    &.xxx-small {
-        @include column-width(1);
-        text-align: center;
-    }
-    &.xx-small {
-        @include column-width(2);
-        text-align: center;
-    }
-    &.x-small {
-        @include column-width(3);
-    }
-    &.small {
-        @include column-width(4);
-    }
-    &.large {
-        @include column-width(5);
-    }
-    &.x-large {
-        @include column-width(6);
-    }
-    &.xx-large {
-        @include column-width(7);
-    }
-    &.xxx-large {
-        @include column-width(8);
-    }
-    &.xxxx-large {
-        @include column-width(9);
-    }
-
     @include max-screen(720px) {
         width: 100% !important;
     }
