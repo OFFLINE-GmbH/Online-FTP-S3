@@ -1,0 +1,33 @@
+{
+  "name": "Online FTP",
+  "version": "2.0.0",
+  "description": "Online FTP",
+  "authors": [
+    {
+      "name": "OFFLINE GmbH",
+      "email": "info@offlinegmbh.ch",
+      "homepage": "http://www.offlinegmbh.ch/"
+    }
+  ],
+  "require": {
+    "offline/mvc": "dev-develop",
+    "phpmailer/phpmailer": "~5.2",
+    "league/csv": "~6.0@dev",
+    "timetoogo/pinq": "dev-master",
+    "phpoffice/phpexcel": "dev-master"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@projects.offlinegmbh.ch:offline-mvc/core.git"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "autoload": {
+    "classmap": [
+      "app/controllers",
+      "app/models"
+    ]
+  }
+}
