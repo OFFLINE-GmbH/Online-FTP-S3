@@ -2,10 +2,10 @@
 <html lang="de">
 <head>
     <meta charset="utf-8">
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="bower_components/jQueryFileTree/jqueryFileTree.css"/>
-    <link rel="stylesheet" href="template/build/styles.min.css"/>
+    <link rel="stylesheet" href="vendor/jQueryFileTree/jqueryFileTree.css"/>
+    <link rel="stylesheet" href="assets/build/styles.min.css"/>
     <title>Online FTP</title>
 </head>
 <body>
@@ -54,7 +54,7 @@
             <tbody>
             <tr>
                 <td><input type="checkbox"/></td>
-                <td><img src="bower_components/jQueryFileTree/images/directory.png" alt=""/></td>
+                <td><img src="vendor/jQueryFileTree/images/directory.png" alt=""/></td>
                 <td>Datei.jpg</td>
                 <td class="text-right">755</td>
                 <td class="text-right">3.2 kb</td>
@@ -63,7 +63,7 @@
             </tr>
             <tr>
                 <td><input type="checkbox"/></td>
-                <td><img src="bower_components/jQueryFileTree/images/directory.png" alt=""/></td>
+                <td><img src="vendor/jQueryFileTree/images/directory.png" alt=""/></td>
                 <td>Datei.jpg</td>
                 <td class="text-right">755</td>
                 <td class="text-right">3.2 kb</td>
@@ -72,7 +72,7 @@
             </tr>
             <tr>
                 <td><input type="checkbox"/></td>
-                <td><img src="bower_components/jQueryFileTree/images/file.png" alt=""/></td>
+                <td><img src="vendor/jQueryFileTree/images/file.png" alt=""/></td>
                 <td>Datei.jpg</td>
                 <td class="text-right">755</td>
                 <td class="text-right">3.2 kb</td>
@@ -83,11 +83,11 @@
         </table>
     </main>
 </div>
-<script src="bower_components/jQueryFileTree/jqueryFileTree.js"></script>
-<script src="bower_components/requirejs/require.js"></script>
-<script src="bower_components/ace/src-min/ace.js"></script>
-<script src="bower_components/ace/src-min/theme-chrome.js"></script>
-<script src="bower_components/ace/src-min/mode-html.js"></script>
+<script src="vendor/jQueryFileTree/jqueryFileTree.js"></script>
+<script src="vendor/requirejs/require.js"></script>
+<script src="vendor/ace/src-min/ace.js"></script>
+<script src="vendor/ace/src-min/theme-chrome.js"></script>
+<script src="vendor/ace/src-min/mode-html.js"></script>
 <script>
     window.onload = function() {
 
@@ -99,7 +99,7 @@
     $(function () {
         $('.filetree-container').fileTree({
             root: '/',
-            script: 'bower_components/jQueryFileTree/connectors/jqueryFileTree.php'
+            script: 'vendor/jQueryFileTree/connectors/jqueryFileTree.php'
         }, function (file) {
             alert(file);
         });

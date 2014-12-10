@@ -5,27 +5,27 @@ module.exports = function (grunt) {
         concat: {
             //js: {
             //    src: [
-            //        'template/src/js/html5shiv.min.js',
-            //        'template/src/js/cookie.js',
-            //        'template/src/js/jquery.tablesorter.min.js',
-            //        'template/src/js/jquery.filtertable.min.js',
-            //        'template/src/js/mediathek.js',
-            //        'template/src/js/app.js'
+            //        'assets/src/js/html5shiv.min.js',
+            //        'assets/src/js/cookie.js',
+            //        'assets/src/js/jquery.tablesorter.min.js',
+            //        'assets/src/js/jquery.filtertable.min.js',
+            //        'assets/src/js/mediathek.js',
+            //        'assets/src/js/app.js'
             //    ],
-            //    dest: 'template/src/js/concatinated.js'
+            //    dest: 'assets/src/js/concatinated.js'
             //},
             css: {
                 src: [
-                    'template/src/css/fontello/css/onlineftp-embedded.css',
-                    'template/src/css/main.min.css'
+                    'assets/src/css/fontello/css/onlineftp-embedded.css',
+                    'assets/src/css/main.min.css'
                 ],
-                dest: 'template/build/styles.min.css'
+                dest: 'assets/build/styles.min.css'
             }
         },
         //uglify: {
         //    js: {
         //        files: {
-        //            'template/build/app.min.js': ['template/src/js/concatinated.js']
+        //            'assets/build/app.min.js': ['assets/src/js/concatinated.js']
         //        }
         //    }
         //},
@@ -34,35 +34,35 @@ module.exports = function (grunt) {
                 livereload: true
             },
             scripts: {
-                files: ['template/src/js/*.js'],
+                files: ['assets/src/js/*.js'],
                 tasks: ['concat', 'uglify', 'clean'],
                 options: {
                     spawn: false
                 }
             },
             css: {
-                files: ['template/src/scss/*.scss', 'template/src/scss/**/*.scss'],
-                tasks: ['sass:template', 'concat'],
+                files: ['assets/src/scss/*.scss', 'assets/src/scss/**/*.scss'],
+                tasks: ['sass:assets', 'concat'],
                 options: {
                     spawn: false
                 }
             }
         },
         sass: {
-            template: {
+            assets: {
                 options: {
                     'sourcemap=none': true,
                     style: 'compressed'
                 },
                 files: {
-                    'template/src/css/main.min.css': 'template/src/scss/main.scss',
-                    // 'template/src/css/fontello.min.css': 'template/src/fontello/css/cdc-embedded.css'
+                    'assets/src/css/main.min.css': 'assets/src/scss/main.scss',
+                    // 'assets/src/css/fontello.min.css': 'assets/src/fontello/css/cdc-embedded.css'
                 }
             }
         },
         clean: {
-            js: ['template/src/js/concatinated.js'],
-            css: ['template/src/css/fontello.min.css', 'template/src/css/main.min.css']
+            js: ['assets/src/js/concatinated.js'],
+            css: ['assets/src/css/fontello.min.css', 'assets/src/css/main.min.css']
         }
     });
 
@@ -70,8 +70,8 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    // grunt.registerTask('default', ['concat:js', 'uglify', 'sass:template', 'concat:css', 'clean']);
-    grunt.registerTask('default', ['sass:template', 'concat:css', 'clean']);
+    // grunt.registerTask('default', ['concat:js', 'uglify', 'sass:assets', 'concat:css', 'clean']);
+    grunt.registerTask('default', ['sass:assets', 'concat:css', 'clean']);
     grunt.registerTask('dev', ['watch']);
 
 };
