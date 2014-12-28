@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Nexus S",
+    "size": "3.2 KB",
+    "date": "24 Nov 2014",
+    "permissions": "drwxrwsr-x",
+    "isFolder": true
+  },
+  {
+    "name": "Motorola XOOM™ with Wi-Fi",
+    "size": "3.2 KB",
+    "date": "24 Nov 2014",
+    "permissions": "-rwxrwsr-x",
+    "isFolder": false
+  },
+  {
+    "name": "MOTOROLA XOOM™",
+    "size": "3.2 KB",
+    "date": "24 Nov 2014",
+    "permissions": "-rwxrwsr-x",
+    "isFolder": false
+  }
+]
