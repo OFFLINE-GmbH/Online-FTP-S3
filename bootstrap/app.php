@@ -1,8 +1,13 @@
 <?php
+if (!function_exists('config_path')) {
+    function config_path()
+    {
+        return __DIR__ . '/config/';
+    }
+}
+require_once __DIR__ . '/../vendor/autoload.php';
 
-require_once __DIR__.'/../vendor/autoload.php';
-
-Dotenv::load(__DIR__.'/../');
+Dotenv::load(__DIR__ . '/../');
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +21,8 @@ Dotenv::load(__DIR__.'/../');
 */
 
 $app = new Laravel\Lumen\Application;
-// $app->withFacades();
+$app->configure('ftp');
+$app->withFacades();
 
 // $app->withEloquent();
 
@@ -75,7 +81,8 @@ $app->singleton(
 |
 */
 
-// $app->register('App\Providers\AppServiceProvider');
+$app->register('App\Providers\AppServiceProvider');
+$app->register('Anchu\Ftp\FtpServiceProvider');
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +95,6 @@ $app->singleton(
 |
 */
 
-require __DIR__.'/../app/Http/routes.php';
+require __DIR__ . '/../app/Http/routes.php';
 
 return $app;

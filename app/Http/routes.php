@@ -11,7 +11,13 @@
 |
 */
 
+use Anchu\Ftp\Facades\Ftp;
+use Illuminate\Support\Facades\Config;
+
 $app->get('/', function() use ($app) {
+
+    dd(FTP::connection()->getDirListing());
+
     return view('index');
     return $app->welcome();
 });
