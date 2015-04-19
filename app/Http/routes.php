@@ -12,12 +12,13 @@
 */
 
 use Anchu\Ftp\Facades\Ftp;
-use Illuminate\Support\Facades\Config;
 
-$app->get('/', function() use ($app) {
+$app->get('/', function () use ($app) {
 
     dd(FTP::connection()->getDirListing());
 
     return view('index');
     return $app->welcome();
 });
+
+$app->get('/file/{filename}', 'App\Http\Controllers\FileController@index');
