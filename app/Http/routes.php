@@ -21,4 +21,19 @@ $app->get('/', function () use ($app) {
     return $app->welcome();
 });
 
-$app->get('/file/{filename}', 'App\Http\Controllers\FileController@index');
+
+/*
+ | Files
+ */
+$app->get('/file/{filename}', 'App\Http\Controllers\FileController@show');
+$app->post('/file', 'App\Http\Controllers\FileController@store');
+$app->patch('/file/{filename}', 'App\Http\Controllers\FileController@update');
+$app->delete('/file/{filename}', 'App\Http\Controllers\FileController@destroy');
+
+/*
+ | Directories
+ */
+$app->get('/dir/{dirname}', 'App\Http\Controllers\DirectoryController@show');
+$app->post('/dir', 'App\Http\Controllers\DirectoryController@store');
+$app->patch('/dir/{dirname}', 'App\Http\Controllers\DirectoryController@update');
+$app->delete('/dir/{dirname}', 'App\Http\Controllers\DirectoryController@destroy');

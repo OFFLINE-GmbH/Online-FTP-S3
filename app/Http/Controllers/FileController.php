@@ -2,11 +2,27 @@
 
 
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Request;
 
-class FileController extends Controller {
+class FileController extends Controller
+{
 
-    public function index() {
+    public function show()
+    {
+        dd(Input::get('filename'));
+    }
+
+    public function store()
+    {
+        dd(Input::get('filename'));
+    }
+
+    public function update()
+    {
+        dd(Input::get('filename'));
+    }
+
+    public function destroy()
+    {
         dd(Input::get('filename'));
     }
 
