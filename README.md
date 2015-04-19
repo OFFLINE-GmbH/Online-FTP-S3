@@ -1,3 +1,3 @@
 # ONLINE FTP
 
-Online FTP V2.0 rewritten in Angular JS & PHP
+This project is work in progress and not ready to use yet!
