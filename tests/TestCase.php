@@ -1,6 +1,7 @@
 <?php
 
-class TestCase extends Laravel\Lumen\Testing\TestCase {
+class TestCase extends Laravel\Lumen\Testing\TestCase
+{
 
     /**
      * Creates the application.
@@ -9,7 +10,26 @@ class TestCase extends Laravel\Lumen\Testing\TestCase {
      */
     public function createApplication()
     {
-        return require __DIR__.'/../bootstrap/app.php';
+        return require __DIR__ . '/../bootstrap/app.php';
+    }
+
+    /**
+     * Default preparation for each test
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->prepareForTests();
+    }
+
+    /**
+     * Prepares test environment
+     */
+    private function prepareForTests()
+    {
+        Session::start();
+        Dotenv::setEnvironmentVariable('FTP_SERVER', 'phpunit');
     }
 
 }

@@ -1,5 +1,5 @@
 <?php
-return array(
+return [
 
     /*
 	|--------------------------------------------------------------------------
@@ -11,7 +11,7 @@ return array(
 	|
 	*/
 
-    'default' => 'mainserver',
+    'default'     => 'production',
 
     /*
     |--------------------------------------------------------------------------
@@ -22,14 +22,20 @@ return array(
     |
     */
 
-    'connections' => array(
-
-        'mainserver' => array(
-            'host'   => '',
-            'port'  => 21,
+    'connections' => [
+        'production' => [
+            'host'     => '',
+            'port'     => 21,
             'username' => '',
-            'password'   => '',
-            'passive'   => false,
-        ),
-    ),
-);
+            'password' => '',
+            'passive'  => false,
+        ],
+        'unittest'   => [
+            'host'     => 'localhost',
+            'port'     => 21,
+            'username' => 'onlineftp',
+            'password' => 'onlineftp',
+            'passive'  => false,
+        ],
+    ],
+];

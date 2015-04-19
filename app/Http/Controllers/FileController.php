@@ -1,37 +1,41 @@
 <?php namespace App\Http\Controllers;
 
+use Anchu\Ftp\Facades\Ftp;
+use App\Repositories\FileRepository;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 
 class FileController extends Controller
 {
     /**
-     * @var \App\Repositories\FileRepository
+     * @var FileRepository
      */
     private $file;
 
-    public function __construct(App\Repositories\FileRepository $fileRepository)
+    public function __construct(FileRepository $fileRepository)
     {
         $this->file = $fileRepository;
     }
 
-    public function show()
+    public function show($filename)
     {
-        dd(Input::get('filename'));
+        dd(rawurldecode($filename));
+        dd(FTP::connection(getenv('FTP_SERVER'))->getDirListing());
     }
 
     public function store()
     {
-        dd(Input::get('filename'));
+        dd(Request::all());
     }
 
-    public function update()
+    public function update($filename)
     {
         dd(Input::get('filename'));
     }
 
-    public function destroy()
+    public function destroy($filename)
     {
-        dd(Input::get('filename'));
+        dd($filename);
     }
 
 }

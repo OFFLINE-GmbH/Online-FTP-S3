@@ -1,15 +1,16 @@
 <?php namespace App\Http\Controllers;
 
+use App\Repositories\DirectoryRepository;
 use Illuminate\Support\Facades\Input;
 
 class DirectoryController extends Controller
 {
     /**
-     * @var \App\Repositories\DirectoryRepository
+     * @var DirectoryRepository
      */
     private $directory;
 
-    public function __construct(App\Repositories\DirectoryRepository $directoryRepository)
+    public function __construct(DirectoryRepository $directoryRepository)
     {
         $this->directory = $directoryRepository;
     }
