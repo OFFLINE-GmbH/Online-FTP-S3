@@ -9,9 +9,12 @@ class FileRepository
      */
     private $ftp;
 
+    /**
+     *
+     */
     function __construct()
     {
-        $this->ftp = FTP::connection(getenv('FTP_SERVER'));
+        $this->ftp = Ftp::connection(getenv('FTP_SERVER'));
     }
 
     /**

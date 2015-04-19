@@ -1,7 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Repositories\DirectoryRepository;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 
 class DirectoryController extends Controller
 {
@@ -15,24 +15,27 @@ class DirectoryController extends Controller
         $this->directory = $directoryRepository;
     }
 
-    public function show()
+    public function show($dirname)
     {
-        dd(Input::get('dirname'));
+        $content = $this->directory->get(rawurldecode($dirname));
+        if ($content === false) return ['success' => false];
+
+        return ['success' => true, 'content' => $content];
     }
 
     public function store()
     {
-        dd(Input::get('dirname'));
+        return ['success' => $this->directory->create(rawurldecode(Request::get('name')))];
     }
 
-    public function update()
+    public function update($dirname)
     {
-        dd(Input::get('dirname'));
+        return ['success' => $this->directory->move(rawurldecode($dirname), Request::get('newname'))];
     }
 
-    public function destroy()
+    public function destroy($dirname)
     {
-        dd(Input::get('dirname'));
+        return ['success' => $this->directory->delete(rawurldecode($dirname))];
     }
 
 }

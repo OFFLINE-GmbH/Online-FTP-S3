@@ -18,15 +18,18 @@ class FileController extends Controller
 
     public function show($filename)
     {
-        $contents = $this->file->get(rawurldecode($filename));
-        if ($contents === false) return ['success' => false];
+        $content = $this->file->get(rawurldecode($filename));
+        if ($content === false) return ['success' => false];
 
-        return ['success' => true, 'contents' => $this->file->get(rawurldecode($filename))];
+        return ['success' => true, 'content' => $content];
     }
 
     public function store()
     {
-        dd(Request::all());
+        if ($this->file->checkFilesize(Request::get('contents')) === false) {
+            return ['success' => false, 'message' => 'File is too large.'];
+        }
+        return ['success' => $this->file->update(rawurldecode(Request::get('name')), Request::get('content'))];
     }
 
     public function update($filename)
@@ -34,7 +37,7 @@ class FileController extends Controller
         if ($this->file->checkFilesize(Request::get('contents')) === false) {
             return ['success' => false, 'message' => 'File is too large.'];
         }
-        return ['success' => $this->file->update(rawurldecode($filename), Request::get('contents'))];
+        return ['success' => $this->file->update(rawurldecode($filename), Request::get('content'))];
     }
 
     public function destroy($filename)
