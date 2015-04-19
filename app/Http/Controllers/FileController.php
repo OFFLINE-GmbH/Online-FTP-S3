@@ -1,8 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-use Anchu\Ftp\Facades\Ftp;
+use App\Http\Requests\FileRequest;
 use App\Repositories\FileRepository;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Request;
 
 class FileController extends Controller
@@ -19,8 +18,10 @@ class FileController extends Controller
 
     public function show($filename)
     {
-        dd(rawurldecode($filename));
-        dd(FTP::connection(getenv('FTP_SERVER'))->getDirListing());
+        $contents = $this->file->get(rawurldecode($filename));
+        if ($contents === false) return ['success' => false];
+
+        return ['success' => true, 'contents' => $this->file->get(rawurldecode($filename))];
     }
 
     public function store()
@@ -30,12 +31,15 @@ class FileController extends Controller
 
     public function update($filename)
     {
-        dd(Input::get('filename'));
+        if ($this->file->checkFilesize(Request::get('contents')) === false) {
+            return ['success' => false, 'message' => 'File is too large.'];
+        }
+        return ['success' => $this->file->update(rawurldecode($filename), Request::get('contents'))];
     }
 
     public function destroy($filename)
     {
-        dd($filename);
+        return ['success' => $this->file->delete(rawurldecode($filename))];
     }
 
 }
