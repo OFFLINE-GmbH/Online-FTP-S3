@@ -1,20 +1,16 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" ng-app="onlineftp">
 <head>
     <meta charset="utf-8">
-    <script src="vendor/jquery/dist/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="vendor/jQueryFileTree/jqueryFileTree.css"/>
     <link rel="stylesheet" href="assets/build/styles.min.css"/>
+
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
     <title>Online FTP</title>
 </head>
-<body>
+<body ng-controller="FileController">
 <div id="editor"></div>
 <div class="page-wrapper">
     <aside class="sidebar">
-        <div class="filetree-container">
-
-        </div>
     </aside>
     <main class="main">
         <ul class="breadcrumbs">
@@ -52,58 +48,38 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr ng-repeat="file in files">
                 <td><input type="checkbox"/></td>
-                <td><img src="vendor/jQueryFileTree/images/directory.png" alt=""/></td>
-                <td>Datei.jpg</td>
-                <td class="text-right">755</td>
-                <td class="text-right">3.2 kb</td>
-                <td class="text-right">5 Jun 2008</td>
-                <td class="text-right">X Y</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"/></td>
-                <td><img src="vendor/jQueryFileTree/images/directory.png" alt=""/></td>
-                <td>Datei.jpg</td>
-                <td class="text-right">755</td>
-                <td class="text-right">3.2 kb</td>
-                <td class="text-right">5 Jun 2008</td>
-                <td class="text-right">X Y</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"/></td>
-                <td><img src="vendor/jQueryFileTree/images/file.png" alt=""/></td>
-                <td>Datei.jpg</td>
-                <td class="text-right">755</td>
-                <td class="text-right">3.2 kb</td>
-                <td class="text-right">5 Jun 2008</td>
+                <td>{{file.isFolder ? 'Fldr' : 'File'}}</td>
+                <td>{{file.name}}</td>
+                <td class="text-right">{{file.permissions}}</td>
+                <td class="text-right">{{file.size}}</td>
+                <td class="text-right">{{file.date}}</td>
                 <td class="text-right">X Y</td>
             </tr>
             </tbody>
         </table>
     </main>
 </div>
-<script src="vendor/jQueryFileTree/jqueryFileTree.js"></script>
 <script src="vendor/requirejs/require.js"></script>
 <script src="vendor/ace/src-min/ace.js"></script>
 <script src="vendor/ace/src-min/theme-chrome.js"></script>
 <script src="vendor/ace/src-min/mode-html.js"></script>
-<script>
-    window.onload = function() {
 
+<script src="vendor/angular/angular.min.js"></script>
+<script src="vendor/angular-resource/angular-resource.js"></script>
+
+<script src="app/app.js"></script>
+<script src="app/services/FileService.js"></script>
+<script src="app/controllers/FileController.js"></script>
+
+<script>
+    window.onload = function () {
         var editor = ace.edit('editor');
         var JavaScriptMode = require("ace/mode/javascript").Mode;
         editor.setTheme("ace/theme/chrome");
         editor.getSession().setMode(new JavaScriptMode());
     }
-    $(function () {
-        $('.filetree-container').fileTree({
-            root: '/',
-            script: 'vendor/jQueryFileTree/connectors/jqueryFileTree.php'
-        }, function (file) {
-            alert(file);
-        });
-    });
 </script>
 </body>
 </html>
