@@ -1,3 +1,6 @@
+/lumen.log
+/vendor
+.env
 .idea/
 vendor/
 node_modules
