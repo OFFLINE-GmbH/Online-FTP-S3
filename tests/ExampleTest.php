@@ -1,6 +1,6 @@
 <?php
 
-class ExampleTest extends TestCase {
+class FileControllerTest extends TestCase {
 
     /**
      * A basic test example.
