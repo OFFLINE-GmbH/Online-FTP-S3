@@ -30,7 +30,7 @@ return [
             'password' => '',
             'passive'  => false,
         ],
-        'unittest'   => [
+        'phpunit'   => [
             'host'     => 'localhost',
             'port'     => 21,
             'username' => 'onlineftp',

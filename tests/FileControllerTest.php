@@ -24,7 +24,6 @@ class FileControllerTest extends TestCase {
     public function testFileGet()
     {
         $response = $this->call('GET', '/file/test.php');
-        dd($response);
         $this->assertResponseOk();
     }
 

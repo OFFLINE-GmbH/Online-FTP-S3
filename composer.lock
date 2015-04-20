@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a504e23fada40ef76c346b2b69aa5b09",
+    "hash": "5c2b2900df0fb3ac7de376c65f916804",
     "packages": [
         {
             "name": "anchu/ftp",
-            "version": "v2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harishanchu/Laravel-FTP.git",
-                "reference": "a42a85cf50c65f89e803d1d17b7d307d30739124"
+                "reference": "33d26f693f6d303a59f213a85a4911b7e276eaec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harishanchu/Laravel-FTP/zipball/a42a85cf50c65f89e803d1d17b7d307d30739124",
-                "reference": "a42a85cf50c65f89e803d1d17b7d307d30739124",
+                "url": "https://api.github.com/repos/harishanchu/Laravel-FTP/zipball/33d26f693f6d303a59f213a85a4911b7e276eaec",
+                "reference": "33d26f693f6d303a59f213a85a4911b7e276eaec",
                 "shasum": ""
             },
             "require": {
@@ -48,7 +48,7 @@
                 "laravel",
                 "service provider"
             ],
-            "time": "2015-03-22 16:41:33"
+            "time": "2015-04-20 08:05:01"
         },
         {
             "name": "danielstjules/stringy",
@@ -1266,16 +1266,16 @@
         },
         {
             "name": "laravel/lumen-framework",
-            "version": "v5.0.2",
+            "version": "v5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/lumen-framework.git",
-                "reference": "729490d74a405b511a660441f0633b246ab6e755"
+                "reference": "5b560f0ef5b3930dd770c8a8be1ffe52901124b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/729490d74a405b511a660441f0633b246ab6e755",
-                "reference": "729490d74a405b511a660441f0633b246ab6e755",
+                "url": "https://api.github.com/repos/laravel/lumen-framework/zipball/5b560f0ef5b3930dd770c8a8be1ffe52901124b9",
+                "reference": "5b560f0ef5b3930dd770c8a8be1ffe52901124b9",
                 "shasum": ""
             },
             "require": {
@@ -1350,7 +1350,7 @@
                 "laravel",
                 "lumen"
             ],
-            "time": "2015-04-16 01:59:14"
+            "time": "2015-04-20 14:10:27"
         },
         {
             "name": "league/flysystem",
@@ -3286,7 +3286,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "anchu/ftp": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
