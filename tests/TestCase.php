@@ -28,8 +28,6 @@ class TestCase extends Laravel\Lumen\Testing\TestCase
      */
     private function prepareForTests()
     {
-        Session::start();
-        Dotenv::setEnvironmentVariable('FTP_SERVER', 'phpunit');
     }
 
 }
