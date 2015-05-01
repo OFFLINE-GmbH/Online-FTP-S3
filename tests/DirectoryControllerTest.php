@@ -62,6 +62,7 @@ class DirectoryControllerTest extends TestCase
 
     private function createTestDirectory()
     {
+        mkdir(storage_path('temp'));
         mkdir(storage_path('temp/unittest'));
         mkdir(storage_path('temp/unittest/test'));
     }
