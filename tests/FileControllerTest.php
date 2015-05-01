@@ -10,10 +10,9 @@ class FileControllerTest extends TestCase {
     public function testFileCreate()
     {
         $response = $this->call('POST', '/file', [
-            'filename' => 'test.php',
-            'contents' => 'Contents'
+            'name' => 'test.php',
+            'content' => 'Content2'
         ]);
-        dd($response);
         $this->assertResponseOk();
     }
     /**
@@ -24,6 +23,7 @@ class FileControllerTest extends TestCase {
     public function testFileGet()
     {
         $response = $this->call('GET', '/file/test.php');
+        dd($response);
         $this->assertResponseOk();
     }
 

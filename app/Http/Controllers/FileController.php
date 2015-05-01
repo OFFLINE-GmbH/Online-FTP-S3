@@ -25,7 +25,7 @@ class FileController extends Controller
 
     public function store()
     {
-        if ($this->file->update(Request::get('name'), Request::get('content'))) {
+        if ($this->file->create(Request::get('name'), Request::get('content'))) {
             return ['content' => Request::get('name') . ' created successfully'];
         }
     }

@@ -18,9 +18,8 @@ class TestCase extends Laravel\Lumen\Testing\TestCase
      */
     public function setUp()
     {
-        parent::setUp();
-
         $this->prepareForTests();
+        parent::setUp();
     }
 
     /**
@@ -28,7 +27,17 @@ class TestCase extends Laravel\Lumen\Testing\TestCase
      */
     private function prepareForTests()
     {
-        
+        /**
+         * config/flysystem.php
+         * -------------------------------
+         * 'connections' => [
+         *     'unittest' => [
+         *       'driver'   => 'local',
+         *       'path'       => storage_path('temp'),
+         *     ],
+         * ],
+         */
+        putenv('FILESYSTEM_DRIVER=unittest');
     }
 
 }

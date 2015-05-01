@@ -53,6 +53,6 @@ return [
     |
     */
 
-    'default' => 'ftp',
+    'default' => getenv('FILESYSTEM_DRIVER'),
 
 ];

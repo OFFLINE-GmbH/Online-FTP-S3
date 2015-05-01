@@ -30,6 +30,19 @@ class FileRepository
     }
 
     /**
+     * Creates a file
+     *
+     * @param $filename
+     * @param $contents
+     *
+     * @return bool
+     */
+    function create($filename, $contents)
+    {
+        return $this->update(rawurldecode($filename), $contents);
+    }
+
+    /**
      * Updates content of a file
      *
      * @param $filename
@@ -39,7 +52,7 @@ class FileRepository
      */
     function update($filename, $contents)
     {
-        return $this->flysystem->update(rawurldecode($filename), $contents);
+        return $this->flysystem->put(rawurldecode($filename), $contents);
     }
 
     /**
