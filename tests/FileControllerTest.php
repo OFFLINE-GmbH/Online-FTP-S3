@@ -88,8 +88,8 @@ class FileControllerTest extends TestCase
 
     private function createTestFile()
     {
-        mkdir(storage_path('temp'));
-        mkdir(storage_path('temp/unittest'));
+        @mkdir(storage_path('temp'));
+        @mkdir(storage_path('temp/unittest'));
         file_put_contents(storage_path('temp/unittest/test.php'), 'Content');
     }
 
