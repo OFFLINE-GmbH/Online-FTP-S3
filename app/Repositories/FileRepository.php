@@ -56,6 +56,20 @@ class FileRepository
     }
 
     /**
+     * Renames a file
+     *
+     * @param $from
+     * @param $to
+     *
+     * @return bool
+     *
+     */
+    function rename($from, $to)
+    {
+        return $this->flysystem->rename(rawurldecode($from), $to);
+    }
+
+    /**
      * Deletes a file
      *
      * @param $filename

@@ -17,7 +17,7 @@ class JsonResponseMiddleware implements Middleware
         $response = $next($request);
 
         if ($response->original === null) {
-            $this->setUnkownError($response);
+            $this->setUnknownError($response);
         }
 
         // Merge response with defaults
@@ -29,10 +29,10 @@ class JsonResponseMiddleware implements Middleware
     /**
      * @param $response
      */
-    private function setUnkownError($response)
+    private function setUnknownError($response)
     {
         $response->original = [
-            'errors' => new \ArrayObject([0 => 'Unkown error occured'])
+            'errors' => new \ArrayObject([0 => 'Unknown error occurred'])
         ];
     }
 

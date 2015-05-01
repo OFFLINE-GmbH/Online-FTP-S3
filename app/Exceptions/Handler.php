@@ -40,12 +40,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+        $errorCode = ErrorCodeResolver::getCodeByException($e);
+
+        // if the error code is below 600 we use it as HTTP response code
+        $httpErrorCode = ($errorCode < 600 && $errorCode >= 200) ? $errorCode : 500;
+
         return response([
             'content' => '',
             'errors'  => new \ArrayObject([
-                ErrorCodeResolver::getCodeByException($e) => $e->getMessage()
+                $errorCode => ErrorCodeResolver::getMessageByException($e)
             ])
-        ], 500);
+        ], $httpErrorCode);
     }
 
 }

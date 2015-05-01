@@ -25,6 +25,7 @@ $app->get('/', function () use ($app) {
 $app->get('/file/{filename}', 'App\Http\Controllers\FileController@show');
 $app->post('/file', 'App\Http\Controllers\FileController@store');
 $app->patch('/file/{filename}', 'App\Http\Controllers\FileController@update');
+$app->put('/file/{filename}', 'App\Http\Controllers\FileController@rename');
 $app->delete('/file/{filename}', 'App\Http\Controllers\FileController@destroy');
 
 /*

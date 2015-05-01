@@ -4,52 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0731a91d482f5655118c31fbca4a01dc",
+    "hash": "b5930d3e9b6352a80dcc23f34905799c",
     "packages": [
-        {
-            "name": "anchu/ftp",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/harishanchu/Laravel-FTP.git",
-                "reference": "33d26f693f6d303a59f213a85a4911b7e276eaec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/harishanchu/Laravel-FTP/zipball/33d26f693f6d303a59f213a85a4911b7e276eaec",
-                "reference": "33d26f693f6d303a59f213a85a4911b7e276eaec",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.x",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Anchu\\Ftp\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Harish Anchu",
-                    "email": "harishanchu@gmail.com"
-                }
-            ],
-            "description": "A simple Laravel 4/5 ftp service provider",
-            "keywords": [
-                "L4",
-                "ftp",
-                "l5",
-                "laravel",
-                "service provider"
-            ],
-            "time": "2015-04-20 08:05:01"
-        },
         {
             "name": "danielstjules/stringy",
             "version": "1.9.0",
@@ -3430,9 +3386,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "anchu/ftp": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

@@ -26,21 +26,28 @@ class FileController extends Controller
     public function store()
     {
         if ($this->file->create(Request::get('name'), Request::get('content'))) {
-            return ['content' => Request::get('name') . ' created successfully'];
+            return ['content' => rawurldecode(Request::get('name')) . ' created successfully'];
         }
     }
 
     public function update($filename)
     {
         if ($this->file->update($filename, Request::get('content'))) {
-            return ['content' => $filename . ' updated successfully'];
+            return ['content' => rawurldecode($filename) . ' updated successfully'];
+        }
+    }
+
+    public function rename($filename)
+    {
+        if ($this->file->rename($filename, Request::get('newname'))) {
+            return ['content' => rawurldecode($filename) . ' renamed successfully'];
         }
     }
 
     public function destroy($filename)
     {
         if ($this->file->delete($filename)) {
-            return ['content' => $filename . ' deleted successfully'];
+            return ['content' => rawurldecode($filename) . ' deleted successfully'];
         }
     }
 

@@ -38,6 +38,7 @@ class TestCase extends Laravel\Lumen\Testing\TestCase
          * ],
          */
         putenv('FILESYSTEM_DRIVER=unittest');
+        putenv('MAX_FILE_SIZE=12');
     }
 
 }

@@ -17,7 +17,8 @@ class DirectoryController extends Controller
 
     public function show($dirname)
     {
-        if ($content = $this->directory->get($dirname)) {
+        $content = $this->directory->get($dirname);
+        if (is_array($content)) {
             return compact('content');
         }
     }
@@ -25,21 +26,21 @@ class DirectoryController extends Controller
     public function store()
     {
         if ($this->directory->create(Request::get('name'))) {
-            return ['content' => Request::get('name') . ' created successfully'];
+            return ['content' => rawurldecode(Request::get('name')) . ' created successfully'];
         }
     }
 
     public function update($dirname)
     {
         if ($this->directory->move($dirname, Request::get('newname'))) {
-            return ['content' => $dirname . ' updated successfully'];
+            return ['content' => rawurldecode($dirname) . ' updated successfully'];
         }
     }
 
     public function destroy($dirname)
     {
         if ($this->directory->delete($dirname)) {
-            return ['content' => $dirname . ' deleted successfully'];
+            return ['content' => rawurldecode($dirname) . ' deleted successfully'];
         }
     }
 
