@@ -1,17 +1,19 @@
 <?php namespace App\Repositories;
 
 use Anchu\Ftp\Facades\Ftp;
+use GrahamCampbell\Flysystem\FlysystemManager;
+use Illuminate\Support\Facades\Storage;
 
 class DirectoryRepository
 {
     /**
-     * @var \Anchu\Ftp\Ftp;
+     * @var FlysystemManager
      */
-    private $ftp;
+    private $flysystem;
 
-    function __construct()
+    function __construct(FlysystemManager $flysystem)
     {
-        $this->ftp = Ftp::connection(getenv('FTP_SERVER'));
+        $this->flysystem = $flysystem;
     }
 
     /**
@@ -26,7 +28,7 @@ class DirectoryRepository
         /**
          * @TODO: Check if dir exists!
          */
-        return $this->ftp->getDirListingDetailed($dirname);
+        return $this->flysystem->listContents($dirname);
     }
 
     /**
@@ -38,7 +40,7 @@ class DirectoryRepository
      */
     function create($dirname)
     {
-        return $this->ftp->makeDir($dirname);
+        return $this->flysystem->createDir($dirname);
     }
 
     /**
@@ -51,7 +53,7 @@ class DirectoryRepository
      */
     function move($from, $to)
     {
-        return $this->ftp->rename($from, $to);
+        return $this->flysystem->rename($from, $to);
     }
 
     /**
@@ -63,6 +65,6 @@ class DirectoryRepository
      */
     function delete($dirname)
     {
-        return $this->ftp->removeDir($dirname);
+        return $this->flysystem->deleteDir($dirname);
     }
 }

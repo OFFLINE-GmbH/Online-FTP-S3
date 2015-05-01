@@ -1,5 +1,6 @@
 <?php namespace App\Exceptions;
 
+use App\ErrorCodeResolver;
 use Exception;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 
@@ -36,7 +37,13 @@ class Handler extends ExceptionHandler {
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+        return response([
+            'content' => '',
+            'errors' => [
+                ErrorCodeResolver::getCodeByException($e) => $e->getMessage()
+            ]
+        ], 500);
+        //return parent::render($request, $e);
     }
 
 }

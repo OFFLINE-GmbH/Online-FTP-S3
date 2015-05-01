@@ -1,20 +1,20 @@
 <?php namespace App\Repositories;
 
-use Anchu\Ftp\Facades\Ftp;
+use GrahamCampbell\Flysystem\FlysystemManager;
 
 class FileRepository
 {
     /**
-     * @var \Anchu\Ftp\Ftp;
+     * @var FlysystemManager
      */
-    private $ftp;
+    private $flysystem;
 
     /**
      *
      */
-    function __construct()
+    function __construct(FlysystemManager $flysystem)
     {
-        $this->ftp = Ftp::connection(getenv('FTP_SERVER'));
+        $this->flysystem = $flysystem;
     }
 
     /**
@@ -26,7 +26,13 @@ class FileRepository
      */
     function get($filename)
     {
-        return $this->ftp->readFile($filename);
+        try {
+            $file = $this->flysystem->read($filename);
+        } catch(Exception $e) {
+            die($e->getMessage());
+            return false;
+        }
+        return $file;
     }
 
     /**
@@ -39,15 +45,7 @@ class FileRepository
      */
     function update($filename, $contents)
     {
-        $tmpFile = tempnam(sys_get_temp_dir(), 'onlineftp');
-
-        if ($tmpFile === false) return false;
-        if (file_put_contents($tmpFile, $contents) === false) return false;
-        if ($this->ftp->uploadFile($tmpFile, $filename) === false) return false;
-
-        unlink($tmpFile);
-
-        return true;
+        return $this->flysystem->write($filename, $contents);
     }
 
     /**
@@ -59,7 +57,7 @@ class FileRepository
      */
     function delete($filename)
     {
-        return $this->ftp->delete($filename);
+        return $this->flysystem->delete($filename);
     }
 
     /**

@@ -23,7 +23,7 @@ Dotenv::load(__DIR__ . '/../');
 $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
-$app->configure('ftp');
+$app->configure('flysystem');
 $app->withFacades();
 
 // $app->withEloquent();
@@ -66,7 +66,7 @@ $app->middleware([
     'Illuminate\Session\Middleware\StartSession',
     'Illuminate\View\Middleware\ShareErrorsFromSession',
     //'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
-    //'App\Http\Middleware\UrlDecoderMiddleware',
+    'App\Http\Middleware\JsonResponseMiddleware',
 ]);
 
 // $app->routeMiddleware([
@@ -85,7 +85,7 @@ $app->middleware([
 */
 
 $app->register('App\Providers\AppServiceProvider');
-$app->register('Anchu\Ftp\FtpServiceProvider');
+$app->register('GrahamCampbell\Flysystem\FlysystemServiceProvider');
 
 /*
 |--------------------------------------------------------------------------

@@ -14,9 +14,6 @@
 use Anchu\Ftp\Facades\Ftp;
 
 $app->get('/', function () use ($app) {
-
-    dd(FTP::connection()->getDirListing());
-
     return view('index');
     return $app->welcome();
 });

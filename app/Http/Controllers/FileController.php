@@ -3,6 +3,8 @@
 use App\Http\Requests\FileRequest;
 use App\Repositories\FileRepository;
 use Illuminate\Support\Facades\Request;
+use League\Flysystem\Exception;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 class FileController extends Controller
 {
@@ -13,15 +15,24 @@ class FileController extends Controller
 
     public function __construct(FileRepository $fileRepository)
     {
-        $this->file = $fileRepository;
+        try {
+            $this->file = $fileRepository;
+        } catch(\Exception $e) {
+            die('x');
+        }
     }
 
     public function show($filename)
     {
-        $content = $this->file->get(rawurldecode($filename));
-        if ($content === false) return ['success' => false];
+        if($content = $this->file->get(rawurldecode($filename))) {
+            return compact('content');
+        }
+        return [
+            'errors' => [
+                'Error while reading file'
+            ]
+        ];
 
-        return ['success' => true, 'content' => $content];
     }
 
     public function store()

@@ -7,3 +7,4 @@ node_modules
 bower_components
 .sass-cache
 config/ftp.php
+config/flysystem.php
