@@ -6,7 +6,11 @@ class ErrorCodeResolver
      * @var array
      */
     protected static $errorCodes = [
-        'League\Flysystem\FileNotFoundException' => 1000
+        // Flysystem
+        'League\Flysystem\FileNotFoundException'          => 1000,
+
+        // HTTP
+        'Illuminate\Http\Exception\PostTooLargeException' => 2000
     ];
 
     /**
@@ -19,7 +23,7 @@ class ErrorCodeResolver
     public static function getCodeByException(\Exception $e)
     {
         $class = get_class($e);
-        return (array_key_exists($class, self::$errorCodes)) ? self::$errorCodes[$class] : 0;
+        return (array_key_exists($class, self::$errorCodes)) ? self::$errorCodes[$class] : $class;
     }
 
 }

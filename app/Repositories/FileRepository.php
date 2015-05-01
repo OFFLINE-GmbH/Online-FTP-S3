@@ -26,13 +26,7 @@ class FileRepository
      */
     function get($filename)
     {
-        try {
-            $file = $this->flysystem->read($filename);
-        } catch(Exception $e) {
-            die($e->getMessage());
-            return false;
-        }
-        return $file;
+        return $this->flysystem->read(rawurldecode($filename));
     }
 
     /**
@@ -45,7 +39,7 @@ class FileRepository
      */
     function update($filename, $contents)
     {
-        return $this->flysystem->write($filename, $contents);
+        return $this->flysystem->update(rawurldecode($filename), $contents);
     }
 
     /**
@@ -57,7 +51,7 @@ class FileRepository
      */
     function delete($filename)
     {
-        return $this->flysystem->delete($filename);
+        return $this->flysystem->delete(rawurldecode($filename));
     }
 
     /**

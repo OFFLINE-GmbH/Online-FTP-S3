@@ -3,8 +3,6 @@
 use App\Http\Requests\FileRequest;
 use App\Repositories\FileRepository;
 use Illuminate\Support\Facades\Request;
-use League\Flysystem\Exception;
-use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 class FileController extends Controller
 {
@@ -15,45 +13,35 @@ class FileController extends Controller
 
     public function __construct(FileRepository $fileRepository)
     {
-        try {
-            $this->file = $fileRepository;
-        } catch(\Exception $e) {
-            die('x');
-        }
+        $this->file = $fileRepository;
     }
 
     public function show($filename)
     {
-        if($content = $this->file->get(rawurldecode($filename))) {
+        if ($content = $this->file->get($filename)) {
             return compact('content');
         }
-        return [
-            'errors' => [
-                'Error while reading file'
-            ]
-        ];
-
     }
 
     public function store()
     {
-        if ($this->file->checkFilesize(Request::get('contents')) === false) {
-            return ['success' => false, 'message' => 'File is too large.'];
+        if ($this->file->update(Request::get('name'), Request::get('content'))) {
+            return ['content' => Request::get('name') . ' created successfully'];
         }
-        return ['success' => $this->file->update(rawurldecode(Request::get('name')), Request::get('content'))];
     }
 
     public function update($filename)
     {
-        if ($this->file->checkFilesize(Request::get('contents')) === false) {
-            return ['success' => false, 'message' => 'File is too large.'];
+        if ($this->file->update($filename, Request::get('content'))) {
+            return ['content' => $filename . ' updated successfully'];
         }
-        return ['success' => $this->file->update(rawurldecode($filename), Request::get('content'))];
     }
 
     public function destroy($filename)
     {
-        return ['success' => $this->file->delete(rawurldecode($filename))];
+        if ($this->file->delete($filename)) {
+            return ['content' => $filename . ' deleted successfully'];
+        }
     }
 
 }

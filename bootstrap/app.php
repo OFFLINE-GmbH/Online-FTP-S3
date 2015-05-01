@@ -21,7 +21,7 @@ Dotenv::load(__DIR__ . '/../');
 */
 
 $app = new Laravel\Lumen\Application(
-    realpath(__DIR__.'/../')
+    realpath(__DIR__ . '/../')
 );
 $app->configure('flysystem');
 $app->withFacades();
@@ -67,6 +67,7 @@ $app->middleware([
     'Illuminate\View\Middleware\ShareErrorsFromSession',
     //'Laravel\Lumen\Http\Middleware\VerifyCsrfToken',
     'App\Http\Middleware\JsonResponseMiddleware',
+    'App\Http\Middleware\CheckFilesizeMiddleware',
 ]);
 
 // $app->routeMiddleware([

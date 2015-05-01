@@ -19,16 +19,15 @@ class DirectoryRepository
     /**
      * Returns contents of a directory
      *
-     * @param $dirname
+     * @param      $dirname
+     *
+     * @param bool $recursive
      *
      * @return array
      */
-    function get($dirname)
+    function get($dirname, $recursive = false)
     {
-        /**
-         * @TODO: Check if dir exists!
-         */
-        return $this->flysystem->listContents($dirname);
+        return $this->flysystem->listContents(rawurldecode($dirname), $recursive);
     }
 
     /**
@@ -40,7 +39,7 @@ class DirectoryRepository
      */
     function create($dirname)
     {
-        return $this->flysystem->createDir($dirname);
+        return $this->flysystem->createDir(rawurldecode($dirname));
     }
 
     /**
@@ -53,7 +52,7 @@ class DirectoryRepository
      */
     function move($from, $to)
     {
-        return $this->flysystem->rename($from, $to);
+        return $this->flysystem->rename(rawurldecode($from), $to);
     }
 
     /**
@@ -65,6 +64,6 @@ class DirectoryRepository
      */
     function delete($dirname)
     {
-        return $this->flysystem->deleteDir($dirname);
+        return $this->flysystem->deleteDir(rawurldecode($dirname));
     }
 }

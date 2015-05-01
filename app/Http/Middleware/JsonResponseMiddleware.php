@@ -16,13 +16,35 @@ class JsonResponseMiddleware implements Middleware
     {
         $response = $next($request);
 
-        $defaultResponseBody = [
-            'errors' => new \ArrayObject(),
-            'content' => ''
-        ];
+        if ($response->original === null) {
+            $this->setUnkownError($response);
+        }
 
-        $response->setContent($response->original + $defaultResponseBody);
+        // Merge response with defaults
+        $response->setContent($response->original + $this->getDefaultResponseBody());
 
         return $response;
     }
+
+    /**
+     * @param $response
+     */
+    private function setUnkownError($response)
+    {
+        $response->original = [
+            'errors' => new \ArrayObject([0 => 'Unkown error occured'])
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    private function getDefaultResponseBody()
+    {
+        return [
+            'errors'  => new \ArrayObject(),
+            'content' => ''
+        ];
+    }
+
 }

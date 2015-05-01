@@ -13,6 +13,7 @@ class FileControllerTest extends TestCase {
             'filename' => 'test.php',
             'contents' => 'Contents'
         ]);
+        dd($response);
         $this->assertResponseOk();
     }
     /**

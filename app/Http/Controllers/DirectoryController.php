@@ -17,25 +17,30 @@ class DirectoryController extends Controller
 
     public function show($dirname)
     {
-        $content = $this->directory->get(rawurldecode($dirname));
-        if ($content === false) return ['success' => false];
-
-        return ['success' => true, 'content' => $content];
+        if ($content = $this->directory->get($dirname)) {
+            return compact('content');
+        }
     }
 
     public function store()
     {
-        return ['success' => $this->directory->create(rawurldecode(Request::get('name')))];
+        if ($this->directory->create(Request::get('name'))) {
+            return ['content' => Request::get('name') . ' created successfully'];
+        }
     }
 
     public function update($dirname)
     {
-        return ['success' => $this->directory->move(rawurldecode($dirname), Request::get('newname'))];
+        if ($this->directory->move($dirname, Request::get('newname'))) {
+            return ['content' => $dirname . ' updated successfully'];
+        }
     }
 
     public function destroy($dirname)
     {
-        return ['success' => $this->directory->delete(rawurldecode($dirname))];
+        if ($this->directory->delete($dirname)) {
+            return ['content' => $dirname . ' deleted successfully'];
+        }
     }
 
 }

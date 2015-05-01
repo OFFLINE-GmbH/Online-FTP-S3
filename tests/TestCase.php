@@ -28,6 +28,7 @@ class TestCase extends Laravel\Lumen\Testing\TestCase
      */
     private function prepareForTests()
     {
+        
     }
 
 }
