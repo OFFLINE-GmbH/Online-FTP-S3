@@ -22,7 +22,7 @@ class ErrorCodeResolver
     protected static $errorMessages = [
         // HTTP
         'Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException' => 'This HTTP method is now allowed',
-        'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'         => 'The requestet URL does not exist',
+        'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'         => 'The requested URL does not exist',
     ];
 
     /**

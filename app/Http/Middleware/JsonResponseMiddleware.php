@@ -15,6 +15,9 @@ class JsonResponseMiddleware implements Middleware
     public function handle($request, Closure $next)
     {
         $response = $next($request);
+        if(!preg_match('/\/[file|dir]/', $request->getRequestUri())) {
+            return $response;
+        }
 
         if ($response->original === null) {
             $this->setUnknownError($response);

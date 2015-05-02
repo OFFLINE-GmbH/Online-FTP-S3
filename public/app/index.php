@@ -50,8 +50,8 @@
             <tbody>
             <tr ng-repeat="file in files">
                 <td><input type="checkbox"/></td>
-                <td>{{file.isFolder ? 'Fldr' : 'File'}}</td>
-                <td>{{file.name}}</td>
+                <td>{{file.type == 'dir' ? 'Fldr' : 'File'}}</td>
+                <td>{{file.basename}}</td>
                 <td class="text-right">{{file.permissions}}</td>
                 <td class="text-right">{{file.size}}</td>
                 <td class="text-right">{{file.date}}</td>

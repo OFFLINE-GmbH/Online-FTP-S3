@@ -11,27 +11,29 @@
 |
 */
 
-use Anchu\Ftp\Facades\Ftp;
-
 $app->get('/', function () use ($app) {
     return view('index');
     return $app->welcome();
 });
 
-
 /*
- | Files
+ | Api
  */
-$app->get('/file/{filename}', 'App\Http\Controllers\FileController@show');
-$app->post('/file', 'App\Http\Controllers\FileController@store');
-$app->patch('/file/{filename}', 'App\Http\Controllers\FileController@update');
-$app->put('/file/{filename}', 'App\Http\Controllers\FileController@rename');
-$app->delete('/file/{filename}', 'App\Http\Controllers\FileController@destroy');
+$app->group(['namespace' => 'App\Http\Controllers', 'middleware' => 'CheckFilesize|JsonResponse'], function ($app) {
+    /*
+     | Files
+     */
+    $app->get('/file/{filename}', 'FileController@show');
+    $app->post('/file', 'FileController@store');
+    $app->patch('/file/{filename}', 'FileController@update');
+    $app->put('/file/{filename}', 'FileController@rename');
+    $app->delete('/file/{filename}', 'FileController@destroy');
 
-/*
- | Directories
- */
-$app->get('/dir/{dirname}', 'App\Http\Controllers\DirectoryController@show');
-$app->post('/dir', 'App\Http\Controllers\DirectoryController@store');
-$app->patch('/dir/{dirname}', 'App\Http\Controllers\DirectoryController@update');
-$app->delete('/dir/{dirname}', 'App\Http\Controllers\DirectoryController@destroy');
+    /*
+     | Directories
+     */
+    $app->get('/dir/{dirname:.?}', 'DirectoryController@show');
+    $app->post('/dir', 'DirectoryController@store');
+    $app->patch('/dir/{dirname}', 'DirectoryController@update');
+    $app->delete('/dir/{dirname}', 'DirectoryController@destroy');
+});
