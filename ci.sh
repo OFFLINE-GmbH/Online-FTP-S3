@@ -1,6 +1,10 @@
 #!/bin/bash
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+echo "Execution dir is ${DIR}"
+
 echo "Setting up test environment"
-echo cp -v .env.travis .env
+echo cp -v ${DIR}/.env.travis ${DIR}/.env
 
 echo "Generating flysystem config file"
 config="<?php return [
@@ -12,4 +16,4 @@ config="<?php return [
     ],
     'default'     => getenv('FILESYSTEM_DRIVER'),
 ];"
-echo "$config" > config/flysystem.php
+echo "$config" > ${DIR}/config/flysystem.php
