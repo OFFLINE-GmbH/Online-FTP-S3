@@ -6,6 +6,6 @@ php:
   - hhvm
   - nightly
 install:
-  - ci.sh
+  - ./ci.sh
   - rm composer.lock
   - composer -q install --prefer-dist
