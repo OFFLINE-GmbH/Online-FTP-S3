@@ -1,5 +1,11 @@
+/lumen.log
+/vendor
+.env
 .idea/
 vendor/
 node_modules
 bower_components
 .sass-cache
+config/ftp.php
+config/flysystem.php
+!public/assets/src

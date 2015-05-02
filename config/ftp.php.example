@@ -1,0 +1,41 @@
+<?php
+return [
+
+    /*
+	|--------------------------------------------------------------------------
+	| Default FTP Connection Name
+	|--------------------------------------------------------------------------
+	|
+	| Here you may specify which of the FTP connections below you wish
+	| to use as your default connection for all ftp work.
+	|
+	*/
+
+    'default'     => 'production',
+
+    /*
+    |--------------------------------------------------------------------------
+    | FTP Connections
+    |--------------------------------------------------------------------------
+    |
+    | Here are each of the FTP connections setup for your application.
+    |
+    */
+
+    'connections' => [
+        'production' => [
+            'host'     => '',
+            'port'     => 21,
+            'username' => '',
+            'password' => '',
+            'passive'  => false,
+        ],
+        'phpunit'   => [
+            'host'     => 'localhost',
+            'port'     => 21,
+            'username' => 'onlineftp',
+            'password' => 'onlineftp',
+            'passive'  => false,
+        ],
+    ],
+];
