@@ -15,13 +15,18 @@
 <!--<script src="vendor/ace/src-min/theme-chrome.js"></script>-->
 <!--<script src="vendor/ace/src-min/mode-html.js"></script>-->
 
-<script src="vendor/react/react.min.js"></script>
+
+<script src="vendor/react/react.js"></script>
 <script src="vendor/react/JSXTransformer.js"></script>
+
+<script src="vendor/react-router/build/umd/ReactRouter.js"></script>
+
+<script type="text/jsx;harmony=true" src="app/components/FileListEntry.js"></script>
 <script type="text/jsx;harmony=true" src="app/components/FileList.js"></script>
 <script type="text/jsx;harmony=true" src="app/components/FileTree.js"></script>
 <script type="text/jsx;harmony=true" src="app/components/Breadcrumbs.js"></script>
 <script type="text/jsx;harmony=true" src="app/components/Toolbar.js"></script>
-<script type="text/jsx;harmony=true" src="app/components/OnlineFtp.js"></script>
+<script type="text/jsx;harmony=true" src="app/components/_OnlineFtp.js"></script>
 <script>
     //window.onload = function () {
     //    var editor = ace.edit('editor');

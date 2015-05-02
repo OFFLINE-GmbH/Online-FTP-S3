@@ -13,7 +13,7 @@ input[type="file"],
 textarea,
 select {
     display: block;
-    @include vendor-prefix('border-radius', '1px');
+    border-radius: 1px;
     font: 13px Arial, sans-serif;
     border: 1px solid #ccc;
     padding: 7px 5px;
@@ -28,7 +28,7 @@ select {
     &:focus {
         color: #333;
         border-color: #aaa;
-        @include vendor-prefix('box-shadow', '0 0 5px rgba( 0, 0, 0, .15)');
+        box-shadow: 0 0 5px rgba( 0, 0, 0, .15);
     }
     @include max-screen(720px) {
         width: 100% !important;
@@ -83,7 +83,7 @@ legend {
         opacity: .3;
         color: #444;
         @include font-size(1.2);
-        @include vendor-prefix('transition', '.1s ease opacity');
+        transition: .1s ease opacity;
     }
     &:hover {
         [class^="icon-"] {
@@ -111,7 +111,7 @@ fieldset {
         background: #eee;
         padding: 4px 6px;
         display: block;
-        @include vendor-prefix('border-radius', '4px');
+        border-radius: 4px;
     }
     > fieldset {
         margin-top: 20px;
@@ -156,7 +156,7 @@ fieldset {
         &:focus {
             color: #333;
             border-color: #aaa;
-            @include vendor-prefix('box-shadow', '0 0 5px rgba( 255, 0, 0, .25)');
+            box-shadow: 0 0 5px rgba( 255, 0, 0, .25);
         }
     }
 }

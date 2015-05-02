@@ -2,7 +2,6 @@
 
 use Anchu\Ftp\Facades\Ftp;
 use GrahamCampbell\Flysystem\FlysystemManager;
-use Illuminate\Support\Facades\Storage;
 
 class DirectoryRepository
 {
@@ -27,7 +26,12 @@ class DirectoryRepository
      */
     function get($dirname, $recursive = false)
     {
-        return $this->flysystem->listContents(rawurldecode($dirname), $recursive);
+        $contents = $this->flysystem->listContents(rawurldecode($dirname), $recursive);
+        // Sort by type
+        usort($contents, function ($a, $b) {
+            return strcmp($a['type'], $b['type']);
+        });
+        return $contents;
     }
 
     /**

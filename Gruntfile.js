@@ -2,30 +2,40 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        autoprefixer: {
+            options: {
+                browsers: ['last 4 versions', 'ie 8', 'ie 9']
+            },
+            main: {
+                src: 'public/assets/src/css/main.unprefixed.css',
+                dest: 'public/assets/src/css/main.min.css'
+            }
+        },
+
         concat: {
             //js: {
             //    src: [
-            //        'assets/src/js/html5shiv.min.js',
-            //        'assets/src/js/cookie.js',
-            //        'assets/src/js/jquery.tablesorter.min.js',
-            //        'assets/src/js/jquery.filtertable.min.js',
-            //        'assets/src/js/mediathek.js',
-            //        'assets/src/js/app.js'
+            //        'public/assets/src/js/html5shiv.min.js',
+            //        'public/assets/src/js/cookie.js',
+            //        'public/assets/src/js/jquery.tablesorter.min.js',
+            //        'public/assets/src/js/jquery.filtertable.min.js',
+            //        'public/assets/src/js/mediathek.js',
+            //        'public/assets/src/js/app.js'
             //    ],
-            //    dest: 'assets/src/js/concatinated.js'
+            //    dest: 'public/assets/src/js/concatinated.js'
             //},
             css: {
                 src: [
-                    'assets/src/css/fontello/css/onlineftp-embedded.css',
-                    'assets/src/css/main.min.css'
+                    'public/assets/src/css/fontello/css/onlineftp-embedded.css',
+                    'public/assets/src/css/main.min.css'
                 ],
-                dest: 'assets/build/styles.min.css'
+                dest: 'public/assets/build/styles.min.css'
             }
         },
         //uglify: {
         //    js: {
         //        files: {
-        //            'assets/build/app.min.js': ['assets/src/js/concatinated.js']
+        //            'public/assets/build/app.min.js': ['public/assets/src/js/concatinated.js']
         //        }
         //    }
         //},
@@ -34,15 +44,15 @@ module.exports = function (grunt) {
                 livereload: true
             },
             scripts: {
-                files: ['assets/src/js/*.js'],
-                tasks: ['concat', 'uglify', 'clean'],
+                files: ['public/assets/src/js/*.js', 'public/app/**/*.js'],
+                tasks: ['concat:js', 'clean:js'],
                 options: {
                     spawn: false
                 }
             },
             css: {
-                files: ['assets/src/scss/*.scss', 'assets/src/scss/**/*.scss'],
-                tasks: ['sass:assets', 'concat'],
+                files: ['public/assets/src/scss/*.scss', 'public/assets/src/scss/**/*.scss'],
+                tasks: ['sass:assets','autoprefixer', 'concat'],
                 options: {
                     spawn: false
                 }
@@ -55,14 +65,14 @@ module.exports = function (grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'assets/src/css/main.min.css': 'assets/src/scss/main.scss',
-                    // 'assets/src/css/fontello.min.css': 'assets/src/fontello/css/cdc-embedded.css'
+                    'public/assets/src/css/main.unprefixed.css': 'public/assets/src/scss/main.scss',
+                    // 'public/assets/src/css/fontello.min.css': 'public/assets/src/fontello/css/cdc-embedded.css'
                 }
             }
         },
         clean: {
-            js: ['assets/src/js/concatinated.js'],
-            css: ['assets/src/css/fontello.min.css', 'assets/src/css/main.min.css']
+            js: ['public/assets/src/js/concatinated.js'],
+            css: ['public/assets/src/css/fontello.min.css', 'public/assets/src/css/main.min.css', 'public/assets/src/css/main.unprefixed.css']
         }
     });
 
@@ -71,7 +81,7 @@ module.exports = function (grunt) {
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
     // grunt.registerTask('default', ['concat:js', 'uglify', 'sass:assets', 'concat:css', 'clean']);
-    grunt.registerTask('default', ['sass:assets', 'concat:css', 'clean']);
+    grunt.registerTask('default', ['sass:assets', 'autoprefixer', 'concat:css', 'clean']);
     grunt.registerTask('dev', ['watch']);
 
 };
