@@ -32,7 +32,7 @@ $app->group(['namespace' => 'App\Http\Controllers', 'middleware' => 'CheckFilesi
     /*
      | Directories
      */
-    $app->get('/dir/{dirname:.?}', 'DirectoryController@show');
+    $app->get('/dir/{dirname:.*}', 'DirectoryController@show');
     $app->post('/dir', 'DirectoryController@store');
     $app->patch('/dir/{dirname}', 'DirectoryController@update');
     $app->delete('/dir/{dirname}', 'DirectoryController@destroy');
