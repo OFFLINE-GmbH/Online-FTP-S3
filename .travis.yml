@@ -6,6 +6,6 @@ php:
   - hhvm
   - nightly
 install:
-  - cp -v .env.travis .env
+  - ci.sh
   - rm composer.lock
-  - composer install --prefer-source
+  - composer -q install --prefer-dist

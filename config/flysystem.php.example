@@ -25,11 +25,26 @@ return [
     'connections' => [
 
         'ftp' => [
-            'driver'     => 'ftp',
-            'host'     => 'offlinegmbh.ch',
+            'driver'   => 'ftp',
+            'host'     => 'host.ch',
             'port'     => 21,
-            'username' => 'onlineftp@offlinegmbh.ch',
-            'password' => 'x7S22!$l=?*dx4/9(=2f5D_',
+            'username' => 'username',
+            'password' => 'password',
+            // 'root'       => '/path/to/root',
+            // 'passive'    => true,
+            // 'ssl'        => true,
+            // 'timeout'    => 20,
+            // 'visibility' => 'public',
+            // 'eventable'  => true,
+            // 'cache'      => 'foo'
+        ],
+
+        'unittest' => [
+            'driver'   => 'local',
+            'dir'     => 'host.ch',
+            'port'     => 21,
+            'username' => 'username',
+            'password' => 'password',
             // 'root'       => '/path/to/root',
             // 'passive'    => true,
             // 'ssl'        => true,
