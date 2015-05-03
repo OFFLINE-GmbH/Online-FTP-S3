@@ -80,4 +80,10 @@
     &-vertical th {
         vertical-align: middle;
     }
+    &-filelist {
+        a {
+            display: block;
+        }
+    }
 }
+

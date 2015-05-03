@@ -1,4 +1,5 @@
 'use strict';
+import React from 'react';
 import FileTree from './FileTree'
 import Breadcrumbs from './Breadcrumbs'
 import Toolbar from './Toolbar'

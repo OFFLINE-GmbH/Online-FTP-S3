@@ -8,7 +8,6 @@
     <title>Online FTP</title>
 </head>
 <body ng-controller="FileController">
-<div id="editor"></div>
 <div class="page-wrapper">
     <aside class="sidebar">
     </aside>

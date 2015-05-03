@@ -1,5 +1,5 @@
 'use strict';
-
+import React from 'react';
 class FileListEntry extends React.Component {
 
     render() {
@@ -7,7 +7,7 @@ class FileListEntry extends React.Component {
         href += this.props.path;
 
         return (
-            <tr>
+            <tr onClick={this.onClick}>
                 <td><input type="checkbox"/></td>
                 <td>{this.props.type}</td>
                 <td><a href={href}>{this.props.filename}</a></td>

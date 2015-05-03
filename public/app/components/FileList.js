@@ -1,5 +1,5 @@
 'use strict';
-
+import React from 'react';
 import FileListEntry from './FileListEntry'
 
 class FileList extends React.Component {
@@ -9,7 +9,7 @@ class FileList extends React.Component {
         this.state = {
             files: [],
             path: this.props.path,
-            isLoading: false
+            isLoading: true
         };
     }
 
