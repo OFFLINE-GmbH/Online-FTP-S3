@@ -22,7 +22,7 @@ class FileList extends React.Component {
     }
 
     getFiles(path) {
-        if(typeof path === 'undefined') path = this.state.path;
+        if (typeof path === 'undefined') path = this.state.path;
         var isLoading = true;
 
         this.setState({isLoading});
@@ -41,6 +41,7 @@ class FileList extends React.Component {
             }
         });
     }
+
     render() {
         var addFile = (file) => {
             return <FileListEntry
@@ -52,7 +53,16 @@ class FileList extends React.Component {
         }
         var classes = 'table table-filelist table--striped is-clickable';
 
-        if(this.state.isLoading) classes += ' is-loading';
+        if (this.state.isLoading) classes += ' is-loading';
+
+        if (this.state.files.length > 0) {
+            var fileListing = this.state.files.map(addFile);
+        } else {
+            var fileListing = <tr>
+                <td colSpan="2">&nbsp;</td>
+                <td colSpan="5">Dieser Ordner ist leer</td>
+            </tr>;
+        }
 
         return (
             <table className={classes}>
@@ -68,7 +78,7 @@ class FileList extends React.Component {
                 </tr>
                 </thead>
                 <tbody>
-                { this.state.files.map(addFile) }
+                { fileListing }
                 </tbody>
             </table>
         )

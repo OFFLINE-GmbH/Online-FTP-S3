@@ -257,6 +257,25 @@ var FileList = (function (_React$Component) {
 
             if (this.state.isLoading) classes += ' is-loading';
 
+            if (this.state.files.length > 0) {
+                var fileListing = this.state.files.map(addFile);
+            } else {
+                var fileListing = React.createElement(
+                    'tr',
+                    null,
+                    React.createElement(
+                        'td',
+                        { colSpan: '2' },
+                        ' '
+                    ),
+                    React.createElement(
+                        'td',
+                        { colSpan: '5' },
+                        'Dieser Ordner ist leer'
+                    )
+                );
+            }
+
             return React.createElement(
                 'table',
                 { className: classes },
@@ -306,7 +325,7 @@ var FileList = (function (_React$Component) {
                 React.createElement(
                     'tbody',
                     null,
-                    this.state.files.map(addFile)
+                    fileListing
                 )
             );
         }
