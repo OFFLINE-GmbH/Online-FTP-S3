@@ -2,6 +2,10 @@
 import React from 'react';
 import AceEditor from 'react-ace';
 
+
+require('brace/mode/php')
+require('brace/theme/github')
+
 class Editor extends React.Component {
     constructor(props) {
         super(props);
@@ -60,7 +64,7 @@ class Editor extends React.Component {
 
         return (
             <AceEditor
-                mode="java"
+                mode="php"
                 theme="github"
                 name="editor"
                 width="100%"

@@ -1,11 +1,7 @@
 {
   "name": "Online FTP",
   "dependencies": {
-    "requirejs": null,
     "dropzone": "~3.10.2",
-    "jquery": "~1.11.1",
-    "ace": "ajaxorg/ace-builds",
-    "react": "~0.13.2",
-    "react-router": "~0.13.3"
+    "jquery": "~1.11.1"
   }
 }

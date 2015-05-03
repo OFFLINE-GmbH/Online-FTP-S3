@@ -23,19 +23,19 @@ $app->group([
         /*
          | Files
          */
-        $app->get('/file/{filename}', 'FileController@show');
+        $app->get('/file/{filename:.*}', 'FileController@show');
         $app->post('/file', 'FileController@store');
-        $app->patch('/file/{filename}', 'FileController@update');
-        $app->put('/file/{filename}', 'FileController@rename');
-        $app->delete('/file/{filename}', 'FileController@destroy');
+        $app->patch('/file/{filename:.*}', 'FileController@update');
+        $app->put('/file/{filename:.*}', 'FileController@rename');
+        $app->delete('/file/{filename:.*}', 'FileController@destroy');
 
         /*
          | Directories
          */
         $app->get('/dir/{dirname:.*}', 'DirectoryController@show');
         $app->post('/dir', 'DirectoryController@store');
-        $app->patch('/dir/{dirname}', 'DirectoryController@update');
-        $app->delete('/dir/{dirname}', 'DirectoryController@destroy');
+        $app->patch('/dir/{dirname:.*}', 'DirectoryController@update');
+        $app->delete('/dir/{dirname:.*}', 'DirectoryController@destroy');
     });
 
 

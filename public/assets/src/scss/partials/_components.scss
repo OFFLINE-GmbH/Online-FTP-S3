@@ -42,6 +42,8 @@
     pointer-events: auto;
     visibility: visible;
     opacity: 1;
+    @include font-size(1.5);
+    line-height: 1.6;
 
     transition: .4s ease opacity;
     &.is-visible {
@@ -110,7 +112,7 @@
     &.is-visible {
         opacity: 1;
         visibility: visible;
-        transition:opacity .3s 0, visibility 0 0;
+        transition: opacity .3s 0, visibility 0 0;
 
         .modal__container {
             transform: translateY(0px);

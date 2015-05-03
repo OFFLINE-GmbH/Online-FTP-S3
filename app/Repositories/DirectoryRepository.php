@@ -26,10 +26,14 @@ class DirectoryRepository
      */
     function get($dirname, $recursive = false)
     {
-        $contents = $this->flysystem->listContents(rawurldecode($dirname), $recursive);
-        // Sort by type
+        $contents = $this->flysystem->listContents($dirname, $recursive);
         usort($contents, function ($a, $b) {
-            return strcmp($a['type'], $b['type']);
+            // Sort by type
+            $c = strcmp($a['type'], $b['type']);
+            if($c !== 0) return $c;
+
+            // Sort by name
+            return strcmp($a['filename'], $b['filename']);
         });
         return $contents;
     }
@@ -43,7 +47,7 @@ class DirectoryRepository
      */
     function create($dirname)
     {
-        return $this->flysystem->createDir(rawurldecode($dirname));
+        return $this->flysystem->createDir($dirname);
     }
 
     /**
@@ -56,7 +60,7 @@ class DirectoryRepository
      */
     function move($from, $to)
     {
-        return $this->flysystem->rename(rawurldecode($from), $to);
+        return $this->flysystem->rename($from, $to);
     }
 
     /**
@@ -68,6 +72,6 @@ class DirectoryRepository
      */
     function delete($dirname)
     {
-        return $this->flysystem->deleteDir(rawurldecode($dirname));
+        return $this->flysystem->deleteDir($dirname);
     }
 }

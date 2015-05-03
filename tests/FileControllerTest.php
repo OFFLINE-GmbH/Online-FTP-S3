@@ -19,7 +19,7 @@ class FileControllerTest extends TestCase
 //    public function testRename()
 //    {
 //        $this->createTestFile();
-//        $response = $this->call('PUT', '/file/' . rawurlencode('unittest/test.php'), [
+//        $response = $this->call('PUT', '/file/unittest/test.php', [
 //            'newname'    => 'unittest/test.new',
 //        ]);
 //        $this->assertResponseOk();
@@ -43,7 +43,7 @@ class FileControllerTest extends TestCase
     {
         $this->createTestFile();
 
-        $response = $this->call('GET', '/api/file/' . rawurlencode('unittest/test.php'));
+        $response = $this->call('GET', '/api/file/unittest/test.php');
         $this->assertResponseOk();
         $this->assertEquals('Content', $response->original['content']);
     }
@@ -52,11 +52,11 @@ class FileControllerTest extends TestCase
     {
         $this->createTestFile();
 
-        $response = $this->call('DELETE', '/api/file/' . rawurlencode('unittest/test.php'));
+        $response = $this->call('DELETE', '/api/file/unittest/test.php');
         $this->assertNoErrors($response);
         $this->assertResponseOk();
 
-        $response = $this->call('GET', '/api/file/' . rawurlencode('unittest/test.php'));
+        $response = $this->call('GET', '/api/file/unittest/test.php');
         // FileNotFoundException = 1000
         $this->assertCount(1, $response->original['errors']);
         $this->assertArrayHasKey(1000, $response->original['errors']);

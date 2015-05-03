@@ -45,7 +45,8 @@ class FileList extends React.Component {
     render() {
         var addFile = (file) => {
             return <FileListEntry
-                filename={file.filename}
+                filename={file.basename}
+                extension={file.extension}
                 type={file.type}
                 size={file.size}
                 path={file.path}
