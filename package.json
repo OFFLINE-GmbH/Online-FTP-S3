@@ -6,6 +6,8 @@
     "url": "git@projects.offlinegmbh.ch:tobias/online-ftp.git"
   },
   "devDependencies": {
+    "babelify": "^6.0.2",
+    "browserify": "^10.0.0",
     "grunt": "~0.4.1",
     "grunt-autoprefixer": "^3.0.0",
     "grunt-contrib-clean": "~0.5.0",
@@ -13,10 +15,9 @@
     "grunt-contrib-sass": "~0.6.0",
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-watch": "~0.5.3",
-    "load-grunt-tasks": "~0.2.0",
-    "babelify": "^6.0.2",
-    "browserify": "^10.0.0",
     "gulp": "^3.8.11",
+    "gulp-livereload": "^3.8.0",
+    "load-grunt-tasks": "~0.2.0",
     "vinyl-source-stream": "^1.1.0"
   }
 }

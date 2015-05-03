@@ -74,6 +74,9 @@
             transition: opacity .2s;
         }
     }
+    &.is-loading {
+        opacity: .4;
+    }
     &-vertical th {
         vertical-align: middle;
     }

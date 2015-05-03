@@ -2,53 +2,60 @@
 
 import FileListEntry from './FileListEntry'
 
-
 class FileList extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             files: [],
-            path: ''
+            path: this.props.path,
+            isLoading: false
         };
     }
 
     componentDidMount() {
-        this.getFiles();
+        this.getFiles(this.state.path);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.getFiles(nextProps.path);
     }
 
     getFiles(path) {
-        if(typeof path === 'undefined') path = '';
-        console.log(path);
+        if(typeof path === 'undefined') path = this.state.path;
+        var isLoading = true;
+
+        this.setState({isLoading});
+
         $.ajax({
             url: `/api/dir/${path}`,
             dataType: 'json',
             cache: false,
             success: (files) => {
+                isLoading = false;
                 files = files.content;
-                this.setState({files, path});
+                this.setState({files, path, isLoading});
             },
             error: (xhr, status, err) => {
                 console.error(this.props.url, status, err.toString());
             }
         });
     }
-
-    navigate(path) {
-        this.setState({path});
-    }
-
     render() {
         var addFile = (file) => {
             return <FileListEntry
-                        filename={file.filename}
-                        type={file.type}
-                        size={file.size}
-                        onNavigate={this.getFiles.bind(this)}
+                filename={file.filename}
+                type={file.type}
+                size={file.size}
+                path={file.path}
                 />
         }
+        var classes = 'table table-filelist table--striped is-clickable';
+
+        if(this.state.isLoading) classes += ' is-loading';
+
         return (
-            <table className="table table-filelist table--striped is-clickable">
+            <table className={classes}>
                 <thead>
                 <tr>
                     <th>&nbsp;</th>
