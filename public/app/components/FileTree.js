@@ -4,3 +4,5 @@ class FileTree extends React.Component {
         return <p>FileTree</p>
     }
 }
+
+export default FileTree;

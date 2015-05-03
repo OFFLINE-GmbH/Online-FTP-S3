@@ -1,11 +1,6 @@
 'use strict';
+
 class FileListEntry extends React.Component {
-
-    navigate(e) {
-        e.preventDefault();
-
-        this.props.onNavigate(this.props.filename);
-    }
 
     render() {
         var route = `#/dir/${this.props.filename}`
@@ -22,3 +17,5 @@ class FileListEntry extends React.Component {
         )
     }
 }
+
+export default FileListEntry;

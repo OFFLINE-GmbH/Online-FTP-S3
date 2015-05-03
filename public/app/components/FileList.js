@@ -1,13 +1,16 @@
 'use strict';
+
+import FileListEntry from './FileListEntry'
+
+
 class FileList extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             files: [],
-            path: props.path
+            path: ''
         };
-        console.log(props.path);
     }
 
     componentDidMount() {
@@ -16,7 +19,7 @@ class FileList extends React.Component {
 
     getFiles(path) {
         if(typeof path === 'undefined') path = '';
-
+        console.log(path);
         $.ajax({
             url: `/api/dir/${path}`,
             dataType: 'json',
@@ -64,3 +67,5 @@ class FileList extends React.Component {
         )
     }
 }
+
+export default FileList;

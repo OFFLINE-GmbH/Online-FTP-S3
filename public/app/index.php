@@ -19,14 +19,8 @@
 <script src="vendor/react/react.js"></script>
 <script src="vendor/react/JSXTransformer.js"></script>
 
-<script src="vendor/react-router/build/umd/ReactRouter.js"></script>
+<script src="app/bundle.js"></script>
 
-<script type="text/jsx;harmony=true" src="app/components/FileListEntry.js"></script>
-<script type="text/jsx;harmony=true" src="app/components/FileList.js"></script>
-<script type="text/jsx;harmony=true" src="app/components/FileTree.js"></script>
-<script type="text/jsx;harmony=true" src="app/components/Breadcrumbs.js"></script>
-<script type="text/jsx;harmony=true" src="app/components/Toolbar.js"></script>
-<script type="text/jsx;harmony=true" src="app/components/_OnlineFtp.js"></script>
 <script>
     //window.onload = function () {
     //    var editor = ace.edit('editor');
