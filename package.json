@@ -18,8 +18,10 @@
     "gulp": "^3.8.11",
     "gulp-livereload": "^3.8.0",
     "gulp-util": "^3.0.6",
+    "laravel-elixir": "^2.3.12",
     "load-grunt-tasks": "~0.2.0",
     "lodash.assign": "^3.2.0",
+    "react-bootstrap": "^0.23.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.3"

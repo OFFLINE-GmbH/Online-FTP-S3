@@ -33,15 +33,18 @@ class OnlineFtp extends React.Component {
             default: Child = FileList; break;
         }
         return (
-            <div>
-                <aside className="sidebar">
+            <div className="row">
+                <aside className="sidebar col-md-2">
                     <FileTree />
                 </aside>
-                <main className="main">
-
-                    <Breadcrumbs path={route.path} />
-                    <Toolbar />
-                    <Child path={route.path}/>
+                <main className="main col-md-10">
+                    <header className="header">
+                        <Breadcrumbs path={route.path} />
+                        <Toolbar />
+                    </header>
+                    <section className="content">
+                        <Child path={route.path}/>
+                    </section>
                 </main>
             </div>
         )

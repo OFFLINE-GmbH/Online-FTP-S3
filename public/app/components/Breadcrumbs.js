@@ -27,7 +27,7 @@ class Breadcrumbs extends React.Component {
         parts.forEach(function (element) {
             // root element
             if (element == '') {
-                element = '/';
+                element = 'ftp.server.ch';
             } else {
                 path = path + element + '/';
             }
@@ -46,9 +46,9 @@ class Breadcrumbs extends React.Component {
         }
         return (
             <div>
-                <ul className="breadcrumbs">
+                <ol className="breadcrumb">
                     { this.state.parts.map(addBreadcrumb) }
-                </ul>
+                </ol>
             </div>
         )
     }

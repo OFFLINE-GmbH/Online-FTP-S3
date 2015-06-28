@@ -23,12 +23,12 @@ class FileListEntry extends React.Component {
         var href = (file.type === 'dir') ? '#/dir/' : '#/file/';
         href += file.path;
 
-        var imgsrc = 'assets/images/icon-' + file.type + '.png';
+        var imgsrc = 'images/icon-' + file.type + '.png';
         return (
             <tr onClick={this.onClick}>
                 <td><input type="checkbox"/></td>
                 <td><img src={imgsrc} alt={file.type}/></td>
-                <td><a href={href}>{file.filename}</a></td>
+                <td><a href={href}>{file.basename}</a></td>
                 <td className="text-right">A</td>
                 <td className="text-right">{this.formatFilesize(file.size)}</td>
                 <td className="text-right">A</td>

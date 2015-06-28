@@ -43,7 +43,7 @@ class FileList extends React.Component {
         var addFile = (file) => {
             return <FileListEntry key={"file-" + file.basename + +Date.now()} file={file} />
         }
-        var classes = 'table table-filelist table--striped is-clickable';
+        var classes = 'table table-filelist table-striped is-clickable';
 
         if (this.state.isLoading) classes += ' is-loading';
 
