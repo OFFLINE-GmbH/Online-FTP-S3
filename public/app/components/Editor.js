@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import AceEditor from 'react-ace';
 
@@ -27,18 +26,15 @@ class Editor extends React.Component {
 
     getContents(path) {
         if (typeof path === 'undefined') path = this.state.path;
-        var isLoading = true;
 
-        this.setState({isLoading});
+        this.setState({isLoading: true});
 
         $.ajax({
             url: `/api/file${path}`,
             dataType: 'json',
             cache: false,
             success: (files) => {
-                isLoading = false;
-                var contents = files.content;
-                this.setState({contents, path, isLoading});
+                this.setState({contents: files.content, path, isLoading: false});
             },
             error: (xhr, status, err) => {
                 console.error(this.props.url, status, err.toString());

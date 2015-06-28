@@ -40,7 +40,7 @@ class Breadcrumbs extends React.Component {
     render() {
         var addBreadcrumb = (breadcrumb) => {
             var href = `#/dir${breadcrumb.path}`;
-            return <li>
+            return <li key={breadcrumb.path}>
                 <a href={href}>{breadcrumb.label}</a>
             </li>
         }

@@ -23,18 +23,15 @@ class FileList extends React.Component {
 
     getFiles(path) {
         if (typeof path === 'undefined') path = this.state.path;
-        var isLoading = true;
 
-        this.setState({isLoading});
+        this.setState({isLoading: true});
 
         $.ajax({
             url: `/api/dir/${path}`,
             dataType: 'json',
             cache: false,
-            success: (files) => {
-                isLoading = false;
-                files = files.content;
-                this.setState({files, path, isLoading});
+            success: (response) => {
+                this.setState({files: response.content, path, isLoading: false});
             },
             error: (xhr, status, err) => {
                 console.error(this.props.url, status, err.toString());
@@ -44,13 +41,7 @@ class FileList extends React.Component {
 
     render() {
         var addFile = (file) => {
-            return <FileListEntry
-                filename={file.basename}
-                extension={file.extension}
-                type={file.type}
-                size={file.size}
-                path={file.path}
-                />
+            return <FileListEntry key={"file-" + file.basename + +Date.now()} file={file} />
         }
         var classes = 'table table-filelist table--striped is-clickable';
 

@@ -10,6 +10,6 @@
 <body>
 <div class="page-wrapper" id="app"></div>
 
-<script src="app/bundle.js"></script>
+<script src="bundle.js"></script>
 </body>
 </html>
