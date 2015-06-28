@@ -10,3 +10,27 @@
 .content {
     padding-top: 120px;
 }
+
+
+/**
+ * React Bootstrap Treeview
+ */
+ .treeview {
+
+     .list-group-item {
+        cursor: pointer;
+     }
+
+     span {
+        width: 1rem;
+        height: 1rem;
+        &.indent {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        &.icon {
+            margin-left: 10px;
+            margin-right: 5px;
+        }
+     }
+ }

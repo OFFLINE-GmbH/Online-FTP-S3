@@ -24,7 +24,8 @@
     "react-bootstrap": "^0.23.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.2.3"
+    "watchify": "^3.2.3",
+    "react-bootstrap-treeview": "^0.1.0"
   },
   "dependencies": {
     "react": "^0.13.2",

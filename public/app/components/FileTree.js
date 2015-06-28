@@ -1,8 +1,18 @@
-'use strict';
 import React from 'react';
+
 class FileTree extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            //data: [{
+            //    text: 'Node'
+            //}]
+        };
+    }
     render() {
-        return <p>FileTree</p>
+        return <div>TreeView</div>
     }
 }
 

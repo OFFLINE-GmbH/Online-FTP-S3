@@ -4,6 +4,8 @@ import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup'
 import Button from 'react-bootstrap/lib/Button'
 import Glyphicon from 'react-bootstrap/lib/Glyphicon'
+import ModalTrigger from 'react-bootstrap/lib/ModalTrigger'
+import ModalCreate from './modals/ModalCreate'
 
 class Toolbar extends React.Component {
     render() {
@@ -24,7 +26,9 @@ class Toolbar extends React.Component {
                         <Button>Löschen</Button>
                     </ButtonGroup>
                     <ButtonGroup>
-                        <Button>Erstellen</Button>
+                        <ModalTrigger modal={<ModalCreate />}>
+                             <Button>Erstellen</Button>
+                         </ModalTrigger>
                     </ButtonGroup>
                     <ButtonGroup>
                         <Button><Glyphicon glyph="refresh" /></Button>
