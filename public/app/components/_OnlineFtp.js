@@ -8,9 +8,9 @@ import Editor from './Editor'
 
 
 class OnlineFtp extends React.Component {
+
     constructor(props) {
         super(props);
-
     }
 
     parseRoute(hash) {
@@ -51,21 +51,20 @@ class OnlineFtp extends React.Component {
     }
 }
 
-// var routes = (
-//     <Route name="app" path="/" handler={OnlineFtp}>
-//         <Route name="dir/:path" handler={FileList}/>
-//     </Route>
-// );
-// Router.run(routes, function (Handler, state) {
-//     var params = state.params;
-//
-// });
 function render() {
     var hash = window.location.hash.substr(2);
     React.render(<OnlineFtp hash={hash}/>, document.getElementById('app'));
 }
+
 window.onhashchange = render;
+
+$(function() {
+    $.subscribe('filelist.reload', render);
+});
+
 render();
+
+
 
 
 export default OnlineFtp;

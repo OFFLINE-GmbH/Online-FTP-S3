@@ -2,6 +2,7 @@
   "name": "Online FTP",
   "dependencies": {
     "dropzone": "~3.10.2",
-    "jquery": "~1.11.1"
+    "jquery": "~1.11.1",
+    "jquery-tiny-pubsub": "~0.7.0"
   }
 }

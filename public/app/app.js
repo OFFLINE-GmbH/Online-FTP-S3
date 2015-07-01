@@ -1,3 +1,5 @@
+require('../vendor/jquery-tiny-pubsub/dist/ba-tiny-pubsub.min.js');
+
 import React from 'react';
 
 import Breadcrumbs from './components/Breadcrumbs.js';
