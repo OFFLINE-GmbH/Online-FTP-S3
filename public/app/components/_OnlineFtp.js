@@ -11,6 +11,10 @@ class OnlineFtp extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            selectedEntries: []
+        }
     }
 
     parseRoute(hash) {
@@ -22,6 +26,30 @@ class OnlineFtp extends React.Component {
         var path = parts.join('/');
 
         return {type, path}
+    }
+
+    _onSelect(file, remove = false) {
+        var selectedEntries = this.state.selectedEntries;
+
+        console.log('select');
+
+        if(remove) {
+            delete selectedEntries[file.path];
+        } else {
+            selectedEntries[file.path] = file;
+        }
+
+        this.setState({
+            selectedEntries
+        });
+
+        console.log(this.state.selectedEntries);
+    }
+
+    _onNavigate() {
+        this.setState({
+            selectedEntries: []
+        });
     }
 
     render() {
@@ -39,11 +67,18 @@ class OnlineFtp extends React.Component {
                 </aside>
                 <main className="main col-md-10">
                     <header className="header">
-                        <Breadcrumbs path={route.path} />
-                        <Toolbar />
+                        <Breadcrumbs path={route.path}/>
+                        <Toolbar
+                            selectedEntries={this.state.selectedEntries}
+                             />
                     </header>
                     <section className="content">
-                        <Child path={route.path}/>
+                        <Child
+                            path={route.path}
+                            onSelect={this._onSelect.bind(this)}
+                            onNavigate={this._onNavigate.bind(this)}
+                            selectedEntries={this.state.selectedEntries}
+                            />
                     </section>
                 </main>
             </div>

@@ -18,7 +18,9 @@ class FileList extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.getFiles(nextProps.path);
+        if(nextProps.path !== this.state.path) {
+            this.getFiles(nextProps.path);
+        }
     }
 
     getFiles(path) {
@@ -31,6 +33,7 @@ class FileList extends React.Component {
             dataType: 'json',
             cache: false,
             success: (response) => {
+                this.props.onNavigate();
                 this.setState({files: response.content, path, isLoading: false});
             },
             error: (xhr, status, err) => {
@@ -41,7 +44,12 @@ class FileList extends React.Component {
 
     render() {
         var addFile = (file) => {
-            return <FileListEntry key={"file-" + file.basename + +Date.now()} file={file} />
+            return <FileListEntry
+                key={"file-" + file.basename + +Date.now()}
+                file={file}
+                onSelect={this.props.onSelect}
+                selectedEntries={this.props.selectedEntries}
+                 />
         }
         var classes = 'table table-filelist table-striped is-clickable';
 

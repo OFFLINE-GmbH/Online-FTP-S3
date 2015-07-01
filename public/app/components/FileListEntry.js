@@ -4,9 +4,25 @@ class FileListEntry extends React.Component {
 
     constructor(props) {
         super(props);
+
+        var checked = props.selectedEntries.hasOwnProperty(props.file.path);
+
         this.state = {
-            file: props.file
+            file: props.file,
+            checked
         };
+    }
+
+    _onSelect(file) {
+
+        this.setState({
+            checked: event.target.checked
+        });
+
+        var remove = this.state.checked;
+
+        this.props.onSelect(file, remove);
+
     }
 
     formatFilesize(size) {
@@ -26,7 +42,7 @@ class FileListEntry extends React.Component {
         var imgsrc = 'images/icon-' + file.type + '.png';
         return (
             <tr onClick={this.onClick}>
-                <td><input type="checkbox"/></td>
+                <td><input onChange={this._onSelect.bind(this, file)} type="checkbox" checked={this.state.checked}/></td>
                 <td><img src={imgsrc} alt={file.type}/></td>
                 <td><a href={href}>{file.basename}</a></td>
                 <td className="text-right">A</td>
