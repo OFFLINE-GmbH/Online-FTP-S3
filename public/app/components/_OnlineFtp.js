@@ -29,9 +29,8 @@ class OnlineFtp extends React.Component {
     }
 
     _onSelect(file, remove = false) {
-        var selectedEntries = this.state.selectedEntries;
 
-        console.log('select');
+        var selectedEntries = this.state.selectedEntries;
 
         if(remove) {
             delete selectedEntries[file.path];
@@ -42,8 +41,6 @@ class OnlineFtp extends React.Component {
         this.setState({
             selectedEntries
         });
-
-        console.log(this.state.selectedEntries);
     }
 
     _onNavigate() {
@@ -82,7 +79,7 @@ class OnlineFtp extends React.Component {
                     </section>
                 </main>
             </div>
-        )
+        );
     }
 }
 
@@ -98,8 +95,6 @@ $(function() {
 });
 
 render();
-
-
 
 
 export default OnlineFtp;
