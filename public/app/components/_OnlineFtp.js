@@ -55,30 +55,40 @@ class OnlineFtp extends React.Component {
 
         var Child;
         switch(route.type) {
-            case 'file': Child = Editor; break;
-            default: Child = FileList; break;
+            case 'file':
+            Child = (
+                <Editor path={route.path} />
+            );
+            break;
+
+            default:
+                Child = (
+                    <div>
+                        <aside className="sidebar col-md-2">
+                            <FileTree />
+                        </aside>
+                        <main className="main col-md-10">
+                            <header className="header">
+                                <Breadcrumbs path={route.path}/>
+                                <Toolbar
+                                    selectedEntries={this.state.selectedEntries}
+                                     />
+                            </header>
+                            <section className="content">
+                                <FileList
+                                     path={route.path}
+                                     onSelect={this._onSelect.bind(this)}
+                                     onNavigate={this._onNavigate.bind(this)}
+                                     selectedEntries={this.state.selectedEntries} />
+                            </section>
+                        </main>
+                    </div>
+                );
+            break;
         }
         return (
             <div className="row">
-                <aside className="sidebar col-md-2">
-                    <FileTree />
-                </aside>
-                <main className="main col-md-10">
-                    <header className="header">
-                        <Breadcrumbs path={route.path}/>
-                        <Toolbar
-                            selectedEntries={this.state.selectedEntries}
-                             />
-                    </header>
-                    <section className="content">
-                        <Child
-                            path={route.path}
-                            onSelect={this._onSelect.bind(this)}
-                            onNavigate={this._onNavigate.bind(this)}
-                            selectedEntries={this.state.selectedEntries}
-                            />
-                    </section>
-                </main>
+                {Child}
             </div>
         );
     }

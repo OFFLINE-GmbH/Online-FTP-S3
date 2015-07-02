@@ -3,9 +3,10 @@
 
 import React from 'react';
 import AceEditor from 'react-ace';
+import Brace from 'brace';
 
 
-require('brace/mode/php');
+require('brace/mode/java');
 require('brace/theme/github');
 
 class Editor extends React.Component {
@@ -63,7 +64,7 @@ class Editor extends React.Component {
 
         return (
             <AceEditor
-                mode="php"
+                mode="java"
                 theme="github"
                 name="editor"
                 width="100%"
