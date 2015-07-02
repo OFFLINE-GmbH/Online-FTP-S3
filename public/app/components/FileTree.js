@@ -1,3 +1,5 @@
+/* jshint esnext: true */
+
 import React from 'react';
 
 class FileTree extends React.Component {

@@ -1,3 +1,5 @@
+/* jshint esnext: true */
+
 import React from 'react';
 
 class FileListEntry extends React.Component {

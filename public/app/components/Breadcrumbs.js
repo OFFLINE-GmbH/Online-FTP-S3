@@ -1,4 +1,5 @@
-'use strict';
+/* jshint esnext: true */
+
 import React from 'react';
 class Breadcrumbs extends React.Component {
 
@@ -6,7 +7,7 @@ class Breadcrumbs extends React.Component {
         super(props);
         this.state = {
             parts: this.parsePath(props.path)
-        }
+        };
     }
 
     componentWillReceiveProps(nextProps) {

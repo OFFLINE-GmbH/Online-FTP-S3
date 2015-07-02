@@ -1,6 +1,7 @@
-'use strict';
+/* jshint esnext: true */
+
 import React from 'react';
-import FileListEntry from './FileListEntry'
+import FileListEntry from './FileListEntry';
 
 class FileList extends React.Component {
 

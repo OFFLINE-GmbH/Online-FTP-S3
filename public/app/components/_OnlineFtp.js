@@ -1,10 +1,11 @@
-'use strict';
+/* jshint esnext: true */
+
 import React from 'react';
-import FileTree from './FileTree'
-import Breadcrumbs from './Breadcrumbs'
-import Toolbar from './Toolbar'
-import FileList from './FileList'
-import Editor from './Editor'
+import FileTree from './FileTree';
+import Breadcrumbs from './Breadcrumbs';
+import Toolbar from './Toolbar';
+import FileList from './FileList';
+import Editor from './Editor';
 
 
 class OnlineFtp extends React.Component {
@@ -14,7 +15,7 @@ class OnlineFtp extends React.Component {
 
         this.state = {
             selectedEntries: []
-        }
+        };
     }
 
     parseRoute(hash) {
@@ -25,7 +26,7 @@ class OnlineFtp extends React.Component {
 
         var path = parts.join('/');
 
-        return {type, path}
+        return {type, path};
     }
 
     _onSelect(file, remove = false) {

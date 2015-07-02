@@ -1,9 +1,12 @@
+/* jshint esnext: true */
+
+
 import React from 'react';
 import AceEditor from 'react-ace';
 
 
-require('brace/mode/php')
-require('brace/theme/github')
+require('brace/mode/php');
+require('brace/theme/github');
 
 class Editor extends React.Component {
     constructor(props) {

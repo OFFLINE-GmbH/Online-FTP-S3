@@ -1,3 +1,5 @@
+/* jshint esnext: true */
+
 require('../vendor/jquery-tiny-pubsub/dist/ba-tiny-pubsub.min.js');
 
 import React from 'react';
