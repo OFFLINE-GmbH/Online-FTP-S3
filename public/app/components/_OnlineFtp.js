@@ -50,6 +50,10 @@ class OnlineFtp extends React.Component {
         });
     }
 
+    _refresh() {
+        this.refs.filelist.getFiles();
+    }
+
     render() {
         var route = this.parseRoute(this.props.hash);
 
@@ -72,10 +76,12 @@ class OnlineFtp extends React.Component {
                                 <Breadcrumbs path={route.path}/>
                                 <Toolbar
                                     selectedEntries={this.state.selectedEntries}
+                                    doRefresh={this._refresh.bind(this)}
                                      />
                             </header>
                             <section className="content">
                                 <FileList
+                                     ref="filelist"
                                      path={route.path}
                                      onSelect={this._onSelect.bind(this)}
                                      onNavigate={this._onNavigate.bind(this)}
