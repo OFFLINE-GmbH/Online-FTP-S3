@@ -8,6 +8,15 @@ import FileList from './FileList';
 import Editor from './Editor';
 
 
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
+
 class OnlineFtp extends React.Component {
 
     constructor(props) {
@@ -54,6 +63,33 @@ class OnlineFtp extends React.Component {
         this.refs.filelist.getFiles();
     }
 
+    _delete() {
+
+        var that = this;
+        var selectedEntries = this.state.selectedEntries;
+        
+        if(Object.size(selectedEntries) < 1) return;
+
+        Object.keys(selectedEntries).forEach(function(entry) {
+
+            var url = WEBROOT + '/file/' + entry;
+
+            $.ajax({
+                method: 'DELETE',
+                url,
+                data: {_method: 'DELETE'}
+            })
+            .done(() => {
+                that._refresh();
+            })
+            .fail((response) => {
+                alert('Fehler beim Löschen der Datei ' + entry);
+            });
+
+        });
+
+    }
+
     render() {
         var route = this.parseRoute(this.props.hash);
 
@@ -75,7 +111,7 @@ class OnlineFtp extends React.Component {
                             <header className="header">
                                 <Breadcrumbs path={route.path}/>
                                 <Toolbar
-                                    selectedEntries={this.state.selectedEntries}
+                                    doDelete={this._delete.bind(this)}
                                     doRefresh={this._refresh.bind(this)}
                                      />
                             </header>

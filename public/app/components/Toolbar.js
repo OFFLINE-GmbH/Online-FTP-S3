@@ -8,43 +8,7 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import ModalTrigger from 'react-bootstrap/lib/ModalTrigger';
 import ModalCreate from './modals/ModalCreate';
 
-
-Object.size = function(obj) {
-    var size = 0, key;
-    for (key in obj) {
-        if (obj.hasOwnProperty(key)) size++;
-    }
-    return size;
-};
-
 class Toolbar extends React.Component {
-
-    onDelete() {
-
-        var that = this;
-        var selectedEntries = this.props.selectedEntries;
-        if(Object.size(selectedEntries) < 1) return;
-
-        Object.keys(selectedEntries).forEach(function(entry) {
-
-            var url = WEBROOT + '/file/' + entry;
-
-            $.ajax({
-                method: 'DELETE',
-                url,
-                data: {_method: 'DELETE'}
-            })
-            .done(() => {
-                that.props.doRefresh();
-            })
-            .fail((response) => {
-                console.error(response);
-                alert('Fehler beim Löschen der Datei ' + entry);
-            });
-
-        });
-
-    }
 
     render() {
         return (
@@ -61,7 +25,7 @@ class Toolbar extends React.Component {
                     </ButtonGroup>
                     <ButtonGroup>
                         <Button>Verschieben</Button>
-                        <Button onClick={this.onDelete.bind(this)}>Löschen</Button>
+                        <Button onClick={this.props.doDelete}>Löschen</Button>
                     </ButtonGroup>
                     <ButtonGroup>
                         <ModalTrigger modal={<ModalCreate />}>
@@ -69,10 +33,10 @@ class Toolbar extends React.Component {
                          </ModalTrigger>
                     </ButtonGroup>
                     <ButtonGroup>
-                        <Button><Glyphicon glyph="refresh" /></Button>
+                        <Button onClick={this.props.doRefresh}><Glyphicon glyph="refresh" /></Button>
                     </ButtonGroup>
             </ButtonToolbar>
-        )
+        );
     }
 }
 
