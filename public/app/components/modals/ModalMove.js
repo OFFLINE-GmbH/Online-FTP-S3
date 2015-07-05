@@ -1,5 +1,5 @@
 import React from 'react'
-import TreeView from '../TreView'
+import FileTree from '../FileTree'
 import Modal from 'react-bootstrap/lib/Modal'
 import Button from 'react-bootstrap/lib/Button'
 import ButtonGroup from 'react-bootstrap/lib/ButtonGroup'
@@ -54,10 +54,10 @@ class ModalCreate extends React.Component {
         return (
           <Modal {...this.props} title="Erstellen" animation={true}>
             <div className="modal-body">
-                <TreeView></TreeView>
+                <FileTree></FileTree>
                 <div className="modal-footer">
                   <Button onClick={this.props.onRequestHide}>Abbrechen</Button>
-                  <Button onClick={this._create.bind(this)} bsStyle="primary">Verschieben</Button>
+                  <Button onClick={this._move.bind(this)} bsStyle="primary">Verschieben</Button>
                 </div>
             </div>
           </Modal>

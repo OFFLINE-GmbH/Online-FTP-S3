@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import ModalTrigger from 'react-bootstrap/lib/ModalTrigger';
 import ModalCreate from './modals/ModalCreate';
+import ModalMove from './modals/ModalMove';
 
 class Toolbar extends React.Component {
 
@@ -24,7 +25,9 @@ class Toolbar extends React.Component {
                         </Button>
                     </ButtonGroup>
                     <ButtonGroup>
-                        <Button>Verschieben</Button>
+                        <ModalTrigger modal={<ModalMove />}>
+                            <Button>Verschieben</Button>
+                        </ModalTrigger>
                         <Button onClick={this.props.doDelete}>Löschen</Button>
                     </ButtonGroup>
                     <ButtonGroup>
