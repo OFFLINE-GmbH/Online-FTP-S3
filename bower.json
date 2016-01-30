@@ -1,11 +1,8 @@
 {
   "name": "Online FTP",
   "dependencies": {
-    "requirejs": null,
     "dropzone": "~3.10.2",
     "jquery": "~1.11.1",
-    "angular": "~1.3.0",
-    "ace": "ajaxorg/ace-builds",
-    "angular-resource": "~1.3.0"
+    "jquery-tiny-pubsub": "~0.7.0"
   }
 }

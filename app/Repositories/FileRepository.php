@@ -26,7 +26,7 @@ class FileRepository
      */
     function get($filename)
     {
-        return $this->flysystem->read(rawurldecode($filename));
+        return $this->flysystem->read($filename);
     }
 
     /**
@@ -39,7 +39,7 @@ class FileRepository
      */
     function create($filename, $contents)
     {
-        return $this->update(rawurldecode($filename), $contents);
+        return $this->update($filename, $contents);
     }
 
     /**
@@ -52,7 +52,7 @@ class FileRepository
      */
     function update($filename, $contents)
     {
-        return $this->flysystem->put(rawurldecode($filename), $contents);
+        return $this->flysystem->put($filename, $contents);
     }
 
     /**
@@ -66,7 +66,7 @@ class FileRepository
      */
     function rename($from, $to)
     {
-        return $this->flysystem->rename(rawurldecode($from), $to);
+        return $this->flysystem->rename($from, $to);
     }
 
     /**
@@ -78,7 +78,7 @@ class FileRepository
      */
     function delete($filename)
     {
-        return $this->flysystem->delete(rawurldecode($filename));
+        return $this->flysystem->delete($filename);
     }
 
     /**

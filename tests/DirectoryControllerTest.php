@@ -18,7 +18,7 @@ class DirectoryControllerTest extends TestCase
 
     public function testCreateDirectory()
     {
-        $response = $this->call('POST', '/dir', [
+        $response = $this->call('POST', '/api/dir', [
             'name'    => 'unittest/test'
         ]);
         $this->assertNoErrors($response);
@@ -30,7 +30,7 @@ class DirectoryControllerTest extends TestCase
     {
         $this->createTestDirectoryWithContents();
 
-        $response = $this->call('GET', '/dir/' . rawurlencode('unittest/test'));
+        $response = $this->call('GET', '/api/dir/unittest/test');
         $this->assertResponseOk();
         $this->assertCount(2, $response->original['content']);
     }
@@ -39,11 +39,11 @@ class DirectoryControllerTest extends TestCase
     {
         $this->createTestDirectoryWithContents();
 
-        $response = $this->call('DELETE', '/dir/' . rawurlencode('unittest/test'));
+        $response = $this->call('DELETE', '/api/dir/unittest/test');
         $this->assertNoErrors($response);
         $this->assertResponseOk();
 
-        $response = $this->call('GET', '/dir/' . rawurlencode('unittest/test'));
+        $response = $this->call('GET', '/api/dir/unittest/test');
         $this->assertResponseOk();
         $this->assertTrue(is_array($response->original['content']));
         $this->assertCount(0, $response->original['content']);
