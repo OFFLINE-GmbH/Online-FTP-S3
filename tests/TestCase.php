@@ -1,16 +1,26 @@
 <?php
 
-class TestCase extends Laravel\Lumen\Testing\TestCase
+class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
+    /**
+     * The base URL to use while testing the application.
+     *
+     * @var string
+     */
+    protected $baseUrl = 'http://localhost';
 
     /**
      * Creates the application.
      *
-     * @return \Laravel\Lumen\Application
+     * @return \Illuminate\Foundation\Application
      */
     public function createApplication()
     {
-        return require __DIR__ . '/../bootstrap/app.php';
+        $app = require __DIR__.'/../bootstrap/app.php';
+
+        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+
+        return $app;
     }
 
     /**
@@ -21,6 +31,7 @@ class TestCase extends Laravel\Lumen\Testing\TestCase
         $this->prepareForTests();
         parent::setUp();
     }
+
 
     /**
      * Prepares test environment
@@ -40,5 +51,4 @@ class TestCase extends Laravel\Lumen\Testing\TestCase
         putenv('FILESYSTEM_DRIVER=unittest');
         putenv('MAX_FILE_SIZE=12');
     }
-
 }
