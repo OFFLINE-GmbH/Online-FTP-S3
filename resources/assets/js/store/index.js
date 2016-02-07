@@ -1,36 +1,19 @@
-let store = {};
+import Vue from 'vue'
+import Vuex from 'vuex'
 
-store.files = [];
-store.path = 'public_html/test/dir';
-store.isLoading = false;
+import * as actions from './actions'
+import mutations from './mutations'
 
-/**
- * Fetch the given list of items.
- */
-store.fetchFiles = (path) => {
-    store.isLoading = true;
-    setTimeout(() => {
-        store.files = [
-            {
-                type: 'file',
-                name: 'filename',
-                permissions: 'perms',
-                size: '20 kb',
-                last_modified: '24.11.1990'
-            }
-        ];
-        store.isLoading = false;
-    }, 3000);
-};
-/**
- * Change directory.
- *
- * @param {Array<Number>} ids
- * @return {Promise}
- */
-store.cd = path => {
-    store.path = path;
-    store.fetchFiles(path);
+const state = {
+    files: [],
+    path: 'public_html/test/dir',
+    isLoading: false
 };
 
-export default store;
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+    state,
+    mutations,
+    actions
+});

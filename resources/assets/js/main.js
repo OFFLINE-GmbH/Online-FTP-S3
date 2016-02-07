@@ -1,5 +1,7 @@
-var Vue = require('vue');
-var App = require('./app.vue');
+import Vue from 'vue'
+import App from './app.vue'
+
+import store from './store'
 
 new Vue({
     el: 'body',
@@ -7,3 +9,5 @@ new Vue({
         app: App
     }
 });
+
+store.actions.fetchFiles('/');

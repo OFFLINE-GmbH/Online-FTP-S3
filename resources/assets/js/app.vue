@@ -1,15 +1,15 @@
 <template>
-    <loading-overlay :visible="state.isLoading"></loading-overlay>
+    <loading-overlay :visible="isLoading"></loading-overlay>
     <div class="container">
         <div class="row">
-            <breadcrumbs :path="state.path"></breadcrumbs>
+            <breadcrumbs></breadcrumbs>
         </div>
         <div class="row">
             <toolbar></toolbar>
         </div>
 
         <div class="row">
-            <file-list :listing="state.files"></file-list>
+            <file-list :listing="files"></file-list>
         </div>
     </div>
 </template>
@@ -20,13 +20,19 @@
     import FileList from './components/filelist.vue'
     import LoadingOverlay from './components/loading-overlay.vue'
 
-    import store from './store';
+    import store from './store'
 
     export default {
-        data() {
-            return {
-                state: store
-            }
+        methods: {
+
+        },
+        computed: {
+          files() {
+              return store.state.files;
+          },
+          isLoading() {
+              return store.state.isLoading;
+          }
         },
         components: {
             Breadcrumbs,

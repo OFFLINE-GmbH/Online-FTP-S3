@@ -16,19 +16,23 @@
 </template>
 
 <script type="text/babel">
-    export default {
-        props: ['path'],
+    import store from '../store';
 
+    export default {
         methods: {
             isLast(index) {
                 return index + 1 == this.breadcrumbs.length
+            },
+
+            cd(path) {
+                store.actions.changeDirectory(path);
             }
         },
 
         computed: {
             breadcrumbs() {
                 let path = '';
-                return this.path.split('/')
+                return store.state.path.split('/')
                         .map(item => {
                             path += item + '/';
                             return {
