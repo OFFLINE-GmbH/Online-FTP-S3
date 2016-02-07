@@ -1,12 +1,15 @@
 export default {
 
     SET_LOADING (state, isLoading) {
-        console.log('setting loading', isLoading);
         state.isLoading = isLoading
     },
 
     SET_FILELIST(state, files) {
         state.files = files;
+    },
+
+    TOGGLE_FILE(state, file) {
+        file.checked = ! file.checked;
     },
 
     SET_PATH(state, path) {

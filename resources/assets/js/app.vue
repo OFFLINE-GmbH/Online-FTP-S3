@@ -9,7 +9,7 @@
         </div>
 
         <div class="row">
-            <file-list :listing="files"></file-list>
+            <file-list></file-list>
         </div>
     </div>
 </template>
@@ -27,9 +27,6 @@
 
         },
         computed: {
-          files() {
-              return store.state.files;
-          },
           isLoading() {
               return store.state.isLoading;
           }

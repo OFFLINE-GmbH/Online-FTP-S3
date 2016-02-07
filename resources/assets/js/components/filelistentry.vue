@@ -1,10 +1,18 @@
 <template>
     <tr>
-        <td><input type="checkbox"></td>
+        <td>
+            <input type="checkbox"
+                   :checked="item.checked"
+                   @change="toggle(item)">
+        </td>
         <td>
             <span class="glyphicon glyphicon-{{ this.icon }}"></span>
         </td>
-        <td>{{ item.name }}</td>
+        <td>
+            <a @click="click">
+                {{ item.name }}
+            </a>
+        </td>
         <td>{{ item.permissions }}</td>
         <td>{{ item.filesize }}</td>
         <td>{{ item.last_modified }}</td>
@@ -12,8 +20,22 @@
 </template>
 
 <script>
+    import store from '../store';
+
     export default {
         props: ['item'],
+        methods: {
+            toggle(item) {
+                store.actions.toggleFile(item);
+            },
+            click() {
+                if(this.item.type === 'file') {
+
+                } else {
+                    store.actions.changeDirectoryRelative(this.item.name)
+                }
+            }
+        },
         computed: {
             icon() {
                 return this.item.type === 'file' ? 'file' : 'folder-open'

@@ -1,9 +1,9 @@
 <style lang="stylus">
     .listing
         td
-            &:nth-child(1)
+            & :nth-child(1)
                 width 10px
-            &:nth-child(2)
+            & :nth-child(2)
                 width 10px
 </style>
 
@@ -35,12 +35,19 @@
     </div>
 </template>
 
-<script>
+<script type="text/babel">
     import FileListEntry from './filelistentry.vue'
+
+    import store from './../store';
+
     export default {
-        props: ['listing'],
         components: {
             FileListEntry
+        },
+        computed: {
+            listing() {
+                return store.state.files;
+            }
         }
     }
 </script>
