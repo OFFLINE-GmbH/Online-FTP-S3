@@ -1,6 +1,9 @@
 var elixir = require('laravel-elixir');
+bootstrap = require('bootstrap-styl');
 
 require('laravel-elixir-vueify');
+require('laravel-elixir-stylus');
+
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -13,6 +16,6 @@ require('laravel-elixir-vueify');
  */
 
 elixir(function (mix) {
-    mix.sass('app.scss')
-        .browserify('main.js');
+    mix.browserify('main.js')
+        .stylus('app.styl', null, {use: bootstrap()});
 });
