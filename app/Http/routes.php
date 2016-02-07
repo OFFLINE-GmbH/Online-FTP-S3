@@ -1,36 +1,31 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Routes File
+|--------------------------------------------------------------------------
+|
+| Here is where you will register all of the routes in an application.
+| It's a breeze. Simply tell Laravel the URIs it should respond to
+| and give it the controller to call when that URI is requested.
+|
+*/
 
-Route::group([
-    'prefix'     => 'api',
-    'namespace'  => 'App\Http\Controllers',
-    'middleware' => 'CheckFilesize|JsonResponse'],
-    function ($app) {
-        /*
-         | Files
-         */
-        $app->get('/file/{filename:.*}', 'FileController@show');
-        $app->post('/file', 'FileController@store');
-        $app->patch('/file/{filename:.*}', 'FileController@update');
-        $app->put('/file/{filename:.*}', 'FileController@rename');
-        $app->delete('/file/{filename:.*}', 'FileController@destroy');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-        /*
-         | Directories
-         */
-        $app->get('/dir/{dirname:.*}', 'DirectoryController@show');
-        $app->post('/dir', 'DirectoryController@store');
-        $app->patch('/dir/{dirname:.*}', 'DirectoryController@update');
-        $app->delete('/dir/{dirname:.*}', 'DirectoryController@destroy');
-    });
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| This route group applies the "web" middleware group to every route
+| it contains. The "web" middleware group is defined in your HTTP
+| kernel and includes session state, CSRF protection, and more.
+|
+*/
 
 Route::group(['middleware' => ['web']], function () {
-    
-
-        $app->get('/', function () use ($app) {
-            return view('index');
-        });
-        $app->get('/dir/{path:.*}', function () use ($app) {
-            return view('index');
-        });
+    //
 });

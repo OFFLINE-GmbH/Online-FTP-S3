@@ -1,26 +1,7 @@
 {
   "private": true,
   "devDependencies": {
-    "babelify": "^6.0.2",
-    "browserify": "^10.0.0",
-    "grunt": "~0.4.1",
-    "grunt-autoprefixer": "^3.0.0",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-sass": "~0.6.0",
-    "grunt-contrib-uglify": "~0.2.7",
-    "grunt-contrib-watch": "~0.5.3",
-    "gulp": "^3.8.11",
-    "gulp-livereload": "^3.8.0",
-    "gulp-util": "^3.0.6",
-    "laravel-elixir": "^2.3.12",
-    "load-grunt-tasks": "~0.2.0",
-    "lodash.assign": "^3.2.0",
-    "react-bootstrap": "^0.23.5",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.2.3",
-    "react-bootstrap-treeview": "^0.1.0"
+    "gulp": "^3.8.8"
   },
   "dependencies": {
     "laravel-elixir": "^4.0.0",
