@@ -3,6 +3,7 @@
   "devDependencies": {
     "bootstrap": "^4.0.0-alpha.2",
     "bootstrap-styl": "^5.0.5",
+    "es6-promise": "^3.0.2",
     "gulp": "^3.8.8",
     "laravel-elixir-stylus": "^1.0.1",
     "laravel-elixir-vueify": "^1.0.2"
