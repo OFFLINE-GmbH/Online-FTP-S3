@@ -10,6 +10,7 @@
 </head>
 <body>
     <app></app>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
     <script src="/js/main.js"></script>
 </body>
 </html>

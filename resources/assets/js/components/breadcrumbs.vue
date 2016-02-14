@@ -1,17 +1,19 @@
 <template>
-    <div class="breadcrumbs col-md-12">
-        <ol class="breadcrumb">
-            <li v-for="breadcrumb in breadcrumbs"
-                :class="{ active: isLast($index) }">
-                <a @click="cd(breadcrumb.path)"
-                   v-if="!isLast($index)">
-                    {{ breadcrumb.label }}
-                </a>
+    <div class="row">
+        <div class="breadcrumbs col-md-12">
+            <ol class="breadcrumb">
+                <li v-for="breadcrumb in breadcrumbs"
+                    :class="{ active: isLast($index) }">
+                    <a @click="cd(breadcrumb.path)"
+                       v-if="!isLast($index)">
+                        {{ breadcrumb.label }}
+                    </a>
                 <span v-else>
                     {{ breadcrumb.label }}
                 </span>
-            </li>
-        </ol>
+                </li>
+            </ol>
+        </div>
     </div>
 </template>
 

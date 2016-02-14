@@ -1,28 +1,30 @@
 <template>
-    <div class="listing col-md-12">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th colspan="2"></th>
-                <th>Filename</th>
-                <th>Permissions</th>
-                <th>Filesize</th>
-                <th>Last modified</th>
-            </tr>
-            <tr>
-                <td><input @change.prevent="toggleAll" v-model="allSelected" type="checkbox"></td>
-                <td>
-                    <span v-if="! isRootLevel" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-                </td>
-                <td colspan="4">
-                    <a v-if="! isRootLevel" href="#" @click.prevent="levelUp">One level up</a>
-                </td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr is="file-list-entry" :item="item" v-for="item in listing"></tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="listing col-md-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th colspan="2"></th>
+                    <th>Filename</th>
+                    <th>Permissions</th>
+                    <th>Filesize</th>
+                    <th>Last modified</th>
+                </tr>
+                <tr>
+                    <td><input @change.prevent="toggleAll" v-model="allSelected" type="checkbox"></td>
+                    <td>
+                        <span v-if="! isRootLevel" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                    </td>
+                    <td colspan="4">
+                        <a v-if="! isRootLevel" href="#" @click.prevent="levelUp">One level up</a>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr is="file-list-entry" :item="item" v-for="item in listing"></tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
@@ -37,7 +39,7 @@
                 store.actions.levelUp();
             },
             toggleAll() {
-                store.actions.toggleAll( ! store.state.allSelected);
+                store.actions.toggleAll(!store.state.allSelected);
             }
         },
         computed: {

@@ -1,47 +1,33 @@
 <template>
     <loading-overlay :visible="isLoading"></loading-overlay>
-    <modal-delete></modal-delete>
-    <modal-create></modal-create>
-    <modal-upload></modal-upload>
-    <div class="container">
-        <div class="row">
-            <breadcrumbs></breadcrumbs>
-        </div>
-        <div class="row">
-            <toolbar></toolbar>
-        </div>
+    <modals></modals>
 
-        <div class="row">
-            <file-list></file-list>
-        </div>
-    </div>
+    <browser></browser>
+    <editor></editor>
 </template>
 
 <script>
-    import Breadcrumbs from './components/breadcrumbs.vue'
-    import Toolbar from './components/toolbar.vue'
-    import FileList from './components/filelist.vue'
+    import Editor from './components/editor.vue';
+    import Browser from './components/browser.vue';
+    import Modals from './components/modals/index.vue'
     import LoadingOverlay from './components/loading-overlay.vue'
-    import ModalDelete from './components/modals/modal-delete.vue'
-    import ModalCreate from './components/modals/modal-create.vue'
-    import ModalUpload from './components/modals/modal-upload.vue'
-
-    import store from './store'
 
     export default {
-        computed: {
-          isLoading() {
-              return store.state.isLoading;
-          }
-        },
         components: {
-            Breadcrumbs,
-            Toolbar,
-            FileList,
-            LoadingOverlay,
-            ModalDelete,
-            ModalCreate,
-            ModalUpload,
+            Editor,
+            Browser,
+            Modals,
+            LoadingOverlay
         }
     }
 </script>
+
+<style>
+    .col {
+        width: 50%;
+        float: left;
+    }
+    .col-browser {
+        padding: 1em;
+    }
+</style>
