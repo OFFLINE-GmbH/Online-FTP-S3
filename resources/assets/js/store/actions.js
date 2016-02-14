@@ -28,6 +28,9 @@ export const changeDirectoryRelative = ({state, actions}, path) => {
 export const changeDirectory = ({actions}, path) => {
     actions.fetchFiles(path);
 };
+export const toggleModal = ({dispatch}, modal) => {
+    dispatch('TOGGLE_MODAL', modal);
+};
 
 export const levelUp = ({actions, state}) => {
     let path = state.path.replace(/^\/|\/$/g, '').split('/');

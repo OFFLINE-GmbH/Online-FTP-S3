@@ -21,10 +21,10 @@
             <tr>
                 <td><input type="checkbox"></td>
                 <td>
-                    <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                    <span v-if="! isRootLevel" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                 </td>
                 <td colspan="4">
-                    <a href="#" @click.prevent="levelUp">One level up</a>
+                    <a v-if="! isRootLevel" href="#" @click.prevent="levelUp">One level up</a>
                 </td>
             </tr>
             </thead>
@@ -52,6 +52,9 @@
         computed: {
             listing() {
                 return store.state.files;
+            },
+            isRootLevel() {
+                return store.state.path === '/';
             }
         }
     }

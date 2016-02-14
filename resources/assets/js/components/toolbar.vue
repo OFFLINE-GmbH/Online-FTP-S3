@@ -14,7 +14,7 @@
             <button type="button" class="btn btn-default">Move</button>
         </div>
         <div class="btn-group pull-right" role="group">
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button @click.prevent="doDelete()" type="button" class="btn btn-danger">Delete</button>
         </div>
         <div class="btn-group" role="group">
             <button @click="reload" type="button" class="btn btn-default">Reload
@@ -24,8 +24,13 @@
 </template>
 
 <script>
+    import store from '../store';
+
     export default {
         methods: {
+            doDelete() {
+                store.actions.toggleModal('confirmDelete');
+            },
             reload() {
                 console.log(this.$root);
             }

@@ -14,6 +14,10 @@ export default {
 
     SET_PATH(state, path) {
         state.path = path;
+    },
+
+    TOGGLE_MODAL(state, modal) {
+        state.visibleModals[modal] = ! state.visibleModals[modal];
     }
 
 };

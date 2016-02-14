@@ -7,7 +7,10 @@ import mutations from './mutations'
 const state = {
     files: [],
     path: 'public_html/test/dir',
-    isLoading: false
+    isLoading: false,
+    visibleModals: {
+        confirmDelete: false
+    }
 };
 
 Vue.use(Vuex);
