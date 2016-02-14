@@ -3,6 +3,7 @@ import App from './app.vue'
 
 import store from './store'
 
+
 new Vue({
     el: 'body',
     components: {

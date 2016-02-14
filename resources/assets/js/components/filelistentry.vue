@@ -12,11 +12,11 @@
         </td>
         <td>
             <a @click.prevent="click">
-                {{ item.name }}
+                {{ item.basename }}
             </a>
         </td>
-        <td>{{ item.permissions }}</td>
-        <td>{{ item.filesize }}</td>
+        <td>{{ item.visibility }}</td>
+        <td>{{ item.size }}</td>
         <td>{{ item.last_modified }}</td>
     </tr>
 </template>

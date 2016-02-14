@@ -7,6 +7,7 @@
     "gulp": "^3.8.8",
     "laravel-elixir-stylus": "^1.0.1",
     "laravel-elixir-vueify": "^1.0.2",
+    "vue-resource": "^0.7.0",
     "vuex": "^0.2.0"
   },
   "dependencies": {

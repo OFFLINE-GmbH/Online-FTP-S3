@@ -27,5 +27,6 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::resource('file', 'FileController');
+    Route::resource('directory', 'DirectoryController');
 });

@@ -1,17 +1,29 @@
-let data = require('./mock-data');
-const LATENCY = 200;
+import Vue from 'vue'
+Vue.use(require('vue-resource'));
+
+// let data = require('./mock-data');
+// const LATENCY = 200;
+//
+// setTimeout(() => {
+//     cb(data, path)
+// }, LATENCY);
+
+let http = Vue.http;
 
 export function getFiles(path, cb) {
-    data.map((item) => {
-        item.checked = false;
-        item._uid = +Date.now();
 
-        return item;
+    http({url: '/directory', method: 'GET'}).then((response) => {
+        response.data.map((item) => {
+            item.checked = false;
+            item._uid = +Date.now();
+
+            return item;
+        });
+
+        cb(response.data);
+    }, (response) => {
+        console.error('Cannot fetch files for', path, response);
     });
-
-    setTimeout(() => {
-        cb(data)
-    }, LATENCY)
 }
 
 export function getContents(path, cb) {
