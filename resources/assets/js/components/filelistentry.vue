@@ -32,7 +32,7 @@
             },
             click() {
                 if(this.item.type === 'file') {
-                    console.log('edit');
+                    store.actions.fetchContents(this.item.name);
                 } else {
                     store.actions.changeDirectoryRelative(this.item.name)
                 }

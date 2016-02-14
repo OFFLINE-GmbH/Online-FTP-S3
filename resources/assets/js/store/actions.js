@@ -9,11 +9,39 @@ export const setPath = ({dispatch}, path) => {
 };
 
 export const fetchFiles = ({dispatch, actions}, path) => {
-    dispatch('SET_LOADING', true);
+    actions.setLoading(true);
     actions.setPath(path);
     api.getFiles(path, (files) => {
         actions.setFilelist(files);
     });
+};
+
+export const fetchContents = ({dispatch, actions, state}, path) => {
+
+    actions.setLoading(true);
+
+    let basePath = state.path.replace(/^\/|\/$/g, '');
+
+    path = basePath + '/' + path;
+
+    api.getContents(path, (contents, path) => {
+        dispatch('SET_OPEN_FILE', path);
+        actions.setEditorContents(contents);
+        actions.setLoading(false);
+    });
+};
+
+export const putContents = ({dispatch, actions, state}, contents) => {
+
+    actions.setLoading(true);
+
+    api.putContents(state.openFile, contents, (path, contents) => {
+        actions.setLoading(false);
+    });
+};
+
+export const setEditorContents = ({dispatch}, contents) => {
+    dispatch('SET_EDITOR_CONTENTS', contents);
 };
 
 export const deleteSelected = ({dispatch, actions, state}, cb) => {
@@ -21,9 +49,7 @@ export const deleteSelected = ({dispatch, actions, state}, cb) => {
 
     let cleanUp = () => {
         actions.toggleModal('confirmDelete');
-        if(cb) {
-            cb();
-        }
+        if(cb) cb();
     };
 
     if (files.length < 1) {
@@ -31,7 +57,7 @@ export const deleteSelected = ({dispatch, actions, state}, cb) => {
         return false;
     }
 
-    dispatch('SET_LOADING', true);
+    actions.setLoading(true);
 
     api.deleteFiles(files, () => {
         cleanUp();
@@ -44,10 +70,8 @@ export const downloadSelected = ({dispatch, actions, state}, cb) => {
     let files = state.files.filter((file) => file.checked);
 
     let cleanUp = () => {
-        if(cb) {
-            cb();
-        }
-        dispatch('SET_LOADING', false);
+        if(cb) cb();
+        actions.setLoading(false);
     };
 
     if (files.length < 1) {
@@ -55,34 +79,40 @@ export const downloadSelected = ({dispatch, actions, state}, cb) => {
         return false;
     }
 
-    dispatch('SET_LOADING', true);
+    actions.setLoading(true);
 
     api.download(files, (files) => {
         actions.toggleAll(false);
         cleanUp();
     });
 };
+export const downloadOpen = ({dispatch, actions, state}, cb) => {
+    if(state.openFile === null) return;
+
+    actions.setLoading(true);
+
+    api.download([state.openFile], () => {
+        actions.setLoading(false);
+        if(cb) cb();
+    });
+};
 
 export const create = ({dispatch, actions, state}, type, name, cb) => {
-    dispatch('SET_LOADING', true);
+    actions.setLoading(true);
 
     api.create(type, name, (type, name) => {
         actions.toggleModal('create');
         actions.refresh();
-        if (cb) {
-            cb();
-        }
+        if(cb) cb();
     });
 };
-export const upload = ({dispatch, actions, state}, file, cb) => {
-    dispatch('SET_LOADING', true);
+export const upload = ({actions}, file, cb) => {
+    actions.setLoading(true);
 
     api.upload(file, (file) => {
         actions.toggleModal('upload');
         actions.refresh();
-        if (cb) {
-            cb();
-        }
+        if(cb) cb();
     });
 };
 
@@ -121,8 +151,8 @@ export const levelUp = ({actions, state}) => {
     actions.changeDirectory(path.length > 0 ? '/' + path.join('/') + '/' : '/');
 };
 
-export const setFilelist = ({dispatch}, files) => {
-    dispatch('SET_LOADING', false);
+export const setFilelist = ({actions, dispatch}, files) => {
+    actions.setLoading(false);
     dispatch('SET_ALL_SELECTED', false);
     dispatch('SET_FILELIST', files);
 };

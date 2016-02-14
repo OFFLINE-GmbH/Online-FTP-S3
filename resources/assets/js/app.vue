@@ -12,7 +12,14 @@
     import Modals from './components/modals/index.vue'
     import LoadingOverlay from './components/loading-overlay.vue'
 
+    import store from './store';
+
     export default {
+        computed: {
+            isLoading() {
+                return store.state.isLoading;
+            }
+        },
         components: {
             Editor,
             Browser,
@@ -26,6 +33,7 @@
     .col {
         width: 50%;
         float: left;
+        position: relative;
     }
     .col-browser {
         padding: 1em;

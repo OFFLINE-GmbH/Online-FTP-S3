@@ -2,7 +2,6 @@ let data = require('./mock-data');
 const LATENCY = 200;
 
 export function getFiles(path, cb) {
-
     data.map((item) => {
         item.checked = false;
         item._uid = +Date.now();
@@ -15,23 +14,46 @@ export function getFiles(path, cb) {
     }, LATENCY)
 }
 
+export function getContents(path, cb) {
+
+    console.log('loading contents', path);
+
+    let data = `<!DOCTYPE html>
+    <html>
+        <head></head>
+        <body></body>
+    </html>`;
+
+    setTimeout(() => {
+        cb(data, path)
+    }, LATENCY)
+}
+export function putContents(path, contents, cb) {
+
+    console.log('putting contents', path, contents);
+
+    setTimeout(() => {
+        cb(path, contents)
+    }, LATENCY)
+}
+
 export function deleteFiles(files, cb) {
     console.log('deleting', files);
-    setTimeout((files) => {
+    setTimeout(() => {
         cb(files)
     }, LATENCY)
 }
 
 export function create(type, name, cb) {
     console.log('creating', type, name);
-    setTimeout((type, name) => {
+    setTimeout(() => {
         cb(type, name)
     }, LATENCY)
 }
 
 export function download(files, cb) {
     console.log('downloading', files);
-    setTimeout((files) => {
+    setTimeout(() => {
         cb(files)
     }, LATENCY)
 }
@@ -53,7 +75,7 @@ export function upload(files, cb) {
     //    //handling
     //});
 
-    setTimeout((files) => {
+    setTimeout(() => {
         cb(files)
     }, LATENCY)
 }

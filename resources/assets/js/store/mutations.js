@@ -8,6 +8,15 @@ export default {
         state.files = files;
     },
 
+    SET_EDITOR_CONTENTS(state, contents) {
+        state.editorContents = contents;
+        state.editorContentsChanged = +Date.now();
+    },
+
+    SET_OPEN_FILE(state, path) {
+        state.openFile = path;
+    },
+
     SET_ALL_SELECTED(state, newState) {
         state.allSelected = newState;
     },

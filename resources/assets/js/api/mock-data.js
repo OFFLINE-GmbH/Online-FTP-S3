@@ -1,14 +1,14 @@
 module.exports = [
     {
         type: 'file',
-        name: 'file1.jpg',
+        name: 'file1.html',
         permissions: '755',
         size: '720 kb',
         last_modified: '2015-01-15'
     },
     {
         type: 'file',
-        name: 'file2.jpg',
+        name: 'file2.htm',
         permissions: '755',
         size: '720 kb',
         last_modified: '2015-01-15'
@@ -22,7 +22,7 @@ module.exports = [
     },
     {
         type: 'file',
-        name: 'file3.jpg',
+        name: 'file3.php',
         permissions: '755',
         size: '120 kb',
         last_modified: '2015-01-15'
