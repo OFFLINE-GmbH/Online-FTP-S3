@@ -24,7 +24,7 @@
                     <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                 </td>
                 <td colspan="4">
-                    <a href="#">One level up</a>
+                    <a href="#" @click.prevent="levelUp">One level up</a>
                 </td>
             </tr>
             </thead>
@@ -43,6 +43,11 @@
     export default {
         components: {
             FileListEntry
+        },
+        methods:  {
+            levelUp() {
+                store.actions.levelUp();
+            }
         },
         computed: {
             listing() {

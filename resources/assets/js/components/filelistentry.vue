@@ -9,7 +9,7 @@
             <span class="glyphicon glyphicon-{{ this.icon }}"></span>
         </td>
         <td>
-            <a @click="click">
+            <a @click.prevent="click">
                 {{ item.name }}
             </a>
         </td>

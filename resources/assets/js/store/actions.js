@@ -25,9 +25,15 @@ export const changeDirectoryRelative = ({state, actions}, path) => {
     actions.changeDirectory(path);
 };
 
-export const changeDirectory = ({dispatch, actions}, path) => {
-    dispatch('SET_PATH', path);
+export const changeDirectory = ({actions}, path) => {
     actions.fetchFiles(path);
+};
+
+export const levelUp = ({actions, state}) => {
+    let path = state.path.replace(/^\/|\/$/g, '').split('/');
+    path.pop();
+
+    actions.changeDirectory(path.length > 0 ? '/' + path.join('/') + '/' : '/');
 };
 
 export const setFilelist = ({dispatch}, files) => {

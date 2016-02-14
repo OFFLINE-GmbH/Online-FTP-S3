@@ -1,5 +1,5 @@
 let data = require('./mock-data');
-const LATENCY = 2000;
+const LATENCY = 200;
 
 export function getFiles(path, cb) {
 
