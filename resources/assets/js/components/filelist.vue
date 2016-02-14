@@ -17,7 +17,7 @@
                 <th>Last modified</th>
             </tr>
             <tr>
-                <td><input @click="toggleAll" type="checkbox"></td>
+                <td><input @change.prevent="toggleAll" v-model="allSelected" type="checkbox"></td>
                 <td>
                     <span v-if="! isRootLevel" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                 </td>

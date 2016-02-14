@@ -3,7 +3,8 @@
         <td>
             <input type="checkbox"
                    :checked="item.checked"
-                   @change="toggle(item)">
+                   v-model="checked"
+                   @change.prevent="toggle(item)">
         </td>
         <td>
             <span class="glyphicon glyphicon-{{ this.icon }}"></span>
@@ -39,6 +40,9 @@
         computed: {
             icon() {
                 return this.item.type === 'file' ? 'file' : 'folder-open'
+            },
+            checked() {
+                return this.item.checked;
             }
         }
     }

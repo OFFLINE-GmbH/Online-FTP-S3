@@ -39,6 +39,30 @@ export const deleteSelected = ({dispatch, actions, state}, cb) => {
     });
 };
 
+export const downloadSelected = ({dispatch, actions, state}, cb) => {
+
+    let files = state.files.filter((file) => file.checked);
+
+    let cleanUp = () => {
+        if(cb) {
+            cb();
+        }
+        dispatch('SET_LOADING', false);
+    };
+
+    if (files.length < 1) {
+        cleanUp();
+        return false;
+    }
+
+    dispatch('SET_LOADING', true);
+
+    api.download(files, (files) => {
+        actions.toggleAll(false);
+        cleanUp();
+    });
+};
+
 export const create = ({dispatch, actions, state}, type, name, cb) => {
     dispatch('SET_LOADING', true);
 

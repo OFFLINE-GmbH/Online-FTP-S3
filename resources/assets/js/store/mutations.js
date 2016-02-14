@@ -12,12 +12,12 @@ export default {
         state.allSelected = newState;
     },
 
-    TOGGLE_FILE(state, file, forceState) {
-        if (forceState) {
-            file.checked = forceState;
-        } else {
-            file.checked = !file.checked;
+    TOGGLE_FILE(state, file, newState) {
+        if (typeof newState === 'undefined') {
+            newState = !file.checked;
         }
+
+        file.checked = newState;
     },
 
     SET_PATH(state, path) {

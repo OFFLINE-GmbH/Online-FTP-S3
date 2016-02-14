@@ -28,3 +28,9 @@ export function create(type, name, cb) {
         cb(type, name)
     }, LATENCY)
 }
+export function download(files, cb) {
+    console.log('downloading', files);
+    setTimeout((files) => {
+        cb(files)
+    }, LATENCY)
+}
