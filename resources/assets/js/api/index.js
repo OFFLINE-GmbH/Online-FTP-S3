@@ -14,3 +14,10 @@ export function getFiles(path, cb) {
         cb(data)
     }, LATENCY)
 }
+
+export function deleteFiles(files, cb) {
+    console.log('deleting', files);
+    setTimeout(() => {
+        cb(files)
+    }, LATENCY)
+}

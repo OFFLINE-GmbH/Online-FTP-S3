@@ -1,10 +1,8 @@
-<style lang="stylus">
-    .listing
-        td
-            & :nth-child(1)
-                width 10px
-            & :nth-child(2)
-                width 10px
+<style>
+    .listing td:nth-child(1),
+    .listing td:nth-child(2) {
+        width: 10px;
+    }
 </style>
 
 <template>
@@ -19,7 +17,7 @@
                 <th>Last modified</th>
             </tr>
             <tr>
-                <td><input type="checkbox"></td>
+                <td><input @click="toggleAll" type="checkbox" v-model="allSelected"></td>
                 <td>
                     <span v-if="! isRootLevel" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                 </td>
@@ -41,12 +39,21 @@
     import store from './../store';
 
     export default {
+        data() {
+            return {
+                allSelected: false
+            }
+        },
         components: {
             FileListEntry
         },
-        methods:  {
+        methods: {
             levelUp() {
                 store.actions.levelUp();
+            },
+            toggleAll() {
+                this.allSelected = !this.allSelected;
+                store.actions.toggleAll(this.allSelected);
             }
         },
         computed: {

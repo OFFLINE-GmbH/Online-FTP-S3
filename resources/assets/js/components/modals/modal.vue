@@ -40,11 +40,15 @@
         methods: {
             btnConfirm() {
                 this.hide();
-                this.confirm();
+                if(this.confirm) {
+                    this.confirm();
+                }
             },
             btnCancel() {
                 this.hide();
-                this.cancel();
+                if(this.cancel) {
+                    this.cancel();
+                }
             },
             hide() {
                 store.actions.toggleModal(this.key);

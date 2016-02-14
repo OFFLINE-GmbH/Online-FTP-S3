@@ -1,8 +1,7 @@
 <template>
     <modal :show.sync="showModal"
-           key="confirmDelete"
            :confirm="confirm"
-           :cancel="cancel"
+           key="confirmDelete"
     >
         <h3 slot="header">Test</h3>
     </modal>
@@ -10,14 +9,12 @@
 
 <script>
     import Modal from './modal.vue';
+    import store from '../../store';
 
     export default {
         methods: {
             confirm() {
-                console.log('confirmed');
-            },
-            cancel() {
-                console.log('cancelled');
+                store.actions.deleteSelected();
             }
         },
         components: {

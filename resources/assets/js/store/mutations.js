@@ -8,8 +8,12 @@ export default {
         state.files = files;
     },
 
-    TOGGLE_FILE(state, file) {
-        file.checked = ! file.checked;
+    TOGGLE_FILE(state, file, forceState) {
+        if (forceState) {
+            file.checked = forceState;
+        } else {
+            file.checked = !file.checked;
+        }
     },
 
     SET_PATH(state, path) {
@@ -17,7 +21,7 @@ export default {
     },
 
     TOGGLE_MODAL(state, modal) {
-        state.visibleModals[modal] = ! state.visibleModals[modal];
+        state.visibleModals[modal] = !state.visibleModals[modal];
     }
 
 };
