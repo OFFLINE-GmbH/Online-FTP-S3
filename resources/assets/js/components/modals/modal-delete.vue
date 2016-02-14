@@ -1,6 +1,6 @@
 <template>
-    <modal :show.sync="showModal"
-           :confirm="confirm"
+    <modal :confirm="confirm"
+           :disabled="disabled"
            key="confirmDelete"
     >
         <h3 slot="header">Are you sure?</h3>
@@ -10,14 +10,20 @@
     </modal>
 </template>
 
-<script>
+<script type="text/babel">
     import Modal from './modal.vue';
     import store from '../../store';
 
     export default {
+        data() {
+            return {
+                disabled: false
+            }
+        },
         methods: {
             confirm() {
-                store.actions.deleteSelected();
+                this.disabled = true;
+                store.actions.deleteSelected(() => {this.disabled = false});
             }
         },
         components: {

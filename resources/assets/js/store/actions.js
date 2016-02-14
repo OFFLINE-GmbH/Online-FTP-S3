@@ -16,15 +16,38 @@ export const fetchFiles = ({dispatch, actions}, path) => {
     });
 };
 
-export const deleteSelected = ({dispatch, actions, state}) => {
+export const deleteSelected = ({dispatch, actions, state}, cb) => {
     let files = state.files.filter((file) => file.checked);
 
-    if(files.length < 1) return false;
+    let cleanUp = () => {
+        actions.toggleModal('confirmDelete');
+        if(cb) {
+            cb();
+        }
+    };
+
+    if (files.length < 1) {
+        cleanUp();
+        return false;
+    }
 
     dispatch('SET_LOADING', true);
 
     api.deleteFiles(files, () => {
+        cleanUp();
         actions.refresh();
+    });
+};
+
+export const create = ({dispatch, actions, state}, type, name, cb) => {
+    dispatch('SET_LOADING', true);
+
+    api.create(type, name, (type, name) => {
+        actions.toggleModal('create');
+        actions.refresh();
+        if (cb) {
+            cb();
+        }
     });
 };
 

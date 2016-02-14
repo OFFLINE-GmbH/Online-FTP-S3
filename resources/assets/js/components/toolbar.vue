@@ -10,14 +10,14 @@
             <button type="button" class="btn btn-primary">Download</button>
         </div>
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default">Create</button>
+            <button @click.prevent="toggleModal('create')" type="button" class="btn btn-default">Create</button>
             <button type="button" class="btn btn-default">Move</button>
         </div>
         <div class="btn-group pull-right" role="group">
-            <button @click.prevent="doDelete()" type="button" class="btn btn-danger">Delete</button>
+            <button @click.prevent="toggleModal('confirmDelete')" type="button" class="btn btn-danger">Delete</button>
         </div>
         <div class="btn-group" role="group">
-            <button @click="reload" type="button" class="btn btn-default">Reload
+            <button @click="refresh" type="button" class="btn btn-default">Refresh
             </button>
         </div>
     </div>
@@ -28,11 +28,11 @@
 
     export default {
         methods: {
-            doDelete() {
-                store.actions.toggleModal('confirmDelete');
+            toggleModal(key) {
+                store.actions.toggleModal(key);
             },
-            reload() {
-                console.log(this.$root);
+            refresh() {
+                store.actions.refresh();
             }
         }
     }

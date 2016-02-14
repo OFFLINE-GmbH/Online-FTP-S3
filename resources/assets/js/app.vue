@@ -1,6 +1,7 @@
 <template>
     <loading-overlay :visible="isLoading"></loading-overlay>
     <modal-delete></modal-delete>
+    <modal-create></modal-create>
     <div class="container">
         <div class="row">
             <breadcrumbs></breadcrumbs>
@@ -21,13 +22,11 @@
     import FileList from './components/filelist.vue'
     import LoadingOverlay from './components/loading-overlay.vue'
     import ModalDelete from './components/modals/modal-delete.vue'
+    import ModalCreate from './components/modals/modal-create.vue'
 
     import store from './store'
 
     export default {
-        methods: {
-
-        },
         computed: {
           isLoading() {
               return store.state.isLoading;
@@ -38,7 +37,8 @@
             Toolbar,
             FileList,
             LoadingOverlay,
-            ModalDelete
+            ModalDelete,
+            ModalCreate,
         }
     }
 </script>

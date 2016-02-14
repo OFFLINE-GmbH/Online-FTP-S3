@@ -10,7 +10,8 @@ const state = {
     isLoading: false,
     allSelected: false,
     visibleModals: {
-        confirmDelete: false
+        confirmDelete: false,
+        create: false,
     }
 };
 

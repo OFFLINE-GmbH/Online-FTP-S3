@@ -1,7 +1,7 @@
 <template>
     <div class="modal-mask" v-show="show" transition="modal">
         <div class="modal-wrapper">
-            <div class="modal-container">
+            <div class="modal-container" :style="{width: width + 'px'}">
 
                 <div class="modal-header">
                     <slot name="header">
@@ -18,6 +18,7 @@
                 <div class="modal-footer">
                     <slot name="footer">
                         <button type="button" class="btn btn-primary"
+                                :class="{disabled: disabled}"
                                 @click.prevent="btnConfirm()">
                             <slot name="btnConfirm">Confirm</slot>
                         </button>
@@ -35,10 +36,9 @@
 <script>
     import store from '../../store';
     export default {
-        props: ['key', 'confirm', 'cancel'],
+        props: ['key', 'confirm', 'cancel', 'width', 'disabled'],
         methods: {
             btnConfirm() {
-                this.hide();
                 if(this.confirm) {
                     this.confirm();
                 }
