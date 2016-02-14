@@ -17,14 +17,13 @@
 
                 <div class="modal-footer">
                     <slot name="footer">
-                        default footer
-                        <button class="modal-default-button"
-                                @click="btnCancel()">
-                            Cancel
+                        <button type="button" class="btn btn-primary"
+                                @click.prevent="btnConfirm()">
+                            <slot name="btnConfirm">Confirm</slot>
                         </button>
-                        <button class="modal-default-button"
-                                @click="btnConfirm()">
-                            Confirm
+                        <button type="button" class="btn btn-default"
+                                @click.prevent="btnCancel()">
+                            <slot name="btnCancel">Cancel</slot>
                         </button>
                     </slot>
                 </div>
@@ -93,7 +92,6 @@
 
     .modal-header h3 {
         margin-top: 0;
-        color: #42b983;
     }
 
     .modal-body {

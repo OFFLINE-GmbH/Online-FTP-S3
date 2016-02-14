@@ -17,8 +17,11 @@ export const fetchFiles = ({dispatch, actions}, path) => {
 };
 
 export const deleteSelected = ({dispatch, actions, state}) => {
-    dispatch('SET_LOADING', true);
     let files = state.files.filter((file) => file.checked);
+
+    if(files.length < 1) return false;
+
+    dispatch('SET_LOADING', true);
 
     api.deleteFiles(files, () => {
         actions.refresh();

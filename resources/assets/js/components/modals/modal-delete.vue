@@ -3,7 +3,10 @@
            :confirm="confirm"
            key="confirmDelete"
     >
-        <h3 slot="header">Test</h3>
+        <h3 slot="header">Are you sure?</h3>
+        <p slot="body">Do you really want to delete the selected files?</p>
+
+        <template slot="btnConfirm">Yes, delete the files</template>
     </modal>
 </template>
 
