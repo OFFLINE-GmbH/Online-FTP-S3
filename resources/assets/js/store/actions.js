@@ -74,6 +74,17 @@ export const create = ({dispatch, actions, state}, type, name, cb) => {
         }
     });
 };
+export const upload = ({dispatch, actions, state}, file, cb) => {
+    dispatch('SET_LOADING', true);
+
+    api.upload(file, (file) => {
+        actions.toggleModal('upload');
+        actions.refresh();
+        if (cb) {
+            cb();
+        }
+    });
+};
 
 export const toggleFile = ({dispatch}, file, forceState) => {
     dispatch('TOGGLE_FILE', file, forceState);

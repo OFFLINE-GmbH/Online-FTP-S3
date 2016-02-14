@@ -7,7 +7,7 @@
 <template>
     <div class="toolbar col-md-12">
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-primary">Upload</button>
+            <button @click.prevent="toggleModal('upload')" type="button" class="btn btn-primary">Upload</button>
             <button @click.prevent="download" type="button" class="btn btn-primary">Download</button>
         </div>
         <div class="btn-group" role="group">
@@ -20,7 +20,8 @@
             </button>
         </div>
         <div class="btn-group" role="group">
-            <button @click="refresh" type="button" class="btn btn-default">Refresh
+            <button @click.prevent="refresh" type="button" class="btn btn-default">
+                Refresh
             </button>
         </div>
     </div>
@@ -34,7 +35,7 @@
             toggleModal(key) {
                 store.actions.toggleModal(key);
             },
-            download(key) {
+            download() {
                 store.actions.downloadSelected();
             },
             refresh() {

@@ -12,6 +12,7 @@ const state = {
     visibleModals: {
         confirmDelete: false,
         create: false,
+        upload: false,
     }
 };
 

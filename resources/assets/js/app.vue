@@ -2,6 +2,7 @@
     <loading-overlay :visible="isLoading"></loading-overlay>
     <modal-delete></modal-delete>
     <modal-create></modal-create>
+    <modal-upload></modal-upload>
     <div class="container">
         <div class="row">
             <breadcrumbs></breadcrumbs>
@@ -23,6 +24,7 @@
     import LoadingOverlay from './components/loading-overlay.vue'
     import ModalDelete from './components/modals/modal-delete.vue'
     import ModalCreate from './components/modals/modal-create.vue'
+    import ModalUpload from './components/modals/modal-upload.vue'
 
     import store from './store'
 
@@ -39,6 +41,7 @@
             LoadingOverlay,
             ModalDelete,
             ModalCreate,
+            ModalUpload,
         }
     }
 </script>
