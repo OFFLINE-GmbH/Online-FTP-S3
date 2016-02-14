@@ -8,6 +8,7 @@ const state = {
     files: [],
     path: 'public_html/test/dir',
     isLoading: false,
+    allSelected: false,
     visibleModals: {
         confirmDelete: false
     }

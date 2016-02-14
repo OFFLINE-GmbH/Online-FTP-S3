@@ -8,6 +8,10 @@ export default {
         state.files = files;
     },
 
+    SET_ALL_SELECTED(state, newState) {
+        state.allSelected = newState;
+    },
+
     TOGGLE_FILE(state, file, forceState) {
         if (forceState) {
             file.checked = forceState;

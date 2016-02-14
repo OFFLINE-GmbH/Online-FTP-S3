@@ -17,7 +17,7 @@
                 <th>Last modified</th>
             </tr>
             <tr>
-                <td><input @click="toggleAll" type="checkbox" v-model="allSelected"></td>
+                <td><input @click="toggleAll" type="checkbox"></td>
                 <td>
                     <span v-if="! isRootLevel" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                 </td>
@@ -39,21 +39,12 @@
     import store from './../store';
 
     export default {
-        data() {
-            return {
-                allSelected: false
-            }
-        },
-        components: {
-            FileListEntry
-        },
         methods: {
             levelUp() {
                 store.actions.levelUp();
             },
             toggleAll() {
-                this.allSelected = !this.allSelected;
-                store.actions.toggleAll(this.allSelected);
+                store.actions.toggleAll( ! store.state.allSelected);
             }
         },
         computed: {
@@ -62,7 +53,13 @@
             },
             isRootLevel() {
                 return store.state.path === '/';
+            },
+            allSelected() {
+                return store.state.allSelected;
             }
+        },
+        components: {
+            FileListEntry
         }
     }
 </script>

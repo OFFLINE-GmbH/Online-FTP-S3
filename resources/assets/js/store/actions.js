@@ -33,6 +33,7 @@ export const toggleFile = ({dispatch}, file, forceState) => {
 };
 
 export const toggleAll = ({dispatch, state, actions}, forceState) => {
+    dispatch('SET_ALL_SELECTED', forceState);
     state.files.forEach((file) => {
         actions.toggleFile(file, forceState);
     });
@@ -64,5 +65,6 @@ export const levelUp = ({actions, state}) => {
 
 export const setFilelist = ({dispatch}, files) => {
     dispatch('SET_LOADING', false);
+    dispatch('SET_ALL_SELECTED', false);
     dispatch('SET_FILELIST', files);
 };
