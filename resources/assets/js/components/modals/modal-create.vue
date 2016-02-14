@@ -31,7 +31,7 @@
     </modal>
 </template>
 
-<script>
+<script type="text/babel">
     import Modal from './modal.vue';
     import store from '../../store';
 
@@ -45,13 +45,11 @@
         },
         methods: {
             confirm() {
-                if(this.name === '') {
+                if (this.name === '') {
                     return this.$els.input.focus();
                 }
                 this.disabled = true;
-                store.actions.create(this.type, this.name, () => {
-                    this.reset();
-                });
+                store.actions.create(this.type, this.name, () => this.reset());
             },
             reset() {
                 this.type = 'file';

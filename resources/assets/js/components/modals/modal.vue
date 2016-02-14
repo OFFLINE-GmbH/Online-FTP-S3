@@ -4,25 +4,23 @@
             <div class="modal-container" :style="{width: width + 'px'}">
 
                 <div class="modal-header">
-                    <slot name="header">
-                        default header
-                    </slot>
+                    <slot name="header"></slot>
                 </div>
 
                 <div class="modal-body">
-                    <slot name="body">
-                        default body
-                    </slot>
+                    <slot name="body"></slot>
                 </div>
 
                 <div class="modal-footer">
                     <slot name="footer">
-                        <button type="button" class="btn btn-primary"
+                        <button type="button"
+                                class="btn btn-primary"
                                 :class="{disabled: disabled}"
                                 @click.prevent="btnConfirm()">
                             <slot name="btnConfirm">Confirm</slot>
                         </button>
-                        <button type="button" class="btn btn-default"
+                        <button type="button"
+                                class="btn btn-default"
                                 @click.prevent="btnCancel()">
                             <slot name="btnCancel">Cancel</slot>
                         </button>
@@ -39,13 +37,13 @@
         props: ['key', 'confirm', 'cancel', 'width', 'disabled'],
         methods: {
             btnConfirm() {
-                if(this.confirm) {
+                if (this.confirm) {
                     this.confirm();
                 }
             },
             btnCancel() {
                 this.hide();
-                if(this.cancel) {
+                if (this.cancel) {
                     this.cancel();
                 }
             },
@@ -96,10 +94,6 @@
 
     .modal-body {
         margin: 20px 0;
-    }
-
-    .modal-default-button {
-        float: right;
     }
 
     .modal-enter, .modal-leave {

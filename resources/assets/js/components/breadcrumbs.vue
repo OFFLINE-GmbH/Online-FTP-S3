@@ -21,9 +21,8 @@
     export default {
         methods: {
             isLast(index) {
-                return index + 1 == this.breadcrumbs.length
+                return index + 1 === this.breadcrumbs.length
             },
-
             cd(path) {
                 store.actions.changeDirectory(path);
             }
@@ -32,14 +31,13 @@
         computed: {
             breadcrumbs() {
                 let path = '';
-                return store.state.path.split('/')
-                        .map(item => {
-                            path += item + '/';
-                            return {
-                                label: item,
-                                path
-                            }
-                        });
+                let mapItem = (label) => {
+                    path += label + '/';
+
+                    return {label, path}
+                };
+
+                return store.state.path.split('/').map(mapItem);
             }
         }
     }

@@ -1,10 +1,12 @@
 <template>
     <modal :confirm="confirm"
            :disabled="disabled"
-           key="confirmDelete"
-    >
+           key="confirmDelete">
+
         <h3 slot="header">Are you sure?</h3>
-        <p slot="body">Do you really want to delete the selected files?</p>
+        <p slot="body">
+            Do you really want to delete the selected files?
+        </p>
 
         <template slot="btnConfirm">Yes, delete the files</template>
     </modal>
@@ -23,7 +25,7 @@
         methods: {
             confirm() {
                 this.disabled = true;
-                store.actions.deleteSelected(() => {this.disabled = false});
+                store.actions.deleteSelected(() => this.disabled = false);
             }
         },
         components: {

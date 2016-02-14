@@ -1,10 +1,3 @@
-<style>
-    .listing td:nth-child(1),
-    .listing td:nth-child(2) {
-        width: 10px;
-    }
-</style>
-
 <template>
     <div class="listing col-md-12">
         <table class="table table-hover">
@@ -63,3 +56,10 @@
         }
     }
 </script>
+
+<style>
+    .listing td:nth-child(1),
+    .listing td:nth-child(2) {
+        width: 10px;
+    }
+</style>

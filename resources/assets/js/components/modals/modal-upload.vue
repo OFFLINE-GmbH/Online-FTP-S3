@@ -24,14 +24,10 @@
             confirm() {
                 let files = this.$els.file.files;
 
-                if (files.length < 1) {
-                    return false;
-                }
+                if (files.length < 1) return false;
 
                 this.disabled = true;
-                store.actions.upload(files, () => {
-                    this.disabled = false;
-                });
+                store.actions.upload(files, () => this.disabled = false);
             }
         },
         components: {

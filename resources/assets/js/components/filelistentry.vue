@@ -4,7 +4,8 @@
             <input type="checkbox"
                    :checked="item.checked"
                    v-model="checked"
-                   @change.prevent="toggle(item)">
+                   @change.prevent="toggle(item)"
+            >
         </td>
         <td>
             <span class="glyphicon glyphicon-{{ this.icon }}"></span>
@@ -31,7 +32,7 @@
             },
             click() {
                 if(this.item.type === 'file') {
-
+                    console.log('edit');
                 } else {
                     store.actions.changeDirectoryRelative(this.item.name)
                 }
@@ -39,7 +40,9 @@
         },
         computed: {
             icon() {
-                return this.item.type === 'file' ? 'file' : 'folder-open'
+                return this.item.type === 'file'
+                        ? 'file'
+                        : 'folder-open'
             },
             checked() {
                 return this.item.checked;
