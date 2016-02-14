@@ -14,7 +14,10 @@
             <button @click.prevent="toggleModal('create')" type="button" class="btn btn-default">Create</button>
         </div>
         <div class="btn-group pull-right" role="group">
-            <button @click.prevent="toggleModal('confirmDelete')" type="button" class="btn btn-danger">Delete</button>
+            <button @click.prevent="toggleModal('confirmDelete')" type="button" class="btn btn-danger"
+                    :class="{disabled: ! hasSelectedFiles}">
+                Delete
+            </button>
         </div>
         <div class="btn-group" role="group">
             <button @click="refresh" type="button" class="btn btn-default">Refresh
@@ -23,7 +26,7 @@
     </div>
 </template>
 
-<script>
+<script type="text/babel">
     import store from '../store';
 
     export default {
@@ -36,6 +39,11 @@
             },
             refresh() {
                 store.actions.refresh();
+            }
+        },
+        computed: {
+            hasSelectedFiles() {
+                return !! store.state.files.filter((file) => file.checked).length > 0
             }
         }
     }
