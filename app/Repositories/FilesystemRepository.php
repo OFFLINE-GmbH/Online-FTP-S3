@@ -6,7 +6,7 @@ namespace App\Repositories;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Support\Facades\Config;
 
-class BaseRepository
+class FilesystemRepository
 {
     protected $fs;
 

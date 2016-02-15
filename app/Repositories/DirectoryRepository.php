@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories;
 
-class DirectoryRepository extends BaseRepository
+class DirectoryRepository extends FilesystemRepository
 {
     public function listing($path = '/')
     {
