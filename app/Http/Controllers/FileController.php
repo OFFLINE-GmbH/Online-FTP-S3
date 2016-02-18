@@ -16,4 +16,9 @@ class FileController extends Controller
     {
         $this->file = $file;
     }
+
+    public function show($path)
+    {
+        return $this->file->contents($path);
+    }
 }

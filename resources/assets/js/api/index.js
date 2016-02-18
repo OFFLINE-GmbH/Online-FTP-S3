@@ -2,7 +2,7 @@ import Vue from 'vue'
 Vue.use(require('vue-resource'));
 
 // let data = require('./mock-data');
-// const LATENCY = 200;
+const LATENCY = 200;
 //
 // setTimeout(() => {
 //     cb(data, path)
@@ -13,7 +13,6 @@ let http = Vue.http;
 const removeSlashes = (str) => str.replace(/^\/|\/$/g, '');
 
 export function getFiles(path, cb) {
-
     http({url: '/directory/' + removeSlashes(path), method: 'GET'}).then((response) => {
         response.data.map((item) => {
             item.checked = false;
@@ -29,18 +28,12 @@ export function getFiles(path, cb) {
 }
 
 export function getContents(path, cb) {
-
-    console.log('loading contents', path);
-
-    let data = `<!DOCTYPE html>
-    <html>
-        <head></head>
-        <body></body>
-    </html>`;
-
-    setTimeout(() => {
-        cb(data, path)
-    }, LATENCY)
+    http({url: '/file/' + removeSlashes(path), method: 'GET'}).then((response) => {
+        console.log(response);
+        cb(response.data);
+    }, (response) => {
+        console.error('Cannot fetch contents for', path, response);
+    });
 }
 export function putContents(path, contents, cb) {
 

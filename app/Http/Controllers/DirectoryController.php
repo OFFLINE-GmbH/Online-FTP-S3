@@ -19,6 +19,6 @@ class DirectoryController extends Controller
 
     public function index($path = '/')
     {
-        return $this->directory->listing($path);
+        return response($this->directory->listing($path), 200, ['Content-Type' => 'text/plain']);
     }
 }

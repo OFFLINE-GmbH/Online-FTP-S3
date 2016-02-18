@@ -28,7 +28,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'file'], function () {
-        Route::get('/{path?}', 'FileController@index')->where('path', '(.*)');
+        Route::get('/{path?}', 'FileController@show')->where('path', '(.*)');
     });
 
     Route::group(['prefix' => 'directory'], function () {
