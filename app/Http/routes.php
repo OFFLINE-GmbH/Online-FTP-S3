@@ -27,6 +27,11 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    Route::resource('file', 'FileController');
-    Route::resource('directory', 'DirectoryController');
+    Route::group(['prefix' => 'file'], function () {
+        Route::get('/{path?}', 'FileController@index')->where('path', '(.*)');
+    });
+
+    Route::group(['prefix' => 'directory'], function () {
+        Route::get('/{path?}', 'DirectoryController@index')->where('path', '(.*)');
+    });
 });

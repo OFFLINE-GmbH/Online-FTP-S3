@@ -10,9 +10,11 @@ Vue.use(require('vue-resource'));
 
 let http = Vue.http;
 
+const removeSlashes = (str) => str.replace(/^\/|\/$/g, '');
+
 export function getFiles(path, cb) {
 
-    http({url: '/directory', method: 'GET'}).then((response) => {
+    http({url: '/directory/' + removeSlashes(path), method: 'GET'}).then((response) => {
         response.data.map((item) => {
             item.checked = false;
             item._uid = +Date.now();

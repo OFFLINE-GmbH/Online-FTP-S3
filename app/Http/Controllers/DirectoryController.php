@@ -17,8 +17,8 @@ class DirectoryController extends Controller
         $this->directory = $directory;
     }
 
-    public function index()
+    public function index($path = '/')
     {
-        return $this->directory->listing('/');
+        return $this->directory->listing($path);
     }
 }

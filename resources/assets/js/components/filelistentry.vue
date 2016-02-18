@@ -32,9 +32,9 @@
             },
             click() {
                 if(this.item.type === 'file') {
-                    store.actions.fetchContents(this.item.name);
+                    store.actions.fetchContents(this.item.basename);
                 } else {
-                    store.actions.changeDirectoryRelative(this.item.name)
+                    store.actions.changeDirectoryRelative(this.item.basename)
                 }
             }
         },
