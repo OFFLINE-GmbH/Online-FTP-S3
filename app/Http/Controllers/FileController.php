@@ -20,7 +20,7 @@ class FileController extends Controller
 
     public function show(Request $request)
     {
-        $path = $request->get('path');
+        $path = $request->get('path', '');
 
         return $this->file->contents($path);
     }

@@ -29,12 +29,12 @@ export function getFiles(path, cb) {
 
 export function getContents(path, cb) {
     http({url: '/file/?path=' + removeSlashes(path), method: 'GET'}).then((response) => {
-        console.log(response);
-        cb(response.data);
+        cb(response.data, path);
     }, (response) => {
         console.error('Cannot fetch contents for', path, response);
     });
 }
+
 export function putContents(path, contents, cb) {
 
     console.log('putting contents', path, contents);

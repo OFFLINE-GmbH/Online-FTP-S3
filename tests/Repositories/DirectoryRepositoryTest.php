@@ -20,38 +20,4 @@ class DirectoryRepositoryTest extends TestCase
     {
         Mockery::close();
     }
-
-    private function dummyListing()
-    {
-        return [
-            [
-                'type'     => 'dir',
-                'path'     => 'Directory A',
-                'dirname'  => '',
-                'basename' => 'Directory A',
-                'filename' => 'Directory A',
-            ],
-            [
-                'type'       => 'file',
-                'path'       => 'fileA.txt',
-                'visibility' => 'public',
-                'size'       => 30,
-                'dirname'    => '',
-                'basename'   => 'fileA.txt',
-                'extension'  => 'txt',
-                'filename'   => 'fileA',
-            ],
-            [
-                'type'       => 'file',
-                'path'       => 'fileB.txt',
-                'visibility' => 'public',
-                'size'       => 30,
-                'dirname'    => '',
-                'basename'   => 'fileB.txt',
-                'extension'  => 'txt',
-                'filename'   => 'fileB',
-            ],
-        ];
-    }
-
 }
