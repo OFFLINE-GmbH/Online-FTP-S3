@@ -2,8 +2,6 @@
 
 use App\Repositories\DirectoryRepository;
 use Illuminate\Filesystem\FilesystemManager;
-use Mockery;
-
 
 class DirectoryRepositoryTest extends TestCase
 {

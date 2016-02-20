@@ -28,10 +28,10 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'file'], function () {
-        Route::get('/{path?}', 'FileController@show')->where('path', '(.*)');
+        Route::get('/', 'FileController@show');
     });
 
     Route::group(['prefix' => 'directory'], function () {
-        Route::get('/{path?}', 'DirectoryController@index')->where('path', '(.*)');
+        Route::get('/', 'DirectoryController@index');
     });
 });

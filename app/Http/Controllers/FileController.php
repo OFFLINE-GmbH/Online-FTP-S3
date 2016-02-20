@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Repositories\FileRepository;
+use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
@@ -17,8 +18,10 @@ class FileController extends Controller
         $this->file = $file;
     }
 
-    public function show($path)
+    public function show(Request $request)
     {
+        $path = $request->get('path');
+
         return $this->file->contents($path);
     }
 }

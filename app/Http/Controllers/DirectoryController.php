@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Repositories\DirectoryRepository;
+use Illuminate\Http\Request;
 
 class DirectoryController extends Controller
 {
@@ -17,8 +18,9 @@ class DirectoryController extends Controller
         $this->directory = $directory;
     }
 
-    public function index($path = '/')
+    public function index(Request $request)
     {
+        $path = $request->get('path', '/');
         return response($this->directory->listing($path), 200, ['Content-Type' => 'text/plain']);
     }
 }
