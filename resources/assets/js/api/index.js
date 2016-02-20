@@ -14,14 +14,14 @@ const removeSlashes = (str) => str.replace(/^\/|\/$/g, '');
 
 export function getFiles(path, cb) {
     http({url: '/directory/?path=' + removeSlashes(path), method: 'GET'}).then((response) => {
-        response.data.map((item) => {
+        response.data.listing.map((item) => {
             item.checked = false;
             item._uid = +Date.now();
 
             return item;
         });
 
-        cb(response.data);
+        cb(response.data.listing);
     }, (response) => {
         console.error('Cannot fetch files for', path, response);
     });
@@ -29,19 +29,18 @@ export function getFiles(path, cb) {
 
 export function getContents(path, cb) {
     http({url: '/file/?path=' + removeSlashes(path), method: 'GET'}).then((response) => {
-        cb(response.data, path);
+        cb(response.data.contents, path);
     }, (response) => {
         console.error('Cannot fetch contents for', path, response);
     });
 }
 
 export function putContents(path, contents, cb) {
-
-    console.log('putting contents', path, contents);
-
-    setTimeout(() => {
-        cb(path, contents)
-    }, LATENCY)
+    http({url: '/file/?path=' + removeSlashes(path), method: 'PUT', data: {contents}}).then((response) => {
+        cb(response.data, path, contents);
+    }, (response) => {
+        console.error('Cannot put contents for', path, response);
+    });
 }
 
 export function deleteFiles(files, cb) {

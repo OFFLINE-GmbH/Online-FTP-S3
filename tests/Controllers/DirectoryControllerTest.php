@@ -15,7 +15,9 @@ class DirectoryControllerTest extends TestCase
 
         $this->call('GET', '/directory');
         $this->seeStatusCode(200);
-        $this->assertJson(json_encode($this->dummyListing()));
+        $this->assertEquals($this->response->getContent(), json_encode([
+            'listing' => $this->dummyListing()
+        ]));
     }
 
     public function testIndexWithPath()
@@ -29,7 +31,9 @@ class DirectoryControllerTest extends TestCase
 
         $this->call('GET', '/directory?path=path/to/file');
         $this->seeStatusCode(200);
-        $this->assertJson(json_encode($this->dummyListing()));
+        $this->assertEquals($this->response->getContent(), json_encode([
+            'listing' => $this->dummyListing()
+        ]));
     }
 
 

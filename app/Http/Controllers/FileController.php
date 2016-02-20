@@ -22,6 +22,18 @@ class FileController extends Controller
     {
         $path = $request->get('path', '');
 
-        return $this->file->contents($path);
+        return [
+            'contents' => $this->file->contents($path)
+        ];
+    }
+
+    public function update(Request $request)
+    {
+        $path     = $request->get('path', '');
+        $contents = $request->get('contents', '');
+
+        return [
+            'success' => $this->file->update($path, $contents)
+        ];
     }
 }

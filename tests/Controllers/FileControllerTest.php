@@ -32,10 +32,28 @@ class FileControllerTest extends TestCase
 
         $this->call('GET', '/file/?path=path/to/file');
         $this->seeStatusCode(200);
-
-        $this->assertEquals($this->response->getContent(), 'xyz');
+        $this->assertEquals($this->response->getContent(), json_encode([
+            'contents' => 'xyz'
+        ]));
     }
 
+
+    public function testUpdate()
+    {
+        $repo = $this->getRepo(function ($mock) {
+            $mock->shouldReceive('update')
+                 ->once()
+                 ->with('/file.php', 'new contents')
+                 ->andReturn(true);
+        });
+
+        App::instance(FileRepository::class, $repo);
+
+        $this->call('PUT', '/file/?path=/file.php', ['contents' => 'new contents']);
+        $this->seeStatusCode(200);
+
+        $this->assertJson(json_encode(['success' => true]));
+    }
 
     public function tearDown()
     {

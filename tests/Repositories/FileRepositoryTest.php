@@ -26,6 +26,14 @@ class FileRepositoryTest extends TestCase
         $repo->contents(''); // no path
     }
 
+    public function testUpdate()
+    {
+        $repo = $this->getRepo(function ($mock) {
+            $mock->shouldReceive('put')->once()->with('/file.php', 'new contents')->andReturn(true);
+        });
+
+        $this->assertEquals($repo->update('/file.php', 'new contents'), true);
+    }
 
     /**
      * @return \Mockery\MockInterface
