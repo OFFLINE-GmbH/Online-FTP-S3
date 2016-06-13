@@ -9,4 +9,5 @@ php:
 install:
   - composer -q install --prefer-dist
   - php artisan key:generate
-  - ./vendor/bin/phpunit 
+  - touch .env
+  - ./vendor/bin/phpunit
