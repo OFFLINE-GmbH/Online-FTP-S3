@@ -8,4 +8,4 @@ php:
   - nightly
 install:
   - composer -q install --prefer-dist
-  - ./vendor/bin/phpunit
+  - ./vendor/bin/phpunit --coverage-text
