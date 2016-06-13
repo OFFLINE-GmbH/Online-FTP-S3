@@ -8,6 +8,4 @@ php:
   - nightly
 install:
   - composer -q install --prefer-dist
-  - touch .env
-  - php artisan key:generate
   - ./vendor/bin/phpunit
