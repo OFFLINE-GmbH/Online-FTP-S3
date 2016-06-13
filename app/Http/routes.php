@@ -30,6 +30,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'file'], function () {
         Route::get('/', 'FileController@show');
         Route::put('/', 'FileController@update');
+        Route::delete('/', 'FileController@destroy');
     });
 
     Route::group(['prefix' => 'directory'], function () {

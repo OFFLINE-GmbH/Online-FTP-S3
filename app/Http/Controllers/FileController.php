@@ -23,7 +23,7 @@ class FileController extends Controller
         $path = $request->get('path', '');
 
         return [
-            'contents' => $this->file->contents($path)
+            'contents' => $this->file->contents($path),
         ];
     }
 
@@ -33,7 +33,16 @@ class FileController extends Controller
         $contents = $request->get('contents', '');
 
         return [
-            'success' => $this->file->update($path, $contents)
+            'success' => $this->file->update($path, $contents),
+        ];
+    }
+
+    public function destroy(Request $request)
+    {
+        $path = $request->input('path', null);
+
+        return [
+            'success' => $this->file->delete($path),
         ];
     }
 }

@@ -37,6 +37,26 @@ class FileRepository extends FilesystemRepository
     }
 
     /**
+     * Deletes one or multiple files
+     *
+     * @param $path
+     *
+     * @return bool
+     */
+    public function delete($path)
+    {
+        if ( ! is_array($path)) {
+            $path = [$path];
+        }
+
+        foreach ($path as $file) {
+            $this->fs->delete($file);
+        }
+
+        return true;
+    }
+
+    /**
      * Validates a path.
      *
      * @throws InvalidArgumentException

@@ -44,10 +44,14 @@ export function putContents(path, contents, cb) {
 }
 
 export function deleteFiles(files, cb) {
-    console.log('deleting', files);
-    setTimeout(() => {
-        cb(files)
-    }, LATENCY)
+
+    const path = files.map((file) => file.path);
+
+    http({url: '/file', method: 'DELETE', data: {path}}).then((response) => {
+        cb(response.data, files);
+    }, (response) => {
+        console.error('Cannot delete files', files, response);
+    });
 }
 
 export function create(type, name, cb) {
