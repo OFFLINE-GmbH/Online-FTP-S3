@@ -38,4 +38,8 @@
     .col-browser {
         padding: 1em;
     }
+    .col-editor {
+        position: fixed;
+        left: 50%;
+    }
 </style>
