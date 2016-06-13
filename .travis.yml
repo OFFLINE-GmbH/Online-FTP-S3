@@ -7,6 +7,6 @@ php:
   - hhvm
   - nightly
 install:
-  - ./ci.sh
-  - rm composer.lock
   - composer -q install --prefer-dist
+  - php artisan key:generate
+  - ./vendor/bin/phpunit 
