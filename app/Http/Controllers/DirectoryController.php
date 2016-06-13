@@ -26,4 +26,11 @@ class DirectoryController extends Controller
             'listing' => $this->directory->listing($path)
         ];
     }
+
+    public function destroy(Request $request)
+    {
+        $path = $request->input('path', null);
+        
+        $this->directory->delete($path);
+    }
 }

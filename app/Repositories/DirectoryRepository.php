@@ -19,4 +19,17 @@ class DirectoryRepository extends FilesystemRepository
 
         return $contents;
     }
+
+    public function delete($path)
+    {
+        if ( ! is_array($path)) {
+            $path = [$path];
+        }
+        
+        foreach ($path as $dir) {
+            $this->fs->deleteDir($dir);
+        }
+
+        return true;
+    }
 }

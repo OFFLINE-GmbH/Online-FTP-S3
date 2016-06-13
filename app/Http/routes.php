@@ -35,5 +35,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['prefix' => 'directory'], function () {
         Route::get('/', 'DirectoryController@index');
+        Route::delete('/', 'DirectoryController@destroy');
     });
 });

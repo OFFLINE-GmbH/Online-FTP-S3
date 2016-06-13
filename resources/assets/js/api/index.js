@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from "vue";
 Vue.use(require('vue-resource'));
 
 // let data = require('./mock-data');
@@ -43,15 +43,18 @@ export function putContents(path, contents, cb) {
     });
 }
 
-export function deleteFiles(files, cb) {
+export function deleteFiles(entries, cb) {
 
-    const path = files.map((file) => file.path);
+    const files = entries.filter(entry => entry.type === 'file').map(entry => entry.path);
+    const directories = entries.filter(entry => entry.type === 'dir').map(entry => entry.path);
 
-    http({url: '/file', method: 'DELETE', data: {path}}).then((response) => {
-        cb(response.data, files);
-    }, (response) => {
-        console.error('Cannot delete files', files, response);
-    });
+    Promise.all([
+        http({url: '/file', method: 'DELETE', data: {path: files}}),
+        http({url: '/directory', method: 'DELETE', data: {path: directories}})
+    ]).then(
+        responses => cb(responses, files),
+        response => console.error('Cannot delete files', files, response)
+    );
 }
 
 export function create(type, name, cb) {
