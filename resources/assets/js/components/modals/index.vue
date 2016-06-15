@@ -1,7 +1,9 @@
 <template>
-    <modal-delete></modal-delete>
-    <modal-create></modal-create>
-    <modal-upload></modal-upload>
+    <div>
+        <modal-delete></modal-delete>
+        <modal-create></modal-create>
+        <modal-upload></modal-upload>
+    </div>
 </template>
 
 <script>

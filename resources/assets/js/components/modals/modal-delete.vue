@@ -1,6 +1,7 @@
 <template>
     <modal :confirm="confirm"
            :disabled="disabled"
+           :width="400"
            key="confirmDelete">
 
         <h3 slot="header">Are you sure?</h3>
@@ -17,6 +18,7 @@
     import store from '../../store';
 
     export default {
+        props: ['width'],
         data() {
             return {
                 disabled: false
