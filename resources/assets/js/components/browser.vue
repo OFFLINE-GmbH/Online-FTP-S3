@@ -22,7 +22,7 @@
         components: {
             Breadcrumbs,
             Toolbar,
-            FileList,
+            FileList
         }
     }
 </script>

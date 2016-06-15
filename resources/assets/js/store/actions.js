@@ -45,10 +45,12 @@ export const setEditorContents = ({dispatch}, contents) => {
 };
 
 export const deleteSelected = ({dispatch, actions, state}, cb) => {
+
     let files = state.files.filter((file) => file.checked);
 
     let cleanUp = () => {
         actions.toggleModal('confirmDelete');
+        actions.setLoading(false);
         if(cb) cb();
     };
 

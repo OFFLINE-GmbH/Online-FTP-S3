@@ -11,11 +11,12 @@
 <style>
     #loading-overlay {
         position: fixed;
+        cursor: wait;
         left: 0;
         top: 0;
         width: 100vw;
         height: 100vw;
-        z-index: 1000;
+        z-index: 10000;
         background: rgba(255, 255, 255, .3);
     }
 </style>
