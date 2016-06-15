@@ -27,6 +27,15 @@ class FileController extends Controller
         ];
     }
 
+    public function create(Request $request)
+    {
+        $path = $request->get('path', '');
+
+        return response([
+            'success' => $this->file->create($path),
+        ], 201);
+    }
+
     public function update(Request $request)
     {
         $path     = $request->get('path', '');

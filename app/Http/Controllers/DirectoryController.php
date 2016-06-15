@@ -27,6 +27,15 @@ class DirectoryController extends Controller
         ];
     }
 
+    public function create(Request $request)
+    {
+        $path = $request->get('path', '');
+
+        return response([
+            'success' => $this->directory->create($path),
+        ], 201);
+    }
+
     public function destroy(Request $request)
     {
         $path = $request->input('path', null);

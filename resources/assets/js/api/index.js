@@ -13,8 +13,8 @@ let http = Vue.http;
 const removeSlashes = (str) => str.replace(/^\/|\/$/g, '');
 
 export function getFiles(path, cb) {
-    http({url: '/directory/?path=' + removeSlashes(path), method: 'GET'}).then((response) => {
-        response.data.listing.map((item) => {
+    http({url: '/directory/?path=' + removeSlashes(path), method: 'GET'}).then(response => {
+        response.data.listing.map(item => {
             item.checked = false;
             item._uid = +Date.now();
 
@@ -22,30 +22,30 @@ export function getFiles(path, cb) {
         });
 
         cb(response.data.listing);
-    }, (response) => {
+    }, response => {
         console.error('Cannot fetch files for', path, response);
     });
 }
 
 export function getContents(path, cb) {
-    http({url: '/file/?path=' + removeSlashes(path), method: 'GET'}).then((response) => {
+    http({url: '/file/?path=' + removeSlashes(path), method: 'GET'}).then(response => {
         cb(response.data.contents, path);
-    }, (response) => {
+    }, response => {
         console.error('Cannot fetch contents for', path, response);
     });
 }
 
 export function putContents(path, contents, cb) {
-    http({url: '/file/?path=' + removeSlashes(path), method: 'PUT', data: {contents}}).then((response) => {
+    path = removeSlashes(path);
+    http({url: '/file', method: 'PUT', data: {path, contents}}).then(response => {
         cb(response.data, path, contents);
-    }, (response) => {
+    }, response => {
         console.error('Cannot put contents for', path, response);
     });
 }
 
 export function deleteFiles(entries, cb) {
-
-    const files = entries.filter(entry => entry.type === 'file').map(entry => entry.path);
+    const files       = entries.filter(entry => entry.type === 'file').map(entry => entry.path);
     const directories = entries.filter(entry => entry.type === 'dir').map(entry => entry.path);
 
     Promise.all([
@@ -57,11 +57,10 @@ export function deleteFiles(entries, cb) {
     );
 }
 
-export function create(type, name, cb) {
-    console.log('creating', type, name);
-    setTimeout(() => {
-        cb(type, name)
-    }, LATENCY)
+export function create(type, path, cb) {
+    http({url: `/${type}`, method: 'POST', data: {path}}).then(response => {
+        cb(response, type, path);
+    });
 }
 
 export function download(files, cb) {

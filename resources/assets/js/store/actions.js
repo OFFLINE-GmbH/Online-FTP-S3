@@ -1,5 +1,9 @@
 import * as api from '../api'
 
+const withPwd = (state, path) => {
+    return state.path.replace(/^\/|\/$/g, '') + '/' + path;
+};
+
 export const setLoading = ({dispatch}, isLoading) => {
     dispatch('SET_LOADING', isLoading)
 };
@@ -20,9 +24,7 @@ export const fetchContents = ({dispatch, actions, state}, path) => {
 
     actions.setLoading(true);
 
-    let basePath = state.path.replace(/^\/|\/$/g, '');
-
-    path = basePath + '/' + path;
+    path = withPwd(state, path);
 
     api.getContents(path, (contents, path) => {
         dispatch('SET_OPEN_FILE', path);
@@ -32,7 +34,6 @@ export const fetchContents = ({dispatch, actions, state}, path) => {
 };
 
 export const putContents = ({dispatch, actions, state}, contents) => {
-
     actions.setLoading(true);
 
     api.putContents(state.openFile, contents, (path, contents) => {
@@ -46,7 +47,7 @@ export const setEditorContents = ({dispatch}, contents) => {
 
 export const deleteSelected = ({dispatch, actions, state}, cb) => {
 
-    let files = state.files.filter((file) => file.checked);
+    let files = state.files.filter(file => file.checked);
 
     let cleanUp = () => {
         actions.toggleModal('confirmDelete');
@@ -68,8 +69,7 @@ export const deleteSelected = ({dispatch, actions, state}, cb) => {
 };
 
 export const downloadSelected = ({dispatch, actions, state}, cb) => {
-
-    let files = state.files.filter((file) => file.checked);
+    let files = state.files.filter(file => file.checked);
 
     let cleanUp = () => {
         if(cb) cb();
@@ -99,15 +99,18 @@ export const downloadOpen = ({dispatch, actions, state}, cb) => {
     });
 };
 
-export const create = ({dispatch, actions, state}, type, name, cb) => {
+export const create = ({dispatch, actions, state}, type, path, cb) => {
     actions.setLoading(true);
 
-    api.create(type, name, (type, name) => {
+    path = withPwd(state, path);
+
+    api.create(type, path, () => {
         actions.toggleModal('create');
         actions.refresh();
         if(cb) cb();
     });
 };
+
 export const upload = ({actions}, file, cb) => {
     actions.setLoading(true);
 

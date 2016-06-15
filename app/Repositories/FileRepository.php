@@ -55,6 +55,18 @@ class FileRepository extends FilesystemRepository
 
         return true;
     }
+    
+    /**
+     * Creates an empty file
+     *
+     * @param $path
+     *
+     * @return bool
+     */
+    public function create($path)
+    {
+        return $this->fs->put($path, '');
+    }
 
     /**
      * Validates a path.

@@ -35,6 +35,25 @@ class FileRepositoryTest extends TestCase
         $this->assertEquals($repo->update('/file.php', 'new contents'), true);
     }
 
+    public function testDelete()
+    {
+        $delete = ['a', 'b', 'c'];
+        $repo   = $this->getRepo(function ($mock) use ($delete) {
+            $mock->shouldReceive('delete')->times(count($delete))->andReturn(true);
+        });
+
+        $this->assertTrue($repo->delete($delete));
+    }
+
+    public function testCreate()
+    {
+        $repo = $this->getRepo(function ($mock)  {
+            $mock->shouldReceive('put')->once()->andReturn(true);
+        });
+
+        $this->assertTrue($repo->create('file.txt'));
+    }
+
     /**
      * @return \Mockery\MockInterface
      */

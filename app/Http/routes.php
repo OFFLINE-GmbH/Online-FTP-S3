@@ -29,12 +29,14 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => 'file'], function () {
         Route::get('/', 'FileController@show');
+        Route::post('/', 'FileController@create');
         Route::put('/', 'FileController@update');
         Route::delete('/', 'FileController@destroy');
     });
 
     Route::group(['prefix' => 'directory'], function () {
         Route::get('/', 'DirectoryController@index');
+        Route::post('/', 'DirectoryController@create');
         Route::delete('/', 'DirectoryController@destroy');
     });
 });

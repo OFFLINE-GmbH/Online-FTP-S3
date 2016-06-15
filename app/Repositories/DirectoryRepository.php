@@ -32,4 +32,16 @@ class DirectoryRepository extends FilesystemRepository
 
         return true;
     }
+
+    /**
+     * Creates an empty directory
+     *
+     * @param $path
+     *
+     * @return bool
+     */
+    public function create($path)
+    {
+        return $this->fs->createDir($path);
+    }
 }

@@ -10,7 +10,7 @@
 
             <div class="row">
                 <div class="col-md-8">
-                    <input class="form-control" v-el:input placeholder="Name" type="text" v-model="name" autofocus>
+                    <input class="form-control" v-el:input placeholder="Filename" type="text" v-model="name" autofocus>
                 </div>
                 <div class="col-md-4">
                     <div class="btn-group" data-toggle="buttons">
@@ -18,8 +18,8 @@
                             <input v-model="type" value="file" type="radio" autocomplete="off">
                             File
                         </label>
-                        <label class="btn btn-default btn-small" :class="{active: type === 'folder'}">
-                            <input v-model="type" value="folder" type="radio" autocomplete="off">
+                        <label class="btn btn-default btn-small" :class="{active: type === 'directory'}">
+                            <input v-model="type" value="directory" type="radio" autocomplete="off">
                             Folder
                         </label>
                     </div>

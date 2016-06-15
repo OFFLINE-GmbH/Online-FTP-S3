@@ -7,13 +7,11 @@ class FileControllerTest extends TestCase
 {
     public function testShow()
     {
-        $repo = $this->getRepo(function ($mock) {
+        $this->getRepo(function ($mock) {
             $mock->shouldReceive('contents')
                  ->once()
                  ->andThrow(\InvalidArgumentException::class);
         });
-
-        App::instance(FileRepository::class, $repo);
 
         $this->call('GET', '/file/');
         $this->seeStatusCode(500);
@@ -21,36 +19,65 @@ class FileControllerTest extends TestCase
 
     public function testShowWithPath()
     {
-        $repo = $this->getRepo(function ($mock) {
+        $this->getRepo(function ($mock) {
             $mock->shouldReceive('contents')
                  ->once()
                  ->with('path/to/file')
                  ->andReturn('xyz');
         });
 
-        App::instance(FileRepository::class, $repo);
-
         $this->call('GET', '/file/?path=path/to/file');
         $this->seeStatusCode(200);
         $this->assertEquals($this->response->getContent(), json_encode([
-            'contents' => 'xyz'
+            'contents' => 'xyz',
         ]));
     }
 
-
     public function testUpdate()
     {
-        $repo = $this->getRepo(function ($mock) {
+        $this->getRepo(function ($mock) {
             $mock->shouldReceive('update')
                  ->once()
                  ->with('/file.php', 'new contents')
                  ->andReturn(true);
         });
 
-        App::instance(FileRepository::class, $repo);
-
         $this->call('PUT', '/file/?path=/file.php', ['contents' => 'new contents']);
         $this->seeStatusCode(200);
+
+        $this->assertJson(json_encode(['success' => true]));
+    }
+
+    public function testDelete()
+    {
+        $delete = ['a', 'b', 'c'];
+
+        $this->getRepo(function ($mock) use ($delete) {
+            $mock->shouldReceive('delete')
+                 ->once()
+                 ->with($delete)
+                 ->andReturn(true);
+        });
+
+        $this->call('DELETE', '/file/', ['path' => $delete]);
+        $this->seeStatusCode(200);
+
+        $this->assertJson(json_encode(['success' => true]));
+    }
+
+    public function testCreate()
+    {
+        $file = 'file.txt';
+
+        $this->getRepo(function ($mock) use ($file) {
+            $mock->shouldReceive('create')
+                 ->once()
+                 ->with($file)
+                 ->andReturn(true);
+        });
+
+        $this->call('POST', '/file/', ['path' => $file]);
+        $this->seeStatusCode(201);
 
         $this->assertJson(json_encode(['success' => true]));
     }
@@ -68,6 +95,8 @@ class FileControllerTest extends TestCase
     protected function getRepo(Callable $callback)
     {
         $repo = Mockery::mock(FileRepository::class, $callback);
+
+        App::instance(FileRepository::class, $repo);
 
         return $repo;
     }
