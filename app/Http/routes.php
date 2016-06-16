@@ -39,4 +39,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/', 'DirectoryController@create');
         Route::delete('/', 'DirectoryController@destroy');
     });
+
+    Route::post('/download', 'DownloadController@get');
 });
