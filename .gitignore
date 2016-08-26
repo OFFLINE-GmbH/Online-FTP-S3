@@ -1,5 +1,9 @@
-/lumen.log
 /vendor
+/node_modules
+public/css
+public/js
+Homestead.yaml
+Homestead.json
 .env
 .idea/
 vendor/
@@ -9,3 +13,4 @@ bower_components
 config/ftp.php
 config/flysystem.php
 !public/assets/src
+_old

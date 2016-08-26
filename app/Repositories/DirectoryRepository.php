@@ -1,77 +1,47 @@
-<?php namespace App\Repositories;
+<?php
+namespace App\Repositories;
 
-use Anchu\Ftp\Facades\Ftp;
-use GrahamCampbell\Flysystem\FlysystemManager;
-
-class DirectoryRepository
+class DirectoryRepository extends FilesystemRepository
 {
-    /**
-     * @var FlysystemManager
-     */
-    private $flysystem;
-
-    function __construct(FlysystemManager $flysystem)
+    public function listing($path = '/')
     {
-        $this->flysystem = $flysystem;
-    }
-
-    /**
-     * Returns contents of a directory
-     *
-     * @param      $dirname
-     *
-     * @param bool $recursive
-     *
-     * @return array
-     */
-    function get($dirname, $recursive = false)
-    {
-        $contents = $this->flysystem->listContents($dirname, $recursive);
+        $contents = $this->fs->cloud()->listContents($path);
         usort($contents, function ($a, $b) {
             // Sort by type
             $c = strcmp($a['type'], $b['type']);
-            if($c !== 0) return $c;
+            if ($c !== 0) {
+                return $c;
+            }
 
             // Sort by name
             return strcmp($a['filename'], $b['filename']);
         });
+
         return $contents;
     }
 
-    /**
-     * Creates a directory
-     *
-     * @param $dirname
-     *
-     * @return array
-     */
-    function create($dirname)
+    public function delete($path)
     {
-        return $this->flysystem->createDir($dirname);
+        if ( ! is_array($path)) {
+            $path = [$path];
+        }
+        
+        foreach ($path as $dir) {
+            $this->fs->cloud()->deleteDir($dir);
+        }
+
+        return true;
     }
 
     /**
-     * Moves a directory
+     * Creates an empty directory
      *
-     * @param $from
-     * @param $to
-     *
-     * @return array
-     */
-    function move($from, $to)
-    {
-        return $this->flysystem->rename($from, $to);
-    }
-
-    /**
-     * Deletes a directory
-     *
-     * @param $dirname
+     * @param $path
      *
      * @return bool
      */
-    function delete($dirname)
+    public function create($path)
     {
-        return $this->flysystem->deleteDir($dirname);
+        return $this->fs->cloud()->createDir($path);
     }
 }

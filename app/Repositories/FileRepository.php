@@ -1,95 +1,84 @@
-<?php namespace App\Repositories;
+<?php
+namespace App\Repositories;
 
-use GrahamCampbell\Flysystem\FlysystemManager;
+use InvalidArgumentException;
 
-class FileRepository
+class FileRepository extends FilesystemRepository
 {
     /**
-     * @var FlysystemManager
-     */
-    private $flysystem;
-
-    /**
+     * Get file contents from server.
      *
+     * @param $path
+     *
+     * @throws InvalidArgumentException
+     * @return mixed
      */
-    function __construct(FlysystemManager $flysystem)
+    public function contents($path = '')
     {
-        $this->flysystem = $flysystem;
+        $this->checkPath($path);
+
+        return $this->fs->cloud()->read($path);
     }
 
     /**
-     * Returns contents of a file
+     * Updates a file's contents.
      *
-     * @param $filename
+     * @param string $path
+     * @param string $contents
      *
-     * @return bool|string
+     * @throws InvalidArgumentException
+     * @return mixed
      */
-    function get($filename)
+    public function update($path = '', $contents = '')
     {
-        return $this->flysystem->read($filename);
+        $this->checkPath($path);
+
+        return $this->fs->cloud()->put($path, $contents);
     }
 
     /**
-     * Creates a file
+     * Deletes one or multiple files
      *
-     * @param $filename
-     * @param $contents
+     * @param $path
      *
      * @return bool
      */
-    function create($filename, $contents)
+    public function delete($path)
     {
-        return $this->update($filename, $contents);
-    }
+        if ( ! is_array($path)) {
+            $path = [$path];
+        }
 
+        foreach ($path as $file) {
+            $this->fs->cloud()->delete($file);
+        }
+
+        return true;
+    }
+    
     /**
-     * Updates content of a file
+     * Creates an empty file
      *
-     * @param $filename
-     * @param $contents
+     * @param $path
      *
      * @return bool
      */
-    function update($filename, $contents)
+    public function create($path)
     {
-        return $this->flysystem->put($filename, $contents);
+        return $this->fs->cloud()->put($path, '');
     }
 
     /**
-     * Renames a file
+     * Validates a path.
      *
-     * @param $from
-     * @param $to
+     * @throws InvalidArgumentException
      *
-     * @return bool
-     *
+     * @param $path
      */
-    function rename($from, $to)
+    protected function checkPath($path)
     {
-        return $this->flysystem->rename($from, $to);
-    }
-
-    /**
-     * Deletes a file
-     *
-     * @param $filename
-     *
-     * @return bool
-     */
-    function delete($filename)
-    {
-        return $this->flysystem->delete($filename);
-    }
-
-    /**
-     * Checks the size of the input data
-     *
-     * @param $content
-     *
-     * @return bool
-     */
-    public function checkFilesize($content)
-    {
-        return mb_strlen($content, '8bit') <= getenv('MAX_FILE_SIZE');
+        if ($path == '') {
+            throw new InvalidArgumentException('Please specify a file path.');
+        }
     }
 }

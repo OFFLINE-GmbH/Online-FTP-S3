@@ -1,8 +1,10 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use App\Http\Requests\FileRequest;
+namespace App\Http\Controllers;
+
+use App\Http\Requests;
 use App\Repositories\FileRepository;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
@@ -11,44 +13,45 @@ class FileController extends Controller
      */
     private $file;
 
-    public function __construct(FileRepository $fileRepository)
+    public function __construct(FileRepository $file)
     {
-        $this->file = $fileRepository;
+        $this->file = $file;
     }
 
-    public function show($filename)
+    public function show(Request $request)
     {
-        if ($content = $this->file->get($filename)) {
-            return compact('content');
-        }
+        $path = $request->get('path', '');
+
+        return [
+            'contents' => $this->file->contents($path),
+        ];
     }
 
-    public function store()
+    public function create(Request $request)
     {
-        if ($this->file->create(Request::get('name'), Request::get('content'))) {
-            return ['content' => rawurldecode(Request::get('name')) . ' created successfully'];
-        }
+        $path = $request->get('path', '');
+
+        return response([
+            'success' => $this->file->create($path),
+        ], 201);
     }
 
-    public function update($filename)
+    public function update(Request $request)
     {
-        if ($this->file->update($filename, Request::get('content'))) {
-            return ['content' => rawurldecode($filename) . ' updated successfully'];
-        }
+        $path     = $request->get('path', '');
+        $contents = $request->get('contents', '');
+
+        return [
+            'success' => $this->file->update($path, $contents),
+        ];
     }
 
-    public function rename($filename)
+    public function destroy(Request $request)
     {
-        if ($this->file->rename($filename, Request::get('newname'))) {
-            return ['content' => rawurldecode($filename) . ' renamed successfully'];
-        }
-    }
+        $path = $request->input('path', null);
 
-    public function destroy($filename)
-    {
-        if ($this->file->delete($filename)) {
-            return ['content' => rawurldecode($filename) . ' deleted successfully'];
-        }
+        return [
+            'success' => $this->file->delete($path),
+        ];
     }
-
 }

@@ -1,7 +1,10 @@
-<?php namespace App\Http\Controllers;
+<?php
 
+namespace App\Http\Controllers;
+
+use App\Http\Requests;
 use App\Repositories\DirectoryRepository;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class DirectoryController extends Controller
 {
@@ -10,38 +13,33 @@ class DirectoryController extends Controller
      */
     private $directory;
 
-    public function __construct(DirectoryRepository $directoryRepository)
+    public function __construct(DirectoryRepository $directory)
     {
-        $this->directory = $directoryRepository;
+        $this->directory = $directory;
     }
 
-    public function show($dirname)
+    public function index(Request $request)
     {
-        $content = $this->directory->get($dirname);
-        if (is_array($content)) {
-            return compact('content');
-        }
+        $path = $request->get('path', '/');
+
+        return [
+            'listing' => $this->directory->listing($path)
+        ];
     }
 
-    public function store()
+    public function create(Request $request)
     {
-        if ($this->directory->create(Request::get('name'))) {
-            return ['content' => rawurldecode(Request::get('name')) . ' created successfully'];
-        }
+        $path = $request->get('path', '');
+
+        return response([
+            'success' => $this->directory->create($path),
+        ], 201);
     }
 
-    public function update($dirname)
+    public function destroy(Request $request)
     {
-        if ($this->directory->move($dirname, Request::get('newname'))) {
-            return ['content' => rawurldecode($dirname) . ' updated successfully'];
-        }
+        $path = $request->input('path', null);
+        
+        $this->directory->delete($path);
     }
-
-    public function destroy($dirname)
-    {
-        if ($this->directory->delete($dirname)) {
-            return ['content' => rawurldecode($dirname) . ' deleted successfully'];
-        }
-    }
-
 }

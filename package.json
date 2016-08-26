@@ -1,34 +1,17 @@
 {
-  "name": "OnlineFTP",
-  "version": "2.0.0",
-  "repository": {
-    "type": "git",
-    "url": "git@projects.offlinegmbh.ch:tobias/online-ftp.git"
-  },
+  "private": true,
   "devDependencies": {
-    "babelify": "^6.0.2",
-    "browserify": "^10.0.0",
-    "grunt": "~0.4.1",
-    "grunt-autoprefixer": "^3.0.0",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-sass": "~0.6.0",
-    "grunt-contrib-uglify": "~0.2.7",
-    "grunt-contrib-watch": "~0.5.3",
-    "gulp": "^3.8.11",
-    "gulp-livereload": "^3.8.0",
-    "gulp-util": "^3.0.6",
-    "laravel-elixir": "^2.3.12",
-    "load-grunt-tasks": "~0.2.0",
-    "lodash.assign": "^3.2.0",
-    "react-bootstrap": "^0.23.5",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.2.3",
-    "react-bootstrap-treeview": "^0.1.0"
+    "bootstrap": "^4.0.0-alpha.2",
+    "bootstrap-styl": "^5.0.5",
+    "es6-promise": "^3.0.2",
+    "gulp": "^3.8.8",
+    "laravel-elixir-stylus": "^1.0.1",
+    "laravel-elixir-vueify": "^1.0.2",
+    "vue-resource": "^0.7.0",
+    "vuex": "^0.2.0"
   },
   "dependencies": {
-    "react": "^0.13.2",
-    "react-ace": "^2.0.0"
+    "laravel-elixir": "^4.0.0",
+    "bootstrap-sass": "^3.0.0"
   }
 }
