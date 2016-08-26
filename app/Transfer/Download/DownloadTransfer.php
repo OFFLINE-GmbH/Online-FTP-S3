@@ -4,6 +4,7 @@ namespace App\Transfer\Download;
 
 
 use App\Repositories\DirectoryRepository;
+use App\Tools\Zipper;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemManager;
 
@@ -18,25 +19,41 @@ class DownloadTransfer
      * @var string
      */
     protected $temp;
+    /*
+     * @var string
+     */
+    protected $zip;
     /**
      * @var Filesystem
      */
     private $fs;
+    /**
+     * @var Zipper
+     */
+    private $zipper;
 
-    public function __construct(array $path, FilesystemManager $fs, DirectoryRepository $dir = null)
+    public function __construct(array $path, FilesystemManager $fs, Zipper $zipper, DirectoryRepository $dir = null)
     {
         $this->dirRepo = $dir ?: new DirectoryRepository($fs);
 
-        $this->path = $path;
-        $this->fs   = $fs;
+        $this->path   = $path;
+        $this->fs     = $fs;
+        $this->zipper = $zipper;
+    }
 
-        $this->createTempDir();
-        $this->fetchRemoteContents();
+    public function start()
+    {
+        try {
+            $this->createTempDir();
+            $this->fetchRemoteContents();
+            $this->createZip();
+        } catch (\Exception $e) {
+            throw $e;
+        } finally {
+            $this->cleanUpTemp();
+        }
 
-        // Create zip
-        // Delete temporary directory
-        // Send zip to user
-        // Delete zip
+        return $this->zip;
     }
 
     /**
@@ -46,11 +63,24 @@ class DownloadTransfer
     protected function fetchRemoteContents()
     {
         foreach ($this->path as $location) {
-            $directory = $this->makeAbsolute($location);
-            $location = trim($location, '/');
+            $directory = $this->makeAbsolute($location['path']);
+            $location  = trim($location['path'], '/');
 
             $this->downloadDirectory($directory, $location);
         }
+    }
+
+    /**
+     * Zip all downloaded files.
+     * @throws \RuntimeException
+     */
+    protected function createZip()
+    {
+        $this->zip = str_random();
+        $zipPath   = storage_path('app/downloads/' . $this->zip . '.zip');
+        $rootPath  = storage_path('app/' . $this->temp);
+
+        $this->zipper->zipDirectory($rootPath, $zipPath);
     }
 
     /**
@@ -128,4 +158,13 @@ class DownloadTransfer
     {
         $this->fs->drive('local')->makeDirectory($this->temp . '/' . $path);
     }
+
+    /**
+     * Remove temp files.
+     */
+    protected function cleanUpTemp()
+    {
+        $this->fs->drive('local')->deleteDirectory($this->temp);
+    }
+
 }

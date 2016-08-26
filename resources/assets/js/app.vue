@@ -4,6 +4,8 @@
 
     <browser></browser>
     <editor></editor>
+
+    <iframe src="about:blank" style="display: none" id="download-frame"></iframe>
 </template>
 
 <script>

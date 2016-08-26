@@ -40,5 +40,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::delete('/', 'DirectoryController@destroy');
     });
 
-    Route::post('/download', 'DownloadController@get');
+    Route::get('/download/{zip}', 'DownloadController@download');
+    Route::post('/download', 'DownloadController@generate');
 });

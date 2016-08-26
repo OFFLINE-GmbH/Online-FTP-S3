@@ -45,7 +45,7 @@ export function putContents(path, contents, cb) {
 }
 
 export function deleteFiles(entries, cb) {
-    const files       = entries.filter(entry => entry.type === 'file').map(entry => entry.path);
+    const files = entries.filter(entry => entry.type === 'file').map(entry => entry.path);
     const directories = entries.filter(entry => entry.type === 'dir').map(entry => entry.path);
 
     Promise.all([
@@ -63,11 +63,14 @@ export function create(type, path, cb) {
     });
 }
 
-export function download(files, cb) {
-    console.log('downloading', files);
-    setTimeout(() => {
-        cb(files)
-    }, LATENCY)
+export function download(path, cb, failed) {
+    console.log('downloading', path);
+    http({url: `/download`, method: 'POST', data: {path}}).then(response => {
+        cb(response.data);
+    }, response => {
+        console.error('Cannot download', path, response);
+        failed();
+    });
 }
 
 export function upload(files, cb) {

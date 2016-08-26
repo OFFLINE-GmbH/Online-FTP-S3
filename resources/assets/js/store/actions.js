@@ -83,11 +83,15 @@ export const downloadSelected = ({dispatch, actions, state}, cb) => {
 
     actions.setLoading(true);
 
-    api.download(files, (files) => {
+    api.download(files, zip => {
         actions.toggleAll(false);
+        cleanUp();
+        document.getElementById('download-frame').setAttribute('src', '/download/' + zip);
+    }, error => {
         cleanUp();
     });
 };
+
 export const downloadOpen = ({dispatch, actions, state}, cb) => {
     if(state.openFile === null) return;
 

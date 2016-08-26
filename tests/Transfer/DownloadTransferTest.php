@@ -6,16 +6,27 @@ class DownloadTransferTest extends TestCase
 {
     public function testInit()
     {
-        $fs = $this->fs(function ($mock)  {
+        $fs     = $this->fs(function ($mock) {
             $mock->shouldReceive('drive')->with('local')->andReturn($mock);
             $mock->shouldReceive('makeDirectory')->once()->andReturn($mock);
+            $mock->shouldReceive('deleteDirectory')->once()->andReturn($mock);
+            $mock->shouldReceive('listContents')->times(2)->andReturn([]);
+        });
+        $zipper = $this->zipper(function ($mock) {
+            $mock->shouldReceive('zipDirectory')->once()->andReturn();
         });
 
-        $download = new DownloadTransfer(['a', 'b'], $fs);
-        
+        $transfer = new DownloadTransfer([['path' => 'a'], ['path' => 'b']], $fs, $zipper);
+        $transfer->start();
     }
-    
-    protected function fs(Callable $callback) {
+
+    protected function fs(Callable $callback)
+    {
         return Mockery::mock(\Illuminate\Filesystem\FilesystemManager::class, $callback);
+    }
+
+    protected function zipper(Callable $callback)
+    {
+        return Mockery::mock(\App\Tools\Zipper::class, $callback);
     }
 }
