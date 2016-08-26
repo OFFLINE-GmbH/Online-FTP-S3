@@ -42,4 +42,6 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/download/{zip}', 'DownloadController@download');
     Route::post('/download', 'DownloadController@generate');
+
+    Route::post('/upload', 'UploadController@upload');
 });

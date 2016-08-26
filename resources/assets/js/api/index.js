@@ -72,24 +72,18 @@ export function download(path, cb, failed) {
     });
 }
 
-export function upload(files, cb) {
+export function upload(files, path, cb) {
     console.log('uploading', files);
 
-    // var data = new FormData();
-    // for single file
-    // data.append('files', files[0]);
-    // Or for multiple files you can also do
-    //  _.each(files, function(v, k){
-    //    data.append('avatars['+k+']', v);
-    // });
+    var data = new FormData();
+    for (let i = 0; i < files.length; i++) {
+        data.append('files[]', files[i]);
+    }
 
-    //this.$http.post('/avatars/upload', data, function (data, status, request) {
-    //    //handling
-    //}).error(function (data, status, request) {
-    //    //handling
-    //});
+    data.append('path', path);
 
-    setTimeout(() => {
-        cb(files)
-    }, LATENCY)
+    http({url: '/upload', method: 'POST', data}).then(response => {
+        cb(files);
+        console.log(response);
+    });
 }

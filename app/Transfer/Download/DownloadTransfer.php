@@ -93,7 +93,7 @@ class DownloadTransfer
     {
         $this->temp = 'downloads/' . uniqid(session_id(), true);
 
-        $this->fs->drive('local')->makeDirectory($this->temp);
+        $this->fs->makeDirectory($this->temp);
 
         return $this;
     }
@@ -145,9 +145,9 @@ class DownloadTransfer
      */
     protected function downloadFile($entry)
     {
-        $this->fs->drive('local')->put(
+        $this->fs->put(
             $this->temp . '/' . $entry['path'],
-            $this->fs->read($entry['path'])
+            $this->fs->cloud()->read($entry['path'])
         );
     }
 
@@ -156,7 +156,7 @@ class DownloadTransfer
      */
     protected function createLocalDirectory($path)
     {
-        $this->fs->drive('local')->makeDirectory($this->temp . '/' . $path);
+        $this->fs->makeDirectory($this->temp . '/' . $path);
     }
 
     /**
@@ -164,7 +164,7 @@ class DownloadTransfer
      */
     protected function cleanUpTemp()
     {
-        $this->fs->drive('local')->deleteDirectory($this->temp);
+        $this->fs->deleteDirectory($this->temp);
     }
 
 }

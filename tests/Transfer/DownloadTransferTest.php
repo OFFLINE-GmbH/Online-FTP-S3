@@ -7,7 +7,7 @@ class DownloadTransferTest extends TestCase
     public function testInit()
     {
         $fs     = $this->fs(function ($mock) {
-            $mock->shouldReceive('drive')->with('local')->andReturn($mock);
+            $mock->shouldReceive('cloud')->times(2)->andReturn($mock);
             $mock->shouldReceive('makeDirectory')->once()->andReturn($mock);
             $mock->shouldReceive('deleteDirectory')->once()->andReturn($mock);
             $mock->shouldReceive('listContents')->times(2)->andReturn([]);

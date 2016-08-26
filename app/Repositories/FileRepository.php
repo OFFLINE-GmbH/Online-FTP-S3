@@ -17,7 +17,7 @@ class FileRepository extends FilesystemRepository
     {
         $this->checkPath($path);
 
-        return $this->fs->read($path);
+        return $this->fs->cloud()->read($path);
     }
 
     /**
@@ -33,7 +33,7 @@ class FileRepository extends FilesystemRepository
     {
         $this->checkPath($path);
 
-        return $this->fs->put($path, $contents);
+        return $this->fs->cloud()->put($path, $contents);
     }
 
     /**
@@ -50,7 +50,7 @@ class FileRepository extends FilesystemRepository
         }
 
         foreach ($path as $file) {
-            $this->fs->delete($file);
+            $this->fs->cloud()->delete($file);
         }
 
         return true;
@@ -65,7 +65,7 @@ class FileRepository extends FilesystemRepository
      */
     public function create($path)
     {
-        return $this->fs->put($path, '');
+        return $this->fs->cloud()->put($path, '');
     }
 
     /**

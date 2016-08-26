@@ -40,6 +40,7 @@ class DirectoryRepositoryTest extends TestCase
     protected function getRepo(Callable $callback)
     {
         $fs = Mockery::mock(FilesystemManager::class, $callback);
+        $fs->shouldReceive('cloud')->andReturn($fs);
 
         return new DirectoryRepository($fs);
     }

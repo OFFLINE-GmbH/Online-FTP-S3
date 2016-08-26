@@ -5,7 +5,7 @@ class DirectoryRepository extends FilesystemRepository
 {
     public function listing($path = '/')
     {
-        $contents = $this->fs->listContents($path);
+        $contents = $this->fs->cloud()->listContents($path);
         usort($contents, function ($a, $b) {
             // Sort by type
             $c = strcmp($a['type'], $b['type']);
@@ -27,7 +27,7 @@ class DirectoryRepository extends FilesystemRepository
         }
         
         foreach ($path as $dir) {
-            $this->fs->deleteDir($dir);
+            $this->fs->cloud()->deleteDir($dir);
         }
 
         return true;
@@ -42,6 +42,6 @@ class DirectoryRepository extends FilesystemRepository
      */
     public function create($path)
     {
-        return $this->fs->createDir($path);
+        return $this->fs->cloud()->createDir($path);
     }
 }

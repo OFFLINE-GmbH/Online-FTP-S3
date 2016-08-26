@@ -10,7 +10,7 @@ class CleanUp extends Command
     /**
      * @var int
      */
-    const FIFTEEN_MINUTES = 15 * 60;
+    const FIFTEEN_MINUTES = 1800;
 
     /**
      * Never delete these files.
@@ -55,12 +55,12 @@ class CleanUp extends Command
      */
     public function handle()
     {
-        foreach ($this->fs->disk('local')->files('downloads') as $file) {
+        foreach ($this->fs->files('downloads') as $file) {
             if ($this->ignore($file) || ! $this->isOld($file)) {
                 continue;
             }
 
-            $this->fs->disk('local')->delete($file);
+            $this->fs->delete($file);
         }
     }
 
@@ -87,7 +87,7 @@ class CleanUp extends Command
      */
     protected function isOld($file)
     {
-        $modified = $this->fs->disk('local')->lastModified($file);
+        $modified = $this->fs->lastModified($file);
 
         return $modified < (time() - $this::FIFTEEN_MINUTES);
     }

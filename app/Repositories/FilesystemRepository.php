@@ -12,7 +12,6 @@ class FilesystemRepository
 
     public function __construct(FilesystemManager $fs)
     {
-        Config::set('filesystems.default', 'ftp');
         $this->fs = $fs;
     }
 }

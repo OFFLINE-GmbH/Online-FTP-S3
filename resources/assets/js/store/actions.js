@@ -116,10 +116,10 @@ export const create = ({dispatch, actions, state}, type, path, cb) => {
     });
 };
 
-export const upload = ({actions}, file, cb) => {
+export const upload = ({actions, state}, file, cb) => {
     actions.setLoading(true);
 
-    api.upload(file, (file) => {
+    api.upload(file, state.path, file => {
         actions.toggleModal('upload');
         actions.refresh();
         if (cb) cb();
