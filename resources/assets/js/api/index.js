@@ -64,7 +64,6 @@ export function create(type, path, cb) {
 }
 
 export function download(path, cb, failed) {
-    console.log('downloading', path);
     http({url: `/download`, method: 'POST', data: {path}}).then(response => {
         cb(response.data);
     }, response => {

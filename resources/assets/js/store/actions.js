@@ -1,4 +1,4 @@
-import * as api from '../api'
+import * as api from "../api";
 
 const withPwd = (state, path) => {
     return state.path.replace(/^\/|\/$/g, '') + '/' + path;
@@ -52,7 +52,7 @@ export const deleteSelected = ({dispatch, actions, state}, cb) => {
     let cleanUp = () => {
         actions.toggleModal('confirmDelete');
         actions.setLoading(false);
-        if(cb) cb();
+        if (cb) cb();
     };
 
     if (files.length < 1) {
@@ -72,7 +72,7 @@ export const downloadSelected = ({dispatch, actions, state}, cb) => {
     let files = state.files.filter(file => file.checked);
 
     let cleanUp = () => {
-        if(cb) cb();
+        if (cb) cb();
         actions.setLoading(false);
     };
 
@@ -93,13 +93,14 @@ export const downloadSelected = ({dispatch, actions, state}, cb) => {
 };
 
 export const downloadOpen = ({dispatch, actions, state}, cb) => {
-    if(state.openFile === null) return;
+    if (state.openFile === null) return;
 
     actions.setLoading(true);
 
-    api.download([state.openFile], () => {
+    api.download([{path: state.openFile}], zip => {
         actions.setLoading(false);
-        if(cb) cb();
+        document.getElementById('download-frame').setAttribute('src', '/download/' + zip);
+        if (cb) cb();
     });
 };
 
@@ -111,7 +112,7 @@ export const create = ({dispatch, actions, state}, type, path, cb) => {
     api.create(type, path, () => {
         actions.toggleModal('create');
         actions.refresh();
-        if(cb) cb();
+        if (cb) cb();
     });
 };
 
@@ -121,7 +122,7 @@ export const upload = ({actions}, file, cb) => {
     api.upload(file, (file) => {
         actions.toggleModal('upload');
         actions.refresh();
-        if(cb) cb();
+        if (cb) cb();
     });
 };
 
