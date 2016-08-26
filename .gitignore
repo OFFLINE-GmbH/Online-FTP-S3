@@ -1,0 +1,16 @@
+/vendor
+/node_modules
+public/css
+public/js
+Homestead.yaml
+Homestead.json
+.env
+.idea/
+vendor/
+node_modules
+bower_components
+.sass-cache
+config/ftp.php
+config/flysystem.php
+!public/assets/src
+_old
