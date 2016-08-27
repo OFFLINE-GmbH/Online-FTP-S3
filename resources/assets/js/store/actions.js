@@ -30,6 +30,7 @@ export const fetchContents = ({dispatch, actions, state}, path) => {
         dispatch('SET_OPEN_FILE', path);
         actions.setEditorContents(contents);
         actions.setLoading(false);
+        actions.setEditorVisibility(true);
     });
 };
 
@@ -43,6 +44,10 @@ export const putContents = ({dispatch, actions, state}, contents) => {
 
 export const setEditorContents = ({dispatch}, contents) => {
     dispatch('SET_EDITOR_CONTENTS', contents);
+};
+
+export const setEditorVisibility = ({dispatch}, visibility) => {
+    dispatch('SET_EDITOR_VISIBILITY', visibility)
 };
 
 export const deleteSelected = ({dispatch, actions, state}, cb) => {

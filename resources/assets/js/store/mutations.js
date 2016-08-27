@@ -13,6 +13,10 @@ export default {
         state.editorContentsChanged = +Date.now();
     },
 
+    SET_EDITOR_VISIBILITY(state, visibility) {
+        state.editorVisible = visibility;
+    },
+
     SET_OPEN_FILE(state, path) {
         state.openFile = path;
     },

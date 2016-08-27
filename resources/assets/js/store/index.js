@@ -7,10 +7,11 @@ import mutations from './mutations'
 const state = {
     files: [],
     openFile: null,
-    path: 'public_html/test/dir',
+    path: '/',
     isLoading: false,
     allSelected: false,
     editorContents: '',
+    editorVisible: false,
     editorContentsChanged: 0, // Updated file change to trigger editor's watch method
     visibleModals: {
         confirmDelete: false,
