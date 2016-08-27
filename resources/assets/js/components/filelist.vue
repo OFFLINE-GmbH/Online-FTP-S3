@@ -6,9 +6,8 @@
                 <tr>
                     <th colspan="2"></th>
                     <th>Filename</th>
-                    <th>Permissions</th>
-                    <th>Filesize</th>
-                    <th>Last modified</th>
+                    <th>Visibility</th>
+                    <th class="text-right">Filesize</th>
                 </tr>
                 <tr>
                     <td><input @change.prevent="toggleAll" v-model="allSelected" type="checkbox"></td>
