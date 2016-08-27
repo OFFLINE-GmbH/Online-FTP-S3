@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
-
 class LoginRequest extends Request
 {
     /**
@@ -23,11 +21,24 @@ class LoginRequest extends Request
      */
     public function rules()
     {
-        return [
-            'host' => 'required',
-            'username' => 'required',
-            'password' => 'required',
-            'port' => 'required|numeric',
-        ];
+        if ($this->request->get('driver') === 'ftp') {
+            $rules = [
+                'host'     => 'required',
+                'username' => 'required',
+                'password' => 'required',
+                'port'     => 'required|numeric',
+            ];
+        } else {
+            $rules = [
+                'secret' => 'required',
+                'key'    => 'required',
+                'bucket' => 'required',
+                'region' => 'required',
+            ];
+        }
+
+        return array_merge($rules, [
+            'driver' => 'required|in:ftp,s3',
+        ]);
     }
 }

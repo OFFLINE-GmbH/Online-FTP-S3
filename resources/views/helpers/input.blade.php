@@ -1,7 +1,6 @@
 <div class="form-group">
     <label for="{{ $id }}">
         {{ $label }}
-
         @if($errors->has($id))
             <span class="badge badge-danger">
                 {{ $errors->get($id)[0] }}
@@ -9,8 +8,9 @@
         @endif
     </label>
     <input type="{{ $type }}" class="form-control" name="{{ $id }}" id="{{ $id }}"
-           @if(isset($value))
-               value="{{ $value }}"
+           @if( ! isset($value))
+              <?php $value = old($id) ?: '' ?>
            @endif
+           value="{{ $value }}"
     >
 </div>
