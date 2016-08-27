@@ -15,19 +15,30 @@ class LoginHandler
 
     public function apply()
     {
-        $data = \Crypt::decrypt(\Session::get('data'));
-        app()['config']['filesystems.disks.ftp'] = [
-            'driver'   => 'ftp',
-            'host'     => $data['host'],
-            'username' => $data['username'],
-            'password' => $data['password'],
+        $data   = \Crypt::decrypt(\Session::get('data'));
+        $driver = \Session::get('driver');
 
-            // Optional FTP Settings...
-            'port'     => $data['port'],
-            // 'root'     => '',
-            // 'passive'  => true,
-            // 'ssl'      => true,
-            // 'timeout'  => 30,
-        ];
+        if ($driver === 's3') {
+            app()['config']['filesystems.cloud']    = 's3';
+            app()['config']['filesystems.disks.s3'] = [
+                'driver' => 's3',
+                'key'    => $data['key'],
+                'secret' => $data['secret'],
+                'region' => $data['region'],
+                'bucket' => $data['bucket'],
+            ];
+        } elseif ($driver === 'ftp') {
+            app()['config']['filesystems.cloud']     = 'ftp';
+            app()['config']['filesystems.disks.ftp'] = [
+                'driver'   => 'ftp',
+                'host'     => $data['host'],
+                'username' => $data['username'],
+                'password' => $data['password'],
+                'port'     => $data['port'],
+            ];
+        } else {
+            throw new \RuntimeException('Unkown driver');
+        }
+
     }
 }
