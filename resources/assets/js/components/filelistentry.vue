@@ -16,8 +16,7 @@
             </a>
         </td>
         <td>{{ item.visibility }}</td>
-        <td>{{ item.size }}</td>
-        <td>{{ item.last_modified }}</td>
+        <td class="text-right">{{ item.size }}</td>
     </tr>
 </template>
 
