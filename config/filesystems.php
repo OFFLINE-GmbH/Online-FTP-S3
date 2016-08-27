@@ -50,12 +50,12 @@ return [
 
         'ftp' => [
             'driver'   => 'ftp',
-            'host'     => env('FTP_HOSTNAME', ''),
-            'username' => env('FTP_USERNAME', ''),
-            'password' => env('FTP_PASSWORD', ''),
+            'host'     => '',
+            'username' => '',
+            'password' => '',
 
             // Optional FTP Settings...
-            'port'     => env('FTP_PORT', 21),
+            'port'     => '',
             // 'root'     => '',
             // 'passive'  => true,
             // 'ssl'      => true,

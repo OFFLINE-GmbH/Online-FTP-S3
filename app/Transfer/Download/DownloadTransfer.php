@@ -4,7 +4,7 @@ namespace App\Transfer\Download;
 
 
 use App\Repositories\DirectoryRepository;
-use App\Tools\Zipper;
+use App\Helpers\Zipper;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemManager;
 

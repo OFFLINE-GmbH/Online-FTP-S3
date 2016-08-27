@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Tools\Zipper;
+use App\Helpers\Zipper;
 use App\Transfer\Download\DownloadTransfer;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Http\Request;

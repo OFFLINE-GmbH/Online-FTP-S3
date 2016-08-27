@@ -3,7 +3,7 @@
 namespace App\Transfer\Upload;
 
 
-use App\Tools\Zipper;
+use App\Helpers\Zipper;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemManager;
 use Illuminate\Support\Facades\Storage;
