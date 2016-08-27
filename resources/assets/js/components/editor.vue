@@ -1,6 +1,11 @@
 <template>
     <div class="col col-editor">
         <div id="editor">{{ contents }}</div>
+        <div id="hide">
+            <button type="button" class="btn btn-default btn-sm" @click="hide" title="Hide editor">
+                <span class="glyphicon glyphicon-arrow-right"></span>
+            </button>
+        </div>
         <div id="statusbar">
             <button type="button"
                     class="btn btn-primary"
@@ -37,6 +42,9 @@
             },
             save() {
                 store.actions.putContents(this.editor.getValue());
+            },
+            hide() {
+                store.actions.setEditorVisibility(false);
             }
         },
         watch: {
@@ -95,5 +103,13 @@
         width: 100%;
         z-index: 600;
         padding: 10px;
+    }
+
+    #hide {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, 0);
+        z-index: 2000;
     }
 </style>
