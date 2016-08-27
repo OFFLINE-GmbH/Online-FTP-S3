@@ -75,4 +75,8 @@
         opacity: 1;
         left: 50%;
     }
+
+    .alertify-logs {
+        z-index: 10001;
+    }
 </style>

@@ -11,7 +11,8 @@
     "vuex": "^0.2.0"
   },
   "dependencies": {
-    "laravel-elixir": "^4.0.0",
-    "bootstrap-sass": "^3.0.0"
+    "alertify.js": "^1.0.12",
+    "bootstrap-sass": "^3.0.0",
+    "laravel-elixir": "^4.0.0"
   }
 }
