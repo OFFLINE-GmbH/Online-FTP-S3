@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tools;
+namespace App\Helpers;
 
 
 use RecursiveDirectoryIterator;

@@ -36,7 +36,7 @@ class UploadTransferTest extends TestCase
 
     protected function zipper(Callable $callback)
     {
-        return Mockery::mock(\App\Tools\Zipper::class, $callback);
+        return Mockery::mock(\App\Helpers\Zipper::class, $callback);
     }
 
     protected function file(Callable $callback)
