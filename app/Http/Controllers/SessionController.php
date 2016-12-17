@@ -38,6 +38,8 @@ class SessionController extends Controller
             return $this->error($e);
         } catch (S3Exception $e) {
             return $this->error($e);
+        } catch (\RuntimeException $e) {
+            return $this->error($e);
         }
 
         $this->session->set('loggedIn', true);
@@ -63,7 +65,7 @@ class SessionController extends Controller
      *
      * @return array
      */
-    protected function getData(Requests\LoginRequest $request):array
+    protected function getData(Requests\LoginRequest $request): array
     {
         switch ($request->get('driver')) {
             case 'ftp':

@@ -37,7 +37,7 @@ class LoginHandler
                 'port'     => $data['port'],
             ];
         } else {
-            throw new \RuntimeException('Unkown driver');
+            throw new \RuntimeException('Unknown driver');
         }
 
     }

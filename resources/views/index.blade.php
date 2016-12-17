@@ -10,9 +10,9 @@
 </head>
 <body>
     <app></app>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ext-language_tools.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ext-modelist.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ext-language_tools.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ext-modelist.js"></script>
     <script src="/js/main.js"></script>
 </body>
 </html>
