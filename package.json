@@ -1,18 +1,18 @@
 {
   "private": true,
-  "devDependencies": {
-    "bootstrap": "^4.0.0-alpha.2",
-    "bootstrap-styl": "^5.0.5",
-    "es6-promise": "^3.0.2",
-    "gulp": "^3.8.8",
-    "laravel-elixir-stylus": "^1.0.1",
-    "laravel-elixir-vueify": "^1.0.2",
-    "vue-resource": "^0.7.0",
-    "vuex": "^0.2.0"
+  "scripts": {
+    "prod": "gulp --production",
+    "dev": "gulp watch"
   },
-  "dependencies": {
-    "alertify.js": "^1.0.12",
-    "bootstrap-sass": "^3.0.0",
-    "laravel-elixir": "^4.0.0"
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "gulp": "^3.9.1",
+    "jquery": "^3.1.0",
+    "laravel-elixir": "^6.0.0-14",
+    "laravel-elixir-vue-2": "^0.2.0",
+    "laravel-elixir-webpack-official": "^1.0.2",
+    "lodash": "^4.16.2",
+    "vue": "^2.0.1",
+    "vue-resource": "^1.0.3"
   }
 }
