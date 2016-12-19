@@ -4,11 +4,11 @@
             <input type="checkbox"
                    :checked="item.checked"
                    v-model="checked"
-                   @change.prevent="toggle(item)"
+                   @change.prevent="toggleFile(item)"
             >
         </td>
         <td>
-            <span class="glyphicon glyphicon-{{ this.icon }}"></span>
+            <span :class="`glyphicon glyphicon-` + this.icon"></span>
         </td>
         <td>
             <a @click.prevent="click">
@@ -21,19 +21,24 @@
 </template>
 
 <script>
-    import store from '../store';
+    import * as types from '../../store/types'
+    import {mapActions, mapState} from 'vuex'
 
     export default {
         props: ['item'],
         methods: {
-            toggle(item) {
-                store.actions.toggleFile(item);
+            ...mapActions({
+                fetchContents: types.FETCH_CONTENTS,
+                changeDirectoryRelative: types.CHANGE_DIRECTORY_RELATIVE
+            }),
+            toggleFile(file) {
+                this.$store.commit(types.TOGGLE_FILE, {file})
             },
             click() {
                 if(this.item.type === 'file') {
-                    store.actions.fetchContents(this.item.basename);
+                    this.fetchContents(this.item.basename);
                 } else {
-                    store.actions.changeDirectoryRelative(this.item.basename)
+                    this.changeDirectoryRelative(this.item.basename)
                 }
             }
         },

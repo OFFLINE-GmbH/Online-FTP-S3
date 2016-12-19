@@ -1,14 +1,14 @@
 <template>
     <modal :confirm="confirm"
            :disabled="disabled"
-           key="upload"
+           identifier="upload"
            width="500"
     >
         <h3 slot="header">Upload a new file</h3>
         <div slot="body">
             <p>Select the files you want to upload</p>
 
-            <input v-el:file type="file" multiple>
+            <input ref="file" type="file" multiple>
         </div>
 
         <template slot="btnConfirm">Upload files</template>
@@ -16,18 +16,25 @@
 </template>
 
 <script type="text/babel">
-    import Modal from './modal.vue';
-    import store from '../../store';
+    import Modal from './Modal.vue';
+    import * as types from '../../store/types'
+    import { mapActions, mapState } from 'vuex'
 
     export default {
         methods: {
+            ...mapActions({
+               upload: types.UPLOAD
+            }),
             confirm() {
-                let files = this.$els.file.files;
+                let files = this.$refs.file.files;
 
                 if (files.length < 1) return false;
 
                 this.disabled = true;
-                store.actions.upload(files, () => this.disabled = false);
+                this.upload(files).then(() => {
+                    this.disabled = false;
+                    this.$refs.file.value = '';
+                });
             }
         },
         components: {

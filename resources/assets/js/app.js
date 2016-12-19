@@ -11,11 +11,14 @@ import App from './app.vue'
 
 import store from './store'
 
-new Vue({
-    el: 'body',
+import * as types from './store/types'
+
+const vm = new Vue({
+    el: '#main',
+    store,
     components: {
         app: App
     }
 });
 
-store.actions.fetchFiles('/');
+vm.$store.dispatch(types.FETCH_FILES, '/');

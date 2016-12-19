@@ -2,7 +2,7 @@
     <modal :confirm="confirm"
            :disabled="disabled"
            :width="400"
-           key="confirmDelete">
+           identifier="confirmDelete">
 
         <h3 slot="header">Are you sure?</h3>
         <p slot="body">
@@ -14,8 +14,9 @@
 </template>
 
 <script type="text/babel">
-    import Modal from './modal.vue';
-    import store from '../../store';
+    import Modal from './Modal.vue';
+    import * as types from '../../store/types'
+    import {mapActions, mapState} from 'vuex'
 
     export default {
         props: ['width'],
@@ -25,9 +26,14 @@
             }
         },
         methods: {
+            ...mapActions({
+                deleteSelected: types.DELETE_SELECTED
+            }),
             confirm() {
                 this.disabled = true;
-                store.actions.deleteSelected(() => this.disabled = false);
+                this.deleteSelected().then(() => {
+                    this.disabled = false;
+                });
             }
         },
         components: {

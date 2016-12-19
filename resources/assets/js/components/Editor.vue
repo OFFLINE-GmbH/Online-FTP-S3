@@ -29,7 +29,8 @@
 </template>
 
 <script type="text/babel">
-    import store from '../store';
+    import * as types from '../store/types'
+    import { mapActions, mapState } from 'vuex'
     export default {
         data() {
             return {
@@ -37,14 +38,18 @@
             }
         },
         methods: {
-            download() {
-                store.actions.downloadOpen();
+            ...mapActions({
+                download: types.DOWNLOAD_OPEN_FILE,
+                putContents: types.PUT_CONTENTS
+            }),
+            setEditorVisibility(visibility) {
+                this.$store.commit(types.SET_EDITOR_VISIBILITY, visibility)
             },
             save() {
-                store.actions.putContents(this.editor.getValue());
+                this.putContents(this.editor.getValue());
             },
             hide() {
-                store.actions.setEditorVisibility(false);
+                this.setEditorVisibility(false);
             }
         },
         watch: {
@@ -59,7 +64,7 @@
                 }
             }
         },
-        ready() {
+        mounted() {
             this.editor = window.ace.edit('editor');
             this.editor.setOptions({
                 theme: 'ace/theme/tomorrow_night',
@@ -71,16 +76,15 @@
 
             this.editor.$blockScrolling = Infinity;
         },
+        destroyed() {
+            this.editor.destroy()
+        },
         computed: {
-            contents() {
-                return store.state.editorContents;
-            },
-            contentsChanged() {
-                return store.state.editorContentsChanged;
-            },
-            openFile() {
-                return store.state.openFile;
-            }
+            ...mapState({
+                contents: state => state.editorContents,
+                contentsChanged: state => state.editorContentsChanged,
+                openFile: state => state.openFile,
+            })
         }
     }
 </script>

@@ -1,0 +1,26 @@
+// Actions
+export const CREATE_NEW = 'CREATE_NEW';
+export const FETCH_FILES = 'FETCH_FILES';
+export const FETCH_CONTENTS = 'FETCH_CONTENTS';
+export const PUT_CONTENTS = 'PUT_CONTENTS';
+export const UPLOAD = 'UPLOAD';
+export const LEVEL_UP = 'LEVEL_UP';
+export const DOWNLOAD_OPEN_FILE = 'DOWNLOAD_OPEN_FILE';
+export const DOWNLOAD_SELECTED = 'DOWNLOAD_SELECTED';
+export const DELETE_SELECTED = 'DELETE_SELECTED';
+export const REFRESH = 'REFRESH';
+export const TOGGLE_ALL = 'TOGGLE_ALL';
+export const UPDATE_FILELIST = 'UPDATE_FILELIST';
+export const CHANGE_DIRECTORY = 'CHANGE_DIRECTORY';
+export const CHANGE_DIRECTORY_RELATIVE = 'CHANGE_DIRECTORY_RELATIVE';
+
+// Mutations
+export const SET_LOADING = 'SET_LOADING';
+export const SET_PATH = 'SET_PATH';
+export const SET_FILELIST = 'SET_FILELIST';
+export const SET_EDITOR_CONTENTS = 'SET_EDITOR_CONTENTS';
+export const SET_EDITOR_VISIBILITY = 'SET_EDITOR_VISIBILITY';
+export const SET_OPEN_FILE = 'SET_OPEN_FILE';
+export const SET_ALL_SELECTED = 'SET_ALL_SELECTED';
+export const TOGGLE_FILE = 'TOGGLE_FILE';
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';

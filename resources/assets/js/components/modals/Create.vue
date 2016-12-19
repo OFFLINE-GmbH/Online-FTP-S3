@@ -1,7 +1,7 @@
 <template>
     <modal :confirm="confirm"
            :disabled="disabled"
-           key="create"
+           identifier="create"
            width="500"
     >
         <h3 slot="header">Create a new file or folder</h3>
@@ -10,7 +10,7 @@
 
             <div class="row">
                 <div class="col-md-8">
-                    <input class="form-control" v-el:input placeholder="Filename" type="text" v-model="name" autofocus>
+                    <input class="form-control" ref="input" placeholder="Filename" type="text" v-model="name" autofocus>
                 </div>
                 <div class="col-md-4">
                     <div class="btn-group" data-toggle="buttons">
@@ -32,8 +32,9 @@
 </template>
 
 <script type="text/babel">
-    import Modal from './modal.vue';
-    import store from '../../store';
+    import Modal from './Modal.vue';
+    import * as types from '../../store/types'
+    import {mapActions, mapState} from 'vuex'
 
     export default {
         data() {
@@ -44,12 +45,15 @@
             }
         },
         methods: {
+            ...mapActions({
+                create: types.CREATE_NEW
+            }),
             confirm() {
                 if (this.name === '') {
-                    return this.$els.input.focus();
+                    return this.$refs.input.focus();
                 }
                 this.disabled = true;
-                store.actions.create(this.type, this.name, () => this.reset());
+                this.create({type: this.type, path: this.name}).then(this.reset);
             },
             reset() {
                 this.type = 'file';

@@ -12,7 +12,6 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-
     Route::get('/', function () {
         $view = \Session::get('loggedIn', false) !== true ? 'login' : 'index';
 
@@ -20,6 +19,12 @@ Route::group(['middleware' => ['web']], function () {
     });
     Route::post('/login', 'SessionController@login');
     Route::get('/logout', 'SessionController@logout');
+
+
+    Route::get('/download/{zip}', 'DownloadController@download');
+    Route::post('/download', 'DownloadController@generate');
+
+    Route::post('/upload', 'UploadController@upload');
 
     Route::group(['prefix' => 'file'], function () {
         Route::get('/', 'FileController@show');
@@ -33,9 +38,4 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/', 'DirectoryController@create');
         Route::delete('/', 'DirectoryController@destroy');
     });
-
-    Route::get('/download/{zip}', 'DownloadController@download');
-    Route::post('/download', 'DownloadController@generate');
-
-    Route::post('/upload', 'UploadController@upload');
 });

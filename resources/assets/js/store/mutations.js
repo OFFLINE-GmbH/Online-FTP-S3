@@ -1,31 +1,34 @@
+import * as types from './types';
+import Vue from 'vue'
+
 export default {
 
-    SET_LOADING (state, isLoading) {
+    [types.SET_LOADING] (state, isLoading) {
         state.isLoading = isLoading
     },
 
-    SET_FILELIST(state, files) {
+    [types.SET_FILELIST](state, files) {
         state.files = files;
     },
 
-    SET_EDITOR_CONTENTS(state, contents) {
+    [types.SET_EDITOR_CONTENTS](state, contents) {
         state.editorContents = contents;
         state.editorContentsChanged = +Date.now();
     },
 
-    SET_EDITOR_VISIBILITY(state, visibility) {
+    [types.SET_EDITOR_VISIBILITY](state, visibility) {
         state.editorVisible = visibility;
     },
 
-    SET_OPEN_FILE(state, path) {
+    [types.SET_OPEN_FILE](state, path) {
         state.openFile = path;
     },
 
-    SET_ALL_SELECTED(state, newState) {
+    [types.SET_ALL_SELECTED](state, newState) {
         state.allSelected = newState;
     },
 
-    TOGGLE_FILE(state, file, newState) {
+    [types.TOGGLE_FILE](state, {file, newState}) {
         if (typeof newState === 'undefined') {
             newState = !file.checked;
         }
@@ -33,12 +36,12 @@ export default {
         file.checked = newState;
     },
 
-    SET_PATH(state, path) {
+    [types.SET_PATH](state, path) {
         state.path = path;
     },
 
-    TOGGLE_MODAL(state, modal) {
-        state.visibleModals[modal] = !state.visibleModals[modal];
+    [types.TOGGLE_MODAL](state, modal) {
+        Vue.set(state.visibleModals, modal, !state.visibleModals[modal]);
     }
 
 };

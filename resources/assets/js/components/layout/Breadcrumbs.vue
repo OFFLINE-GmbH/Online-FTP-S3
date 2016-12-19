@@ -4,11 +4,11 @@
             <ol class="breadcrumb">
                 <li v-for="breadcrumb in breadcrumbs"
                     :class="{ active: isLast($index) }">
-                    <a @click="cd(breadcrumb.path)"
+                    <a @click="cd('/' + breadcrumb.path)"
                        v-if="!isLast($index)">
                         {{ breadcrumb.label }}
                     </a>
-                <span v-else>
+                    <span v-else>
                     {{ breadcrumb.label }}
                 </span>
                 </li>
@@ -18,28 +18,32 @@
 </template>
 
 <script type="text/babel">
-    import store from '../store';
+    import * as types from '../../store/types'
+    import { mapActions, mapState } from 'vuex'
 
     export default {
         methods: {
+            ...mapActions({
+                cd: types.CHANGE_DIRECTORY
+            }),
             isLast(index) {
                 return index + 1 === this.breadcrumbs.length
-            },
-            cd(path) {
-                store.actions.changeDirectory(path);
             }
         },
-
         computed: {
+            ...mapState({
+                path: state => state.path
+            }),
             breadcrumbs() {
-                let path = '';
-                let mapItem = (label) => {
-                    path += label + '/';
+                const root = [{label: Laravel.host, path: '/'}];
 
+                let path = '';
+                let mapItem = label => {
+                    path += label + '/';
                     return {label, path}
                 };
 
-                return store.state.path.split('/').map(mapItem);
+                return root.concat(this.path.slice(1, -1).split('/').map(mapItem));
             }
         }
     }

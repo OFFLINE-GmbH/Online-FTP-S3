@@ -11,21 +11,20 @@
 </template>
 
 <script>
-    import Editor from './components/editor.vue';
-    import Browser from './components/browser.vue';
-    import Modals from './components/modals/index.vue'
-    import LoadingOverlay from './components/loading-overlay.vue'
+    import Editor from './components/Editor.vue';
+    import Browser from './components/Browser.vue';
+    import Modals from './components/modals/Index.vue'
+    import LoadingOverlay from './components/layout/LoadingOverlay.vue'
 
-    import store from './store';
+    import * as types from './store/types'
+    import { mapActions, mapState } from 'vuex'
 
     export default {
         computed: {
-            isLoading() {
-                return store.state.isLoading;
-            },
-            editorVisible() {
-                return store.state.editorVisible;
-            }
+            ...mapState({
+                isLoading: state => state.isLoading,
+                editorVisible: state => state.editorVisible,
+            })
         },
         components: {
             Editor,
@@ -37,6 +36,10 @@
 </script>
 
 <style>
+    a {
+        cursor: pointer
+    }
+
     .col-browser {
         position: relative;
         width: 80%;
