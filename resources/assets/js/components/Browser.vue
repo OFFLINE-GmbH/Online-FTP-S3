@@ -7,17 +7,18 @@
 </template>
 
 <script type="text/babel">
-    import Breadcrumbs from './breadcrumbs.vue'
-    import Toolbar from './toolbar.vue'
-    import FileList from './filelist.vue'
+    import Breadcrumbs from './layout/Breadcrumbs.vue'
+    import Toolbar from './layout/Toolbar.vue'
+    import FileList from './filelist/FileList.vue'
 
-    import store from './../store'
+    import * as types from '../store/types'
+    import { mapActions, mapState } from 'vuex'
 
     export default {
         computed: {
-            isLoading() {
-                return store.state.isLoading;
-            }
+            ...mapState({
+                isLoading: state => state.isLoading
+            })
         },
         components: {
             Breadcrumbs,

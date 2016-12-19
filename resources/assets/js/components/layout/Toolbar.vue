@@ -30,24 +30,23 @@
 </template>
 
 <script type="text/babel">
-    import store from '../store';
+    import * as types from '../../store/types'
+    import {mapActions, mapState} from 'vuex'
 
     export default {
         methods: {
-            toggleModal(key) {
-                store.actions.toggleModal(key);
-            },
-            download() {
-                store.actions.downloadSelected();
-            },
-            refresh() {
-                store.actions.refresh();
+            ...mapActions({
+               download: types.DOWNLOAD_SELECTED,
+               refresh: types.REFRESH,
+            }),
+            toggleModal(identifier) {
+                this.$store.commit(types.TOGGLE_MODAL, identifier);
             }
         },
         computed: {
-            hasSelectedFiles() {
-                return !!store.state.files.filter((file) => file.checked).length > 0
-            }
+            ...mapState({
+                hasSelectedFiles: state => state.files.filter(file => file.checked).length > 0
+            })
         }
     }
 </script>

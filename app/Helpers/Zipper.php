@@ -37,7 +37,7 @@ class Zipper
         );
 
         foreach ($files as $name => $file) {
-            // Skip directories (they would be added automatically)
+            // Skip directories (they will be added automatically)
             if ($file->isDir()) {
                 continue;
             }

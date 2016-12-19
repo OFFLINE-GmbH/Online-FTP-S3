@@ -10,7 +10,7 @@
                     <th class="text-right">Filesize</th>
                 </tr>
                 <tr>
-                    <td><input @change.prevent="toggleAll" v-model="allSelected" type="checkbox"></td>
+                    <td><input @change.prevent="toggleAll(!allSelected)" v-model="allSelected" type="checkbox"></td>
                     <td>
                         <span v-if="! isRootLevel" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
                     </td>
@@ -28,28 +28,26 @@
 </template>
 
 <script type="text/babel">
-    import FileListEntry from './filelistentry.vue'
+    import FileListEntry from './FileListEntry.vue'
 
-    import store from './../store';
+    import * as types from '../../store/types'
+    import {mapActions, mapState} from 'vuex'
 
     export default {
         methods: {
-            levelUp() {
-                store.actions.levelUp();
-            },
-            toggleAll() {
-                store.actions.toggleAll(!store.state.allSelected);
-            }
+            ...mapActions({
+                levelUp: types.LEVEL_UP,
+                toggleAll: types.TOGGLE_ALL
+            }),
         },
         computed: {
-            listing() {
-                return store.state.files;
-            },
+            ...mapState({
+                allSelected: state => state.allSelected,
+                listing: state => state.files,
+                path: state => state.path
+            }),
             isRootLevel() {
-                return store.state.path === '/';
-            },
-            allSelected() {
-                return store.state.allSelected;
+                return this.path === '/';
             }
         },
         components: {
@@ -59,6 +57,10 @@
 </script>
 
 <style>
+    .listing a {
+        cursor: pointer;
+    }
+
     .listing td:nth-child(1),
     .listing td:nth-child(2) {
         width: 10px;

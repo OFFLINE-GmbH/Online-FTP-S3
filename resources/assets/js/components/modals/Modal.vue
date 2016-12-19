@@ -32,29 +32,31 @@
 </template>
 
 <script>
-    import store from '../../store';
+    import * as types from '../../store/types'
+    import { mapActions, mapState } from 'vuex'
     export default {
-        props: ['key', 'confirm', 'cancel', 'width', 'disabled'],
+        props: ['identifier', 'confirm', 'cancel', 'width', 'disabled'],
         methods: {
+            toggleModal(identifier) {
+                this.$store.commit(types.TOGGLE_MODAL, identifier)
+            },
             btnConfirm() {
-                if (this.confirm) {
-                    this.confirm();
-                }
+                if (this.confirm) this.confirm();
             },
             btnCancel() {
                 this.hide();
-                if (this.cancel) {
-                    this.cancel();
-                }
+                if (this.cancel) this.cancel();
             },
             hide() {
-                store.actions.toggleModal(this.key);
+                this.toggleModal(this.identifier);
             }
         },
         computed: {
-            show() {
-                return store.state.visibleModals[this.key];
-            }
+            ...mapState({
+                show(state) {
+                    return state.visibleModals[this.identifier];
+                }
+            })
         }
     }
 </script>

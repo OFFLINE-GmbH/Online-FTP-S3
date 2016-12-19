@@ -14,6 +14,10 @@ class UploadController extends Controller
         $files = $request->hasFile('files') ? $request->allFiles()['files'] : [];
         $path  = $request->get('path', '');
 
+        if(count($files) < 1) {
+            return response('No files received', 500);
+        }
+
         $transfer = new UploadTransfer($files, $path, $fs, $zipper);
 
         try {
