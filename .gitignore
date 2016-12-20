@@ -8,3 +8,8 @@
 Homestead.json
 Homestead.yaml
 .env
+
+resources/views/partials/analytics.blade.php
+composer.phar
+.htaccess
+public/css/app.css
