@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Online FTP</title>
+    <title>Web based FTP Client &middot; Amazon S3 File browser &middot; Web based</title>
+    <meta name="description" content="Manage and edit your FTP or Amazon S3 files directly in your browser." />
+
     <link rel="stylesheet" href="/css/app.css">
     <style>
         html, body {
@@ -15,6 +17,7 @@
 
         #login {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
 
@@ -90,9 +93,26 @@
             font-size: 11px;
             text-align: center;
         }
+
+        .copyright {
+            position: absolute;
+            bottom: 2em;
+            font-size: 12px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .copyright a {
+            color: rgba(255,255,255,.6);
+        }
+
+        .copyright a:hover {
+            color: rgba(255,255,255,1);
+        }
     </style>
 </head>
 <body id="login">
+@include('partials/github-ribbon')
 <div class="container">
     <div class="services">
         <div data-driver="ftp" data-offset="0" class="@if(old('driver') !== 's3') active @endif">FTP</div>
@@ -120,7 +140,8 @@
 
             <p class="disclaimer">
                 Your login data is deleted as soon as you end your session.<br/>
-                <a href="https://github.com/OFFLINE-GmbH/Online-FTP/blob/master/app/Helpers/LoginHandler.php#L11" target="_blank">
+                <a href="https://github.com/OFFLINE-GmbH/Online-FTP/blob/master/app/Helpers/LoginHandler.php#L11"
+                   target="_blank">
                     All session data is stored encrypted.
                 </a>
             </p>
@@ -128,6 +149,10 @@
             <input type="hidden" id="driver" value="{{ old('driver') ? old('driver') : 'ftp' }}" name="driver">
         </form>
     </div>
+</div>
+
+<div class="copyright">
+    <a href="https://offline.swiss">Created by OFFLINE GmbH</a>
 </div>
 
 <script>

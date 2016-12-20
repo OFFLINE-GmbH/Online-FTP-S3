@@ -1,5 +1,7 @@
-# ONLINE FTP
+# Online FTP / Amazon S3 Filebrowser 
 [![Build Status](https://travis-ci.org/OFFLINE-GmbH/Online-FTP.svg?branch=master)](https://travis-ci.org/OFFLINE-GmbH/Online-FTP)
+
+Simple file browser built with Laravel and Vue.
 
 ## Installation
 

@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Online FTP</title>
+    <title>{{ session('host') }}</title>
     <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
+    @include('partials/github-ribbon')
     <div id="main">
         <app></app>
     </div>
