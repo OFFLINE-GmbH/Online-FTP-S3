@@ -45,11 +45,11 @@ class UploadTransfer
         $this->zipper = $zipper;
     }
 
-    public function start()
+    public function start($extract)
     {
         try {
             $this->generateTemp();
-            $this->saveTempFiles();
+            $this->saveTempFiles($extract);
             $this->uploadToRemote();
         } catch (\Exception $e) {
             throw new $e;
@@ -69,12 +69,12 @@ class UploadTransfer
     /**
      * Upload files to the local filesystem.
      */
-    protected function saveTempFiles()
+    protected function saveTempFiles($extract)
     {
         $base = storage_path('app/' . $this->temp);
         foreach ($this->files as $file) {
             /** @var $file UploadedFile */
-            if ($file->clientExtension() === 'zip') {
+            if ($file->clientExtension() === 'zip' && $extract === true) {
                 (new Zipper())->unzip($file->getRealPath(), $base);
             } else {
                 $file->move($base, $file->getClientOriginalName());
