@@ -6,6 +6,9 @@ var alertify = require('alertify.js');
 const withPwd = (state, path) => {
     return state.path.replace(/^\/|\/$/g, '') + '/' + path;
 };
+const basename = path => {
+    return path.split('/').pop();
+};
 
 export default {
 
@@ -28,10 +31,20 @@ export default {
         commit(types.SET_LOADING, true);
         path = withPwd(state, path);
 
-        api.getContents(path).then(contents => {
-            commit(types.SET_OPEN_FILE, path);
-            commit(types.SET_EDITOR_CONTENTS, contents);
-            commit(types.SET_EDITOR_VISIBILITY, true);
+        api.getContents(path).then(response => {
+
+            if(response.download === true) {
+                const a = window.document.createElement('a');
+                a.href = 'data:application/octet-stream;base64,' + response.contents;
+                a.download = basename(path);
+
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            } else {
+                commit(types.SET_OPEN_FILE, path);
+                commit(types.SET_EDITOR_CONTENTS, response.contents);
+                commit(types.SET_EDITOR_VISIBILITY, true);
+            }
+
             commit(types.SET_LOADING, false);
         }).catch(e => {
             alertify.error('Failed to fetch file');
@@ -78,7 +91,6 @@ export default {
             alertify.error('Failed to delete files');
             cleanUp();
         });
-
 
     },
 
@@ -141,15 +153,19 @@ export default {
 
     },
 
-    [types.UPLOAD]({commit, state, dispatch}, files) {
+    [types.UPLOAD]({commit, state, dispatch}, {files, extract}) {
         commit(types.SET_LOADING, true);
 
-        return api.upload(files, state.path).then(() => {
+        return api.upload(files, state.path, extract).then(() => {
             alertify.success('Upload successful');
             commit(types.TOGGLE_MODAL, 'upload');
             dispatch(types.REFRESH);
-        }).catch(e => {
-            alertify.error('Failed to upload files');
+        }).catch(response => {
+            if(response.status === 422) {
+                alertify.error('The uploaded file is too large');
+            } else {
+                alertify.error('Failed to upload files');
+            }
             dispatch(types.REFRESH);
         });
 

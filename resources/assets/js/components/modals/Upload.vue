@@ -9,6 +9,12 @@
             <p>Select the files you want to upload</p>
 
             <input ref="file" type="file" multiple>
+
+            <div class="checkbox zip-checkbox">
+                <label>
+                    <input v-model="extract" type="checkbox"> Extract ZIP archives on server
+                </label>
+            </div>
         </div>
 
         <template slot="btnConfirm">Upload files</template>
@@ -21,6 +27,11 @@
     import { mapActions, mapState } from 'vuex'
 
     export default {
+        data() {
+            return {
+                extract: false
+            }
+        },
         methods: {
             ...mapActions({
                upload: types.UPLOAD
@@ -31,8 +42,9 @@
                 if (files.length < 1) return false;
 
                 this.disabled = true;
-                this.upload(files).then(() => {
+                this.upload({files, extract: this.extract}).then(() => {
                     this.disabled = false;
+                    this.extract = false;
                     this.$refs.file.value = '';
                 });
             }
@@ -42,3 +54,9 @@
         }
     }
 </script>
+
+<style>
+    .zip-checkbox {
+        margin-top: 3em;
+    }
+</style>

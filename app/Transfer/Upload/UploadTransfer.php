@@ -6,6 +6,7 @@ namespace App\Transfer\Upload;
 use App\Helpers\Zipper;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Filesystem\FilesystemManager;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class UploadTransfer
@@ -44,14 +45,12 @@ class UploadTransfer
         $this->zipper = $zipper;
     }
 
-    public function start()
+    public function start($extract)
     {
         try {
             $this->generateTemp();
-            $this->saveTempFiles();
+            $this->saveTempFiles($extract);
             $this->uploadToRemote();
-        } catch (\Exception $e) {
-            throw new $e;
         } finally {
             $this->cleanUp();
         }
@@ -66,12 +65,18 @@ class UploadTransfer
     }
 
     /**
-     * Upload files to the local server.
+     * Upload files to the local filesystem.
      */
-    protected function saveTempFiles()
+    protected function saveTempFiles($extract)
     {
+        $base = storage_path('app/' . $this->temp);
         foreach ($this->files as $file) {
-            $file->move(storage_path('app/' . $this->temp), $file->getClientOriginalName());
+            /** @var $file UploadedFile */
+            if ($extract === true && $file->clientExtension() === 'zip') {
+                (new Zipper())->unzip($file->getRealPath(), $base);
+            } else {
+                $file->move($base, $file->getClientOriginalName());
+            }
         }
     }
 
@@ -87,13 +92,37 @@ class UploadTransfer
      * Upload local files to remote server.
      * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    protected function uploadToRemote()
+    protected function uploadToRemote($base = null)
     {
-        foreach ($this->fs->files($this->temp) as $file) {
+        $folder = $base ? $this->temp . '/' . $base : $this->temp;
+        $target = $base ? $this->path . '/' . $base : $this->path;
+
+        foreach ($this->fs->files($folder) as $file) {
             $this->fs->cloud()->put(
-                $this->path . $this->getBasename($file),
+                sprintf('%s/%s', $target, $this->getBasename($file)),
                 Storage::get($file)
             );
+        }
+
+        if ($dirs = $this->fs->directories($folder)) {
+            $this->createDirs($base, $dirs, $target);
+        }
+    }
+
+    /**
+     * Creates all uploaded directories on the remote server.
+     *
+     * @param $base
+     * @param $dirs
+     * @param $target
+     */
+    protected function createDirs($base, $dirs, $target)
+    {
+        foreach ($dirs as $dir) {
+            $this->fs->cloud()->makeDirectory(
+                sprintf('%s/%s', $target, $this->getBasename($dir))
+            );
+            $this->uploadToRemote($base . '/' . $this->getBasename($dir));
         }
     }
 

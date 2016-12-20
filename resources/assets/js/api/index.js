@@ -21,7 +21,7 @@ export function getFiles (path, cb) {
 
 export function getContents (path, cb) {
     return http({url: '/file/?path=' + removeSlashes(path), method: 'GET'})
-        .then(response => response.data.contents);
+        .then(response => response.data);
 }
 
 export function putContents (path, contents) {
@@ -48,13 +48,14 @@ export function download (path) {
     return http({url: `/download`, method: 'POST', body: {path}}).then(response => response.data);
 }
 
-export function upload (files, path) {
+export function upload (files, path, extract) {
     let data = new FormData();
     for (let i = 0; i < files.length; i++) {
         data.append('files[]', files[i]);
     }
 
     data.append('path', path);
+    data.append('extract', extract ? 1 : 0);
 
     return http({url: '/upload', method: 'POST', body: data});
 }

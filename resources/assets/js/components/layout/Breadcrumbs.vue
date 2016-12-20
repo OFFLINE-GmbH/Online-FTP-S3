@@ -4,7 +4,7 @@
             <ol class="breadcrumb">
                 <li v-for="breadcrumb in breadcrumbs"
                     :class="{ active: isLast($index) }">
-                    <a @click="cd('/' + breadcrumb.path)"
+                    <a @click="cd(($index === 0 ? '' : '/') + breadcrumb.path)"
                        v-if="!isLast($index)">
                         {{ breadcrumb.label }}
                     </a>
@@ -35,7 +35,7 @@
                 path: state => state.path
             }),
             breadcrumbs() {
-                const root = [{label: Laravel.host, path: '/'}];
+                const root = [{label: Laravel.host, path: ''}];
 
                 let path = '';
                 let mapItem = label => {

@@ -10,6 +10,21 @@ class Zipper
 {
     private $zip;
 
+    public function unzip($path, $target)
+    {
+        $this->zip = new \ZipArchive();
+        $res       = $this->zip->open($path);
+
+        if ($res === true) {
+            $this->zip->extractTo($target);
+            $this->zip->close();
+
+            return $target;
+        } else {
+            throw new \RuntimeException('Failed to extract zip archive.');
+        }
+    }
+
     public function zipDirectory($path, $zipPath)
     {
         $this->zip = new \ZipArchive();
@@ -48,4 +63,5 @@ class Zipper
             $this->zip->addFile($filePath, $relativePath);
         }
     }
+
 }
