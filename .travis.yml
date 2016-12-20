@@ -8,7 +8,7 @@ php:
   - nightly
 install:
   - composer -q install --prefer-dist
-  - touch .env
+  - cp .env.example .env
   - php artisan key:generate
   - cat .env
   - ./vendor/bin/phpunit --coverage-text --configuration phpunit.xml
