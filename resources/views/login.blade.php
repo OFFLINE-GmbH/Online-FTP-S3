@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Web based FTP Client &middot; Amazon S3 File browser &middot; Web based</title>
-    <meta name="description" content="Manage and edit your FTP or Amazon S3 files directly in your browser." />
+    <meta name="description" content="Manage and edit your FTP or Amazon S3 files directly in your browser."/>
 
     <link rel="stylesheet" href="/css/app.css">
     <style>
@@ -103,16 +103,15 @@
         }
 
         .copyright a {
-            color: rgba(255,255,255,.6);
+            color: rgba(255, 255, 255, .6);
         }
 
         .copyright a:hover {
-            color: rgba(255,255,255,1);
+            color: rgba(255, 255, 255, 1);
         }
     </style>
 </head>
 <body id="login">
-@include('partials/github-ribbon')
 <div class="container">
     <div class="services">
         <div data-driver="ftp" data-offset="0" class="@if(old('driver') !== 's3') active @endif">FTP</div>
@@ -170,5 +169,7 @@
         });
     });
 </script>
+@includeIf('partials.github-ribbon')
+@includeIf('partials.analytics')
 </body>
 </html>
