@@ -1,5 +1,5 @@
 # ONLINE FTP
-[![Build Status](https://travis-ci.org/OFFLINE-GmbH/Online-FTP.svg)](https://travis-ci.org/OFFLINE-GmbH/Online-FTP)
+[![Build Status](https://travis-ci.org/OFFLINE-GmbH/Online-FTP.svg?branch=master)](https://travis-ci.org/OFFLINE-GmbH/Online-FTP)
 
 ## Installation
 
