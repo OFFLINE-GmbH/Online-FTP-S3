@@ -85,12 +85,17 @@
             opacity: 1;
             background: rgba(0, 0, 0, .05);
         }
+
+        .disclaimer {
+            font-size: 11px;
+            text-align: center;
+        }
     </style>
 </head>
 <body id="login">
 <div class="container">
     <div class="services">
-        <div data-driver="ftp" data-offset="0" class="@if(old('driver') === 'ftp' or old('driver') === null) active @endif">FTP</div>
+        <div data-driver="ftp" data-offset="0" class="@if(old('driver') !== 's3') active @endif">FTP</div>
         <div data-driver="s3" data-offset="308" class="@if(old('driver') === 's3') active @endif">S3</div>
     </div>
     <div class="container__inner">
@@ -101,9 +106,9 @@
                 </div>
             @endif
             <div class="forms"
-                @if(old('driver') === 's3')
-                    style="transform: translateX(-308px)"
-                @endif
+                 @if(old('driver') === 's3')
+                 style="transform: translateX(-308px)"
+                    @endif
             >
                 <div class="ftp">
                     @include('login/ftp')
@@ -112,10 +117,19 @@
                     @include('login/s3')
                 </div>
             </div>
-            <input type="hidden" id="driver" value="{{ old('driver') or 'ftp' }}" name="driver">
+
+            <p class="disclaimer">
+                Your login data is deleted as soon as you end your session.<br/>
+                <a href="https://github.com/OFFLINE-GmbH/Online-FTP/blob/master/app/Helpers/LoginHandler.php#L11" target="_blank">
+                    All session data is stored encrypted.
+                </a>
+            </p>
+
+            <input type="hidden" id="driver" value="{{ old('driver') ? old('driver') : 'ftp' }}" name="driver">
         </form>
     </div>
 </div>
+
 <script>
     [].forEach.call(document.querySelectorAll('[data-offset]'), function (el) {
         el.addEventListener('click', function () {

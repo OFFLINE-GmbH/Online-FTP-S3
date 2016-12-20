@@ -8,8 +8,11 @@
         @endif
     </label>
     <input type="{{ $type }}" class="form-control" name="{{ $id }}" id="{{ $id }}"
+           @if(isset($autofocus))
+            autofocus
+           @endif
            @if( ! isset($value))
-              <?php $value = old($id) ?: '' ?>
+            <?php $value = old($id) ?: '' ?>
            @endif
            value="{{ $value }}"
     >

@@ -57,7 +57,7 @@ class SessionController extends Controller
 
     protected function error($e)
     {
-        return redirect()->back()->withErrors(['connection' => 'Cannot connect to server!']);
+        return redirect()->back()->withErrors(['connection' => 'Cannot connect to server!'])->withInput();
     }
 
     /**
