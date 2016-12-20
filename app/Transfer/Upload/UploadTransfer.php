@@ -51,8 +51,6 @@ class UploadTransfer
             $this->generateTemp();
             $this->saveTempFiles($extract);
             $this->uploadToRemote();
-        } catch (\Exception $e) {
-            throw new $e;
         } finally {
             $this->cleanUp();
         }
@@ -74,7 +72,7 @@ class UploadTransfer
         $base = storage_path('app/' . $this->temp);
         foreach ($this->files as $file) {
             /** @var $file UploadedFile */
-            if ($file->clientExtension() === 'zip' && $extract === true) {
+            if ($extract === true && $file->clientExtension() === 'zip') {
                 (new Zipper())->unzip($file->getRealPath(), $base);
             } else {
                 $file->move($base, $file->getClientOriginalName());

@@ -13,6 +13,8 @@ class UploadTransferTest extends TestCase
         $fs     = $this->fs(function ($mock) {
             $mock->shouldReceive('cloud')->once()->andReturn($mock);
             $mock->shouldReceive('files')->once()->andReturn(['test.jpg']);
+            $mock->shouldReceive('directories')->once()->andReturn([]);
+            $mock->shouldReceive('makeDirectory')->never();
             $mock->shouldReceive('deleteDirectory')->once()->andReturn($mock);
             $mock->shouldReceive('put')->once()->andReturn($mock);
         });
@@ -26,7 +28,7 @@ class UploadTransferTest extends TestCase
         });
 
         $transfer = new UploadTransfer([$file], '/path/', $fs, $zipper);
-        $transfer->start();
+        $transfer->start(false);
     }
 
     protected function fs(Callable $callback)

@@ -30,6 +30,7 @@ class FileControllerTest extends TestCase
         $this->seeStatusCode(200);
         $this->assertEquals($this->response->getContent(), json_encode([
             'contents' => 'xyz',
+            'download' => false
         ]));
     }
 
