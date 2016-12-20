@@ -1,7 +1,8 @@
 @include('helpers/input', [
     'id' => 'host',
     'label' => 'Host',
-    'type' => 'text'
+    'type' => 'text',
+    'autofocus' => true
 ])
 @include('helpers/input', [
     'id' => 'username',

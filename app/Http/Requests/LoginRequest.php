@@ -25,7 +25,6 @@ class LoginRequest extends Request
             $rules = [
                 'host'     => 'required',
                 'username' => 'required',
-                'password' => 'required',
                 'port'     => 'required|numeric',
             ];
         } else {

@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="breadcrumbs col-md-12">
+        <div class="breadcrumbs col-md-11">
             <ol class="breadcrumb">
                 <li v-for="breadcrumb in breadcrumbs"
                     :class="{ active: isLast($index) }">
@@ -13,6 +13,9 @@
                 </span>
                 </li>
             </ol>
+        </div>
+        <div class="col-md-1 text-right logout-button">
+            <a href="/logout" class="btn btn-sm btn-default">Logout</a>
         </div>
     </div>
 </template>
@@ -48,3 +51,13 @@
         }
     }
 </script>
+
+<style>
+    .logout-button {
+        margin-top: .25em;
+    }
+    .logout-button .btn {
+        position: relative;
+        right: 9px;
+    }
+</style>
