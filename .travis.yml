@@ -10,4 +10,5 @@ install:
   - composer -q install --prefer-dist
   - touch .env
   - php artisan key:generate
-  - ./vendor/bin/phpunit --coverage-text
+  - cat .env
+  - ./vendor/bin/phpunit --coverage-text --configuration phpunit.xml

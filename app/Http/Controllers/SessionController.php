@@ -65,7 +65,7 @@ class SessionController extends Controller
      *
      * @return array
      */
-    protected function getData(Requests\LoginRequest $request): array
+    protected function getData(Requests\LoginRequest $request)
     {
         switch ($request->get('driver')) {
             case 'ftp':
