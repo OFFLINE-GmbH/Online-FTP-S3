@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Web based FTP Client &middot; Amazon S3 File browser &middot; Web based</title>
+    <title>Web based FTP Client &middot; Amazon S3 File browser &middot; Online FTP</title>
     <meta name="description" content="Manage and edit your FTP or Amazon S3 files directly in your browser."/>
 
     <link rel="stylesheet" href="/css/app.css">
