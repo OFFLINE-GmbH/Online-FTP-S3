@@ -116,4 +116,10 @@
         transform: translate(-50%, 0);
         z-index: 2000;
     }
+
+    @media screen and (max-width: 880px) {
+        #hide {
+            transform: translate(10%, 0);
+        }
+    }
 </style>

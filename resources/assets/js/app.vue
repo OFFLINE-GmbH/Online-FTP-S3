@@ -82,4 +82,22 @@
     .alertify-logs {
         z-index: 10001;
     }
+
+    @media screen and (max-width: 880px) {
+        .github-ribbon {
+            display: none;
+        }
+
+        .editor-visible .col {
+            width: 100%;
+        }
+
+        .editor-visible .col-browser {
+            width: 100%;
+        }
+
+        .editor-visible .col-editor {
+            left: 0%;
+        }
+    }
 </style>

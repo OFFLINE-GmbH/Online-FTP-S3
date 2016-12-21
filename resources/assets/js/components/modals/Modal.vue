@@ -85,6 +85,7 @@
         padding: 20px 30px;
         background-color: #fff;
         border-radius: 2px;
+        max-width: 90vw;
         box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
         transition: all .3s ease;
         font-family: Helvetica, Arial, sans-serif;
@@ -106,5 +107,16 @@
     .modal-leave .modal-container {
         -webkit-transform: scale(1.1);
         transform: scale(1.1);
+    }
+
+    @media screen and (max-width: 990px) {
+        .modal-container .btn-group {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .modal-container .btn-group .btn {
+            width: 50%;
+        }
     }
 </style>
