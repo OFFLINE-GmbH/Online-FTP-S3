@@ -15,7 +15,7 @@
         left: 0;
         top: 0;
         width: 100vw;
-        height: 100vw;
+        height: 100%;
         z-index: 10000;
         background: rgba(255, 255, 255, .3);
     }

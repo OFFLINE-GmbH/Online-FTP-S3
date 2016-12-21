@@ -15,8 +15,8 @@
                 {{ item.basename }}
             </a>
         </td>
-        <td>{{ item.visibility }}</td>
-        <td class="text-right">{{ item.size }}</td>
+        <td class="hide-mobile">{{ item.visibility }}</td>
+        <td class="hide-mobile text-right">{{ item.size }}</td>
     </tr>
 </template>
 

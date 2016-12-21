@@ -6,8 +6,8 @@
                 <tr>
                     <th colspan="2"></th>
                     <th>Filename</th>
-                    <th>Visibility</th>
-                    <th class="text-right">Filesize</th>
+                    <th class="hide-mobile">Visibility</th>
+                    <th class="hide-mobile text-right">Filesize</th>
                 </tr>
                 <tr>
                     <td><input @change.prevent="toggleAll(!allSelected)" v-model="allSelected" type="checkbox"></td>
@@ -64,5 +64,10 @@
     .listing td:nth-child(1),
     .listing td:nth-child(2) {
         width: 10px;
+    }
+    @media screen and (max-width: 535px) {
+        .hide-mobile {
+            display: none;
+        }
     }
 </style>

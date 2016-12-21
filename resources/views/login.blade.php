@@ -28,6 +28,7 @@
 
         #login > .container {
             width: 380px;
+            max-width: 80%;
             border-radius: 4px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
 
@@ -61,6 +62,10 @@
         .forms > div {
             float: left;
             width: 308px;
+        }
+
+        .form-control {
+            max-width: 100%;
         }
 
         .services {
@@ -109,13 +114,29 @@
         .copyright a:hover {
             color: rgba(255, 255, 255, 1);
         }
+
+        @media screen and (max-width: 479px) {
+            .forms {
+                overflow: hidden;
+                width: 200%;
+            }
+
+            .forms > div {
+                float: left;
+                width: 50%;
+            }
+
+            .container__inner {
+                padding: 1.5em .5em 1em;
+            }
+        }
     </style>
 </head>
 <body id="login">
 <div class="container">
     <div class="services">
         <div data-driver="ftp" data-offset="0" class="@if(old('driver') !== 's3') active @endif">FTP</div>
-        <div data-driver="s3" data-offset="308" class="@if(old('driver') === 's3') active @endif">S3</div>
+        <div data-driver="s3" data-offset="50" class="@if(old('driver') === 's3') active @endif">S3</div>
     </div>
     <div class="container__inner">
         <form action="/login" method="POST" id="form">
@@ -157,7 +178,7 @@
 <script>
     [].forEach.call(document.querySelectorAll('[data-offset]'), function (el) {
         el.addEventListener('click', function () {
-            document.getElementsByClassName('forms')[0].style.transform = 'translateX(-' + this.dataset.offset + 'px)';
+            document.getElementsByClassName('forms')[0].style.transform = 'translateX(-' + this.dataset.offset + '%)';
 
             [].forEach.call(document.getElementsByClassName('active'), function (el) {
                 el.classList.remove('active');
