@@ -14,12 +14,16 @@
                 </div>
                 <div class="col-md-4">
                     <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default btn-small" :class="{active: type === 'file'}">
-                            <input v-model="type" value="file" type="radio" autocomplete="off">
+                        <label @click="type = 'file'"
+                               class="btn btn-default btn-small"
+                               :class="{active: type === 'file'}">
+                            <input value="file" type="radio" autocomplete="off">
                             File
                         </label>
-                        <label class="btn btn-default btn-small" :class="{active: type === 'directory'}">
-                            <input v-model="type" value="directory" type="radio" autocomplete="off">
+                        <label @click="type = 'directory'"
+                               class="btn btn-default btn-small"
+                               :class="{active: type === 'directory'}">
+                            <input value="directory" type="radio" autocomplete="off">
                             Folder
                         </label>
                     </div>
