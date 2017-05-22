@@ -10,13 +10,18 @@ class CleanUp extends Command
     /**
      * @var int
      */
-    const FIFTEEN_MINUTES = 1800;
+    const FIFTEEN_MINUTES = 900;
 
     /**
      * Never delete these files.
      * @var array
      */
     private $ignore = ['.gitignore'];
+    /**
+     * Cleanup these storage directories
+     * @var array
+     */
+    private $dirs = ['downloads', 'uploads'];
 
     /**
      * The name and signature of the console command.
@@ -55,12 +60,28 @@ class CleanUp extends Command
      */
     public function handle()
     {
-        foreach ($this->fs->files('downloads') as $file) {
-            if ($this->ignore($file) || ! $this->isOld($file)) {
-                continue;
-            }
+        foreach ($this->dirs as $directory) {
+            $this->cleanup($directory);
+        }
+    }
 
-            $this->fs->delete($file);
+    /**
+     * Removes old files from a directory.
+     *
+     * @param $path
+     */
+    protected function cleanup($path)
+    {
+        foreach ($this->fs->directories($path) as $directory) {
+            if ( ! $this->keep($directory)) {
+                $this->fs->deleteDirectory($directory);
+            }
+        }
+
+        foreach ($this->fs->files($path) as $file) {
+            if ( ! $this->keep($file)) {
+                $this->fs->delete($file);
+            }
         }
     }
 
@@ -90,5 +111,18 @@ class CleanUp extends Command
         $modified = $this->fs->lastModified($file);
 
         return $modified < (time() - $this::FIFTEEN_MINUTES);
+    }
+
+    /**
+     * Test if file should be ignored or is not yet old
+     * enough to be deleted.
+     *
+     * @param $path
+     *
+     * @return bool
+     */
+    protected function keep($path)
+    {
+        return $this->ignore($path) || ! $this->isOld($path);
     }
 }
