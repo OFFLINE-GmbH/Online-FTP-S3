@@ -72,7 +72,7 @@ class UploadTransfer
         $base = storage_path('app/' . $this->temp);
         foreach ($this->files as $file) {
             /** @var $file UploadedFile */
-            if ($extract === true && $file->clientExtension() === 'zip') {
+            if ($extract === true && $file->guessExtension() === 'zip') {
                 (new Zipper())->unzip($file->getRealPath(), $base);
             } else {
                 $file->move($base, $file->getClientOriginalName());
