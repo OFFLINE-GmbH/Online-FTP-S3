@@ -1,5 +1,5 @@
 <template>
-    <div class="col col-editor {{ isFullscreen ? 'is-fullscreen' : '' }}">
+    <div class="col col-editor" :class="{'is-fullscreen' : isFullscreen}">
         <div id="editor">{{ contents }}</div>
         <div id="hide">
             <button type="button" class="btn btn-default btn-sm" @click="hide" title="Hide editor">
@@ -27,7 +27,7 @@
             <button type="button"
                     class="btn btn-default"
                     title="Full Window/Fullscreen"
-                    @click="fullwin"
+                    @click="fullscreen"
                     v-show="openFile !== null"
             >
                 <span class="glyphicon glyphicon-fullscreen"></span>
@@ -57,7 +57,7 @@
             save() {
                 this.putContents(this.editor.getValue());
             },
-            fullwin() {
+            fullscreen() {
                 this.isFullscreen = !this.isFullscreen
             },
             hide() {
@@ -104,6 +104,7 @@
 <style>
     .col-editor.is-fullscreen {
         width: 100%;
+        left: 0;
     }
     .col-editor.is-fullscreen #hide {
         display: none;
