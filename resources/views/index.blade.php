@@ -23,7 +23,6 @@
 </script>
 <script src="/js/app.js"></script>
 
-@includeIf('partials.github-ribbon')
 @includeIf('partials.analytics')
 </body>
 </html>
