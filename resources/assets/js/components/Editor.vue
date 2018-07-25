@@ -1,5 +1,5 @@
 <template>
-    <div class="col col-editor">
+    <div class="col col-editor {{ isFullscreen ? 'is-fullscreen' : '' }}">
         <div id="editor">{{ contents }}</div>
         <div id="hide">
             <button type="button" class="btn btn-default btn-sm" @click="hide" title="Hide editor">
@@ -42,7 +42,8 @@
     export default {
         data() {
             return {
-                editor: null
+                editor: null,
+                isFullscreen: false
             }
         },
         methods: {
@@ -57,13 +58,7 @@
                 this.putContents(this.editor.getValue());
             },
             fullwin() {
-            //I only know JavaScript, not this babel stuff, so here goes nothing (B>):
-            //Reconfigure this into your language
-                if (querySelector("div.col-editor").className = "fullscr") {
-                querySelector("div.col-editor").className = ""
-                } else {
-                querySelector("div.col-editor").className = "fullscr"
-                }
+                this.isFullscreen = !this.isFullscreen
             },
             hide() {
                 this.setEditorVisibility(false);
@@ -107,11 +102,10 @@
 </script>
 
 <style>
-    div.col-editor.fullscr {
+    .col-editor.is-fullscreen {
         width: 100%;
     }
-    div.col-editor.fullscr #hide {
-    /* This hides the "hide" button in the fullscreen mode. To show it again, press the Fullscreen button again. */
+    .col-editor.is-fullscreen #hide {
         display: none;
     }
     #editor {
