@@ -24,6 +24,14 @@
             >
                 <span class="glyphicon glyphicon-download"></span>
             </button>
+            <button type="button"
+                    class="btn btn-default"
+                    title="Full Window/Fullscreen"
+                    @click="fullwin"
+                    v-show="openFile !== null"
+            >
+                <span class="glyphicon glyphicon-fullscreen"></span>
+            </button>
         </div>
     </div>
 </template>
@@ -47,6 +55,15 @@
             },
             save() {
                 this.putContents(this.editor.getValue());
+            },
+            fullwin() {
+            //I only know JavaScript, not this babel stuff, so here goes nothing (B>):
+            //Reconfigure this into your language
+                if (querySelector("div.col-editor").className = "fullscr") {
+                querySelector("div.col-editor").className = ""
+                } else {
+                querySelector("div.col-editor").className = "fullscr"
+                }
             },
             hide() {
                 this.setEditorVisibility(false);
@@ -90,11 +107,18 @@
 </script>
 
 <style>
+    div.col-editor.fullscr {
+        width: 100%;
+    }
+    div.col-editor.fullscr #hide {
+    /* This hides the "hide" button in the fullscreen mode. To show it again, press the Fullscreen button again. */
+        display: none;
+    }
     #editor {
         position: relative;
         width: 100%;
         z-index: 500;
-        height: 100vh;
+        height: calc(100vh - 54px);
         font-size: 15px;
         line-height: 1.6;
     }
@@ -107,6 +131,7 @@
         width: 100%;
         z-index: 600;
         padding: 10px;
+        background-color: white;
     }
 
     #hide {
