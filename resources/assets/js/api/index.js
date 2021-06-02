@@ -11,7 +11,7 @@ console.log('base is', Vue.http.options.root);
 const removeSlashes = (str) => str.replace(/^\/|\/$/g, '');
 
 export function getFiles (path, cb) {
-    return http({url: '/directory/?path=' + removeSlashes(path), method: 'GET'}).then(response => {
+    return http({url: '/directory?path=' + removeSlashes(path), method: 'GET'}).then(response => {
         response.data.listing.map(item => {
             item.checked = false;
             item._uid = +Date.now();
@@ -24,7 +24,7 @@ export function getFiles (path, cb) {
 }
 
 export function getContents (path, cb) {
-    return http({url: '/file/?path=' + removeSlashes(path), method: 'GET'})
+    return http({url: '/file?path=' + removeSlashes(path), method: 'GET'})
         .then(response => response.data);
 }
 
