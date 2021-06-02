@@ -5,7 +5,7 @@
     "dev": "gulp watch"
   },
   "engines": {
-    "node": "10.x"
+    "node": "8.x"
   },
   "devDependencies": {
     "alertify.js": "^1.0.12",
