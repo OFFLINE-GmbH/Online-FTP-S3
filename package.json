@@ -6,7 +6,7 @@
   },
   "engines": {
     "node": "10.x"
-  }
+  },
   "devDependencies": {
     "alertify.js": "^1.0.12",
     "babel-core": "^6.21.0",
