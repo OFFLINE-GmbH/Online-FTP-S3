@@ -5,7 +5,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": "^7.1.0",
+        "php": "^7.0.0",
         "laravel/framework": "5.3.*",
         "league/flysystem-aws-s3-v3": "^1.0"
     },
