@@ -17,14 +17,18 @@ Route::group(['middleware' => ['web']], function () {
 
         return view($view);
     });
-    Route::post('/login', 'SessionController@login');
+
     Route::get('/logout', 'SessionController@logout');
 
+    Route::group(['middleware' => ['throttle:10,1']], function() {
+        Route::post('/login', 'SessionController@login');
+    });
 
-    Route::get('/download/{zip}', 'DownloadController@download');
-    Route::post('/download', 'DownloadController@generate');
-
-    Route::post('/upload', 'UploadController@upload');
+    Route::group(['middleware' => ['throttle:5,1']], function() {
+        Route::post('/upload', 'UploadController@upload');
+        Route::get('/download/{zip}', 'DownloadController@download');
+        Route::post('/download', 'DownloadController@generate');
+    });
 
     Route::group(['prefix' => 'file'], function () {
         Route::get('/', 'FileController@show');

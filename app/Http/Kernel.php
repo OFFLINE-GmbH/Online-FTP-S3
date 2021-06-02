@@ -32,6 +32,7 @@ class Kernel extends HttpKernel
             ApplyLoginData::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'throttle:60,1',
         ],
 
         'api' => [
