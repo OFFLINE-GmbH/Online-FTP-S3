@@ -20,12 +20,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
         $view = Session::get('loggedIn', false) !== true ? 'login' : 'index';
 
-        // Run cleanup periodically.
-        Cache::remember('cleanup', Carbon::now()->addHour(), function() {
-            logger()->info('Cleanup stoarge...');
-            Artisan::call('onlineftp:cleanup');
-        });
-
         return view($view);
     });
 
