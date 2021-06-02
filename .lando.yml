@@ -1,0 +1,8 @@
+name: onlineftp
+recipe: laravel
+config:
+  php: '7.0'
+  via: nginx
+  webroot: public
+  cache: redis
+  xdebug: false

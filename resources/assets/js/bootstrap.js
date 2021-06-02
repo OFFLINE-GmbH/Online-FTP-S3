@@ -31,7 +31,6 @@ Vue.http.interceptors.push((request, next) => {
     next();
 });
 
-Vue.http.options.root = document.location.protocol + '//' + document.location.hostname
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

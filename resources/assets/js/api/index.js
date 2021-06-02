@@ -1,8 +1,12 @@
 import Vue from 'vue';
+
 const resource = require('vue-resource');
 Vue.use(resource);
 
 let http = Vue.http;
+
+http.options.root = document.location.protocol + '//' + document.location.hostname
+console.log('base is', Vue.http.options.root);
 
 const removeSlashes = (str) => str.replace(/^\/|\/$/g, '');
 
