@@ -5,7 +5,7 @@
     "dev": "gulp watch"
   },
   "engines": {
-    "node": "8.x"
+    "node": "7.x"
   },
   "devDependencies": {
     "alertify.js": "^1.0.12",
@@ -22,5 +22,8 @@
     "vue": "^2.0.1",
     "vue-resource": "1.0.3",
     "vuex": "^2.1.1"
+  },
+  "dependencies": {
+    "require-dir": "1.2.0"
   }
 }
