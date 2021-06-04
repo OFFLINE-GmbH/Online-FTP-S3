@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,40 +14,30 @@
 |
 */
 
-use Cache;
-use Artisan;
-use Session;
-use Carbon\Carbon;
+Route::get('/', function () {
+    $view = Session::get('loggedIn', false) !== true ? 'login' : 'index';
 
-Route::group(['middleware' => ['web']], function () {
-    Route::get('/', function () {
-        $view = Session::get('loggedIn', false) !== true ? 'login' : 'index';
+    return view($view);
+});
 
-        return view($view);
-    });
+Route::middleware('throttle:10,1')->post('/login', [\App\Http\Controllers\SessionController::class, 'login']);
+Route::get('/logout', [\App\Http\Controllers\SessionController::class, 'logout']);
 
-    Route::get('/logout', 'SessionController@logout');
+Route::group(['middleware' => ['throttle:5,1']], function () {
+    Route::post('/upload', [\App\Http\Controllers\UploadController::class, 'upload']);
+    Route::get('/download/{zip}', [\App\Http\Controllers\DownloadController::class, 'download']);
+    Route::post('/download', [\App\Http\Controllers\DownloadController::class, 'generate']);
+});
 
-    Route::group(['middleware' => ['throttle:10,1']], function() {
-        Route::post('/login', 'SessionController@login');
-    });
+Route::group(['prefix' => 'file'], function () {
+    Route::get('/', [\App\Http\Controllers\FileController::class, 'show']);
+    Route::post('/', [\App\Http\Controllers\FileController::class, 'create']);
+    Route::put('/', [\App\Http\Controllers\FileController::class, 'update']);
+    Route::delete('/', [\App\Http\Controllers\FileController::class, 'destroy']);
+});
 
-    Route::group(['middleware' => ['throttle:5,1']], function() {
-        Route::post('/upload', 'UploadController@upload');
-        Route::get('/download/{zip}', 'DownloadController@download');
-        Route::post('/download', 'DownloadController@generate');
-    });
-
-    Route::group(['prefix' => 'file'], function () {
-        Route::get('/', 'FileController@show');
-        Route::post('/', 'FileController@create');
-        Route::put('/', 'FileController@update');
-        Route::delete('/', 'FileController@destroy');
-    });
-
-    Route::group(['prefix' => 'directory'], function () {
-        Route::get('/', 'DirectoryController@index');
-        Route::post('/', 'DirectoryController@create');
-        Route::delete('/', 'DirectoryController@destroy');
-    });
+Route::group(['prefix' => 'directory'], function () {
+    Route::get('/', [\App\Http\Controllers\DirectoryController::class, 'index']);
+    Route::post('/', [\App\Http\Controllers\DirectoryController::class, 'create']);
+    Route::delete('/', [\App\Http\Controllers\DirectoryController::class, 'destroy']);
 });

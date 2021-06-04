@@ -140,6 +140,7 @@
     </div>
     <div class="container__inner">
         <form action="/login" method="POST" id="form">
+            {{ csrf_field() }}
             @if($errors->has('connection'))
                 <div class="alert alert-danger text-center">
                     {{ $errors->get('connection')[0] }}

@@ -1,7 +1,7 @@
 name: onlineftp
 recipe: laravel
 config:
-  php: '7.4'
+  php: '8.0'
   via: nginx
   webroot: public
   cache: redis
