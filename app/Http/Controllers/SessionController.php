@@ -16,7 +16,7 @@ class SessionController extends Controller
         Session::put('driver', $request->get('driver', 'ftp'));
 
         $login = new LoginHandler();
-        $login->set($data)->apply();
+        $login->set($data)->apply($data);
 
         try {
             // Try to list contents to validate the provided data.

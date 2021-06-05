@@ -6,7 +6,7 @@ Vue.use(resource);
 let http = Vue.http;
 
 http.options.root = document.location.protocol + '//' + document.location.hostname
-console.log('base is', Vue.http.options.root);
+http.headers.common['X-CSRF-TOKEN'] = Laravel.csrfToken
 
 const removeSlashes = (str) => str.replace(/^\/|\/$/g, '');
 

@@ -1,9 +1,5 @@
 <template>
-    <modal :confirm="confirm"
-           :disabled="disabled"
-           identifier="upload"
-           width="500"
-    >
+    <modal :confirm="confirm" :disabled="disabled" identifier="upload" width="500">
         <h3 slot="header">Upload a new file</h3>
         <div slot="body">
             <p>Select the files you want to upload</p>
@@ -29,7 +25,8 @@
     export default {
         data() {
             return {
-                extract: false
+                extract: false,
+                disabled: false,
             }
         },
         methods: {

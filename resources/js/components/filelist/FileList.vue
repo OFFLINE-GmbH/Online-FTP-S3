@@ -20,7 +20,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr is="file-list-entry" :item="item" v-for="item in listing"></tr>
+                <tr is="file-list-entry" :item="item" v-for="item in listing" :key="item.name"></tr>
                 </tbody>
             </table>
         </div>

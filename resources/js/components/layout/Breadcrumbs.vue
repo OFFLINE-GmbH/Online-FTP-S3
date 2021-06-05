@@ -2,7 +2,7 @@
     <div class="row">
         <div class="breadcrumbs col-md-11 col-xs-10">
             <ol class="breadcrumb">
-                <li v-for="breadcrumb in breadcrumbs"
+                <li v-for="(breadcrumb, $index) in breadcrumbs"
                     :class="{ active: isLast($index) }">
                     <a @click="cd(($index === 0 ? '' : '/') + breadcrumb.path)"
                        v-if="!isLast($index)">
