@@ -44,6 +44,5 @@ class LoginHandler
         } else {
             throw new \RuntimeException('Unknown driver');
         }
-
     }
 }
