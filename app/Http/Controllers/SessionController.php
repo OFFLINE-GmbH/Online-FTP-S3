@@ -2,62 +2,57 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Cleanup;
 use App\Helpers\LoginHandler;
 use App\Http\Requests;
-use Aws\S3\Exception\S3Exception;
 use Illuminate\Filesystem\FilesystemManager;
-use Illuminate\Session\SessionManager;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class SessionController extends Controller
 {
-    /**
-     * @var Session
-     */
-    private $session;
-
-    public function __construct(SessionManager $session)
+    public function index()
     {
-        $this->session = $session;
+        $this->cleanup();
+
+        $view = Session::get('loggedIn', false) !== true ? 'login' : 'index';
+
+        return view($view);
     }
 
     public function login(Requests\LoginRequest $request, FilesystemManager $fs)
     {
         $data = $this->getData($request);
-        $this->session->set('driver', $request->get('driver', 'ftp'));
+        Session::put('driver', $request->get('driver', 'ftp'));
 
         $login = new LoginHandler();
-        $login->set($data)->apply();
+        $login->set($data)->apply($data);
 
         try {
             // Try to list contents to validate the provided data.
             $fs->cloud()->files('/');
-        } catch (\Expection $e) {
-            return $this->error($e);
-        } catch (\ErrorException $e) {
-            return $this->error($e);
-        } catch (S3Exception $e) {
-            return $this->error($e);
-        } catch (\RuntimeException $e) {
+        } catch (Throwable $e) {
             return $this->error($e);
         }
 
-        $this->session->set('loggedIn', true);
+        Session::put('loggedIn', true);
 
         return redirect('/');
     }
 
     public function logout()
     {
-        $this->session->flush();
-        $this->session->regenerate();
+        Session::flush();
+        Session::regenerate();
 
         return redirect('/');
     }
 
     protected function error($e)
     {
-	info('login failed', [$e]);
+        info('login failed', [$e]);
+
         return redirect()->back()->withErrors(['connection' => 'Cannot connect to server!'])->withInput();
     }
 
@@ -71,18 +66,33 @@ class SessionController extends Controller
         switch ($request->get('driver')) {
             case 'ftp':
                 return [
-                    'host'     => $request->get('host'),
+                    'host' => $request->get('host'),
                     'username' => $request->get('username'),
                     'password' => $request->get('password'),
-                    'port'     => $request->get('port', 21),
+                    'port' => $request->get('port', 21),
                 ];
             case 's3':
                 return [
-                    'key'    => $request->get('key'),
+                    'key' => $request->get('key'),
                     'secret' => $request->get('secret'),
                     'region' => $request->get('region'),
                     'bucket' => $request->get('bucket'),
                 ];
+        }
+    }
+
+    private function cleanup()
+    {
+        try {
+            return Cache::remember('cleanup', now()->addMinutes(1), function () {
+                app(Cleanup::class)->run();
+
+                return true;
+            });
+        } catch (Throwable $e) {
+            logger()->error('Failed to run cleanup', [$e]);
+
+            return false;
         }
     }
 }

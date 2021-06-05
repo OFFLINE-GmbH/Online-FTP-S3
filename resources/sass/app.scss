@@ -1,0 +1,31 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// @fix for https://github.com/twbs/bootstrap-sass/issues/1204
+$icon-font-path: '/assets/bootstrap/';
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "bootstrap-sass";
+
+#header-bar {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto 1rem;
+    .adswrapper, .adsbygoogle {
+        width: 100%;
+    }
+}
+
+.two.columns {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -10px;
+    .column {
+        margin: 0 10px;
+    }
+}
