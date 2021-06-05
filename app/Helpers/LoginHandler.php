@@ -10,7 +10,7 @@ class LoginHandler
 {
     public function set($data)
     {
-        Session::set('data', Crypt::encrypt($data));
+        Session::put('data', Crypt::encrypt($data));
 
         return $this;
     }
@@ -29,6 +29,7 @@ class LoginHandler
                 'secret' => $data['secret'],
                 'region' => $data['region'],
                 'bucket' => $data['bucket'],
+                'endpoint' => (isset($data['endpoint']) && $data['endpoint']) ? $data['endpoint'] : null,
             ]);
         } elseif ($driver === 'ftp') {
             Session::put('host', sprintf('%s@%s', $data['username'], $data['host']));

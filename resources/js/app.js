@@ -8,6 +8,10 @@ require('./bootstrap');
 
 import Vue from 'vue'
 import App from './app.vue'
+import Adsense from 'vue-google-adsense/dist/Adsense.min.js'
+
+Vue.use(require('vue-script2'))
+Vue.use(Adsense)
 
 import store from './store'
 

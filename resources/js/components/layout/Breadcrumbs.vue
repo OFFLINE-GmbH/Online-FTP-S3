@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="breadcrumbs col-md-11 col-xs-10">
+        <div class="breadcrumbs col-md-10">
             <ol class="breadcrumb">
                 <li v-for="(breadcrumb, $index) in breadcrumbs"
                     :class="{ active: isLast($index) }">
@@ -14,7 +14,7 @@
                 </li>
             </ol>
         </div>
-        <div class="col-md-1 col-xs-2 text-right logout-button">
+        <div class="col-md-2 text-right logout-button">
             <a href="/logout" class="btn btn-sm btn-default">Logout</a>
         </div>
     </div>

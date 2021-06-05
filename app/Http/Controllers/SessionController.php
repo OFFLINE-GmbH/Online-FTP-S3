@@ -2,14 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Cleanup;
 use App\Helpers\LoginHandler;
 use App\Http\Requests;
 use Illuminate\Filesystem\FilesystemManager;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Throwable;
 
 class SessionController extends Controller
 {
+    public function index()
+    {
+        $this->cleanup();
+
+        $view = Session::get('loggedIn', false) !== true ? 'login' : 'index';
+
+        return view($view);
+    }
+
     public function login(Requests\LoginRequest $request, FilesystemManager $fs)
     {
         $data = $this->getData($request);
@@ -41,6 +52,7 @@ class SessionController extends Controller
     protected function error($e)
     {
         info('login failed', [$e]);
+
         return redirect()->back()->withErrors(['connection' => 'Cannot connect to server!'])->withInput();
     }
 
@@ -66,6 +78,21 @@ class SessionController extends Controller
                     'region' => $request->get('region'),
                     'bucket' => $request->get('bucket'),
                 ];
+        }
+    }
+
+    private function cleanup()
+    {
+        try {
+            return Cache::remember('cleanup', now()->addMinutes(1), function () {
+                app(Cleanup::class)->run();
+
+                return true;
+            });
+        } catch (Throwable $e) {
+            logger()->error('Failed to run cleanup', [$e]);
+
+            return false;
         }
     }
 }
