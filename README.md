@@ -6,6 +6,7 @@ Simple file browser built with Laravel and Vue.
 ## Installation
 
 1. Clone this repository to your machine.
+1. `cp .env.example .env`
 1. `composer install`
 1. `yarn` or `npm install`
 1. `yarn dev` or `npm run dev` for development builds or `yarn prod` or `npm run prod` for production builds
