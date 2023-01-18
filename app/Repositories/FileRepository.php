@@ -55,7 +55,7 @@ class FileRepository extends FilesystemRepository
 
         return true;
     }
-    
+
     /**
      * Creates an empty file
      *
@@ -77,7 +77,7 @@ class FileRepository extends FilesystemRepository
      */
     protected function checkPath($path)
     {
-        if ($path == '') {
+        if (!$path) {
             throw new InvalidArgumentException('Please specify a file path.');
         }
     }

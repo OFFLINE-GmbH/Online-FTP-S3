@@ -8,7 +8,7 @@
     <title>Web based FTP Client &middot; Amazon S3 File browser &middot; Online FTP</title>
     <meta name="description" content="Manage and edit your FTP or Amazon S3 files directly in your browser."/>
 
-    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <style>
         html, body {
             height: 100%;
@@ -140,6 +140,7 @@
     </div>
     <div class="container__inner">
         <form action="/login" method="POST" id="form">
+            {{ csrf_field() }}
             @if($errors->has('connection'))
                 <div class="alert alert-danger text-center">
                     {{ $errors->get('connection')[0] }}
@@ -148,7 +149,7 @@
             <div class="forms"
                  @if(old('driver') === 's3')
                  style="transform: translateX(-308px)"
-                    @endif
+                @endif
             >
                 <div class="ftp">
                     @include('login/ftp')
@@ -172,7 +173,7 @@
 </div>
 
 <div class="copyright">
-    <a href="https://offline.swiss">Created by OFFLINE GmbH</a>
+    <a href="https://offline.ch">Created by OFFLINE GmbH</a>
 </div>
 
 <script>

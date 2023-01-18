@@ -39,7 +39,7 @@ class DirectoryController extends Controller
     public function destroy(Request $request)
     {
         $path = $request->input('path', null);
-        
+
         $this->directory->delete($path);
     }
 }
