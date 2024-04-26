@@ -1,6 +1,8 @@
 # Online FTP / Amazon S3 Filebrowser 
 [![Build Status](https://travis-ci.org/OFFLINE-GmbH/Online-FTP.svg?branch=master)](https://travis-ci.org/OFFLINE-GmbH/Online-FTP)
 
+> After 12+ years, we've made the decision to shut down onlineftp.ch. The project is no longer compatible with current data privacy regulations and modern workflows.
+
 Simple file browser built with Laravel and Vue.
 
 ## Installation
